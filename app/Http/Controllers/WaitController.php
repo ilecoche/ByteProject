@@ -48,25 +48,25 @@ class WaitController extends Controller {
 		//Calculate wait and insert into waittime table
 
 		$id = Request::input('id');
+		$dt = date('Y-m-d H:i:s');
 
-		//get customer entrytime
+		//get customer wait time in seconds
 
 		$customerInfo = waitlist::whereId($id)->get();
-
 		$customerEntry = strtotime($customerInfo[0]->datetime);
-
 		$customerExit = strtotime(date("Y-m-d H:i:s"));
-
 		$remainingTime = $customerExit - $customerEntry;
 
 		//convert seconds to minutes
 
 		$customerWait = floor($remainingTime / 60);
 
-		
+		//insert calculation into waittime table
 
-		// $waittime = new waittime();
-		// $currentdt = date('Y-m-d H:i:s');
+		$waittime = new waittime();
+		$waittime->waittime = $customerWait;
+		$waittime->entrytime = $dt;
+		$waittime->save();
 
 
 		// $waitClass = new waitClass();
