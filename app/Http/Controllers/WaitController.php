@@ -68,14 +68,19 @@ class WaitController extends Controller {
 		$waittime->entrytime = $dt;
 		$waittime->save();
 
+		//delete row from waitlist table
 
-		// $waitClass = new waitClass();
+		
 
-		// $count = $waitClass->waitTimeCount();
+		//Do average wait calculation
+
+		$waitClass = new waitClass();
+
+		$count = $waitClass->waitListCount();
 
 		// return $count;
 
-		return $customerWait;
+		return $count;
 
 		
 

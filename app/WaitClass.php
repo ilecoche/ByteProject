@@ -9,31 +9,16 @@ use App\waitlist;
 class waitClass {
 
 	public function waitListCount(){
-		
-	}
 
-	public function waitTimeCount(){
-
-		$waittime = DB::table('waittime')->count();
+		$waitlistEntries = DB::table('waitlist')->count();
 
 		//check number of entries in waittime table
 
-		if($waittime >= 2){
+		if($waitlistEntries == 0){
 
-			//check for time 1 hour ago
+			DB::table('waittime')->delete();
 
-			$date = date("Y-m-d H:i:s");
-			$time = strtotime($date);
-			$time = $time - (60 * 60);
-			$date = date("Y-m-d H:i:s", $time);
-
-			//grab only entries in waittime table after $date
-
-			$rowGrab = DB::table('waittime')->count();
-
-			$time = $date;
-
-		}elseif($waittime == 1){
+		}elseif($waitlistEntries == 1){
 
 			//default value of 10
 
@@ -41,9 +26,31 @@ class waitClass {
 
 		}else{
 
-			//default value of 0
+			$waittimeEntries = DB::table('waittime')->count();
 
-			$time = '0';
+			if($waittimeEntries >= 2){
+
+				//check for time 1 hour ago
+
+				$hourTime = date("Y-m-d H:i:s");
+				$time = strtotime($hourTime);
+				$time = $time - (60 * 60);
+				$hourTime = date("Y-m-d H:i:s", $time);
+
+				//grab only entries in waittime table after $hourTime
+
+				//$rowGrab = DB::table('waittime')->count();
+
+				$rowGrab = DB::table('waittime')->where('entrytime', '>=', $hourTime)->get();
+
+				var_dump($rowGrab);
+
+				//$time = $hourTime;
+
+			}else{
+				$time = '15 Minutes';
+			}
+
 		}
 
 		return $time;
