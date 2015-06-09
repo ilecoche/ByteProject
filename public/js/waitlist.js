@@ -46,7 +46,7 @@ $(document).ready(function(){
                                                     + '<td>' + data[0].partynumber + '</td>'
                                                     + '<td>' + data[0].email + '</td>'
                                                     + '<td>' + data[0].number + '</td>'
-                                                    + '<td>' + '<input class="seatBtn" type="submit" value="+">' + '</td>'
+                                                    + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data[0].id + ')" />' + '</td>'
                                                     + '</tr>');
           },
           error: function(e){
