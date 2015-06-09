@@ -6,15 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 use Cart;
-use Product;
+//use Product;
 use Gloudemans\Shoppingcart\CartCollection;
 use Gloudemans\Shoppingcart\CartRowCollection;
 use Gloudemans\Shoppingcart\CartRowOptionsCollection;
 
 use App\Order;
 use App\Order_Item;
+
+use App\Http\Requests\CreateOrderRequest;
+
 
 
 class OrderController extends Controller {
@@ -39,9 +42,9 @@ class OrderController extends Controller {
             $tax = round(($subtotal * self::TAXRATE), 2);
             $total = $subtotal + $tax;
             
-            $subtotal = $this->currencyFormat($subtotal);
-            $tax = $this->currencyFormat($tax);
-            $total = $this->currencyFormat($total);
+//            $subtotal = $this->currencyFormat($subtotal);
+//            $tax = $this->currencyFormat($tax);
+//            $total = $this->currencyFormat($total);
             //return $cart;
             return view('orders.index', compact('orders','cart', 'subtotal' ,'tax' ,'total'));
 	}
@@ -62,16 +65,26 @@ class OrderController extends Controller {
 	 */
 	public function create()
 	{
+            $now = Carbon::now()->format('Y-m-d');
+            $order_no = Order::orderBy('id','desc')->first();
+            if(!is_null($order_no)){
+                $order_no = $order_no->id + 1;
+            }
+            else {
+                $order_no = 0;
+            }
+            $order_no = str_pad($order_no, 12, '0', STR_PAD_LEFT);
+
             $cart = Cart::content(); 
             $subtotal = Cart::total();
             $tax = round(($subtotal * self::TAXRATE), 2);
             $total = $subtotal + $tax;
             
-            $subtotal = $this->currencyFormat($subtotal);
-            $tax = $this->currencyFormat($tax);
-            $total = $this->currencyFormat($total);
+//            $subtotal = $this->currencyFormat($subtotal);
+//            $tax = $this->currencyFormat($tax);
+//            $total = $this->currencyFormat($total);
             //return $cart;
-            return view('orders.checkout', compact('cart', 'subtotal' ,'tax' ,'total'));
+            return view('orders.checkout', compact('now', 'order_no', 'cart', 'subtotal' ,'tax' ,'total'));
 	}
 
 	/**
@@ -79,10 +92,56 @@ class OrderController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateOrderRequest $request)
 	{
-		//
-	}
+//            $this->validate($request,
+//                        [
+//                            'customer_name' => 'required|min:5',
+//                            'tip' => 'required|between:0,999.99',
+//                            'table_id' => 'required|between:1,10'
+//
+//                        ]
+//                        );
+            $input = $request->all();
+
+            $order = new Order;
+                    
+                $order->order_no = $input['order_no'];
+                $order->date = $input['date'];
+                $order->status = $input['status'];
+                $order->total = $input['total'];
+                $order->tip = $input['tip'];
+                $order->table_id = $input['table_id'];
+                $order->type = $input['type'];
+                $order->customer_name = $input['customer_name'];
+                $order->tax = $input['tax'];
+                    
+                $order->save();
+                $order_id = $order->id;
+                
+            //$order_items = array($input['menu_item'], $input['qty'], $input['price']);
+                
+                $cart = Cart::content(); 
+                $subtotal = Cart::total();
+                $tax = round(($subtotal * self::TAXRATE), 2);
+                $total = $subtotal + $tax;
+                
+//            $menu_items = $input['menu_item'];
+//            $qtys = $input['qty'];
+//            $prices = $input['price'];
+            
+ //           for( $i=0; $i<count($menu_items); $i++ ){
+                foreach($cart as $row){
+            $order_item = new Order_item;
+            
+                $order_item->order_id = $order_id;
+                $order_item->menu_item = $row['name'];
+                $order_item->qty = $row['qty'];
+                $order_item->price = $row['price'];
+            $order_item->save();   
+            }
+             return redirect('payment/'. $order_id);
+        }
 
 	/**
 	 * Display the specified resource.

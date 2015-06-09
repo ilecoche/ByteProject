@@ -1,17 +1,8 @@
-<?php
+<?php namespace App;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+use Illuminate\Database\Eloquent\Model;
 
-/**
- * Description of order
- *
- * @author ILecoche
- */
-class order {
+class Order extends Model {
 	protected $table = 'orders';
         
         protected $fillable = [
@@ -19,6 +10,9 @@ class order {
             'type',
             'tip'
             ];
+        
+        public $timestamps = false; // if timestamps columns are not present in the table
+
         
         // an order can have many order items
         public function order_items()

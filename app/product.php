@@ -10,7 +10,8 @@ class product extends Model {
         'description',
         'menu_category_id',
         'price',
-        'sku'
+        'sku',
+        'image'
     ];
         
 

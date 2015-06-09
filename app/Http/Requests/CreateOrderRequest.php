@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateProductRequest extends Request {
+class CreateOrderRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,11 +22,9 @@ class CreateProductRequest extends Request {
 	public function rules()
 	{
 		return [
-                    'dish' => 'required|min:5',
-                    'sku' => 'required',
-                    'menu_category_id' => 'required|Integer',
-                    'price' => 'required',
-                    'image' => 'required|mimes:png,jpeg'
+                    'customer_name' => 'required|min:5',
+                    'tip' => 'required|Numeric|between:0,999.99',
+                            'table_id' => 'required|Integer|between:1,10'
                 ];
 	}
 

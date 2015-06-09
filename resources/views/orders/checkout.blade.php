@@ -7,41 +7,45 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default">
-				<div class="panel-heading">Your Order</div>
-                                
-                                <!-- removes escaping -->
-                                    {!! Form::open(['url' => 'orders']) !!}
+				<h2>Order Details</h2>
+                                {!! Form::open(['url' => 'orders']) !!}
+                                    {!! Form::hidden('order_no', $order_no) !!}
+                                    {!! Form::hidden('date', $now) !!}
+                                    {!! Form::hidden('status', 'pending') !!}
+                                    {!! Form::hidden('total', $total) !!}
+                                    {!! Form::hidden('type', 'TO') !!}
+                                    {!! Form::hidden('tax', $tax) !!}
                                            
                                     
-                                   
-                                
+                                    
                                 <ul>
-                                    <li class="row list-inline headers">
-                                        <span class="order_date">DATE</span>
-                                        <span class="order_no">ORDER #</span>
-                                        <span class="cust_name">CUSTOMER</span>
-                                        <span class="status">STATUS</span>
+                                    <li>
+                                        DATE: {{ \Carbon\Carbon::now()->format('Y-m-d') }}
+                                        ORDER # {{ $order_no }}
                                     </li>
-                                    <li class="row list-inline">
-                                        {!! Form::hidden('date', date('Y-m-d')) !!}
-                                        <span class="order_date"><?php echo date('Y-m-d'); ?></span>
-                                        {!! Form::hidden('order_no', '0000001') !!}
-                                        <span class="order_no">0000001</span>
-                                        {!! Form::hidden('status', 'pending') !!}
-                                        <span class="status">Pending</span>
+                                    <li>
+                                        CUSTOMER: {!! Form::text('customer_name', null) !!}
+                                        TABLE #: {!! Form::text('table_id', null) !!}
                                     </li>
+                                    
                                 </ul>
-                                <ul>
-                                    <li class="row list-inline headers">
-                                        <span class="qty">QTY</span>
-                                        <span class="name">NAME</span>
-                                        <span class="subtotal">SUBTOTAL</span>
-                                        <span class="actions">ACTIONS</span>
-                                    </li>
+                                <table>
+                                    <thead>
+                                        <th class="qty">QTY</th>
+                                        <th class="name">NAME</th>
+                                        <th class="subtotal">SUBTOTAL</th>
+                                        <th class="actions">ACTIONS</th>
+                                    </thead>
                                     @foreach($cart as $row)
-                                    <li class="row list-inline">
-                                        <span class="qty">
+<!--                                    {!! Form::input('hidden', 'menu_item[]',  $row['name']) !!}
+                                    {!! Form::input('hidden', 'qty[]', $row['qty']) !!}
+                                    {!! Form::input('hidden', 'price[]', $row['price']) !!}-->
+<!--                                    <input name="menu_item[]" type="hidden" value="{!! $row['name'] !!}">
+                                    <input name="qty[]" type="hidden" value="{!! $row['qty'] !!}">
+                                    <input name="price[]" type="hidden" value="{!! $row['price'] !!}">-->
+
+                                    <tr>
+                                        <td class="qty">
                                             @if($row['qty'] > 1)
                                             <a href="{{ url('cart/update', [$row['rowid'],($row['qty'] - 1)] ) }}"><i class="glyphicon glyphicon-minus-sign btn-lg"></i></a>
                                             @else
@@ -50,38 +54,44 @@
                                             {{ $row['qty'] }}
                                             
                                             <a href="{{ url('cart/update', [$row['rowid'],($row['qty'] + 1)] ) }}"><i class="glyphicon glyphicon-plus-sign btn-lg"></i></a>
-                                        </span>
-                                        <span class="name">{{ $row['name'] }}</span>
-                                        <span class="subtotal">{{ $row['subtotal'] }}</span>
-                                        <span class="actions">
+                                        </td>
+                                        <td class="name">{{ $row['name'] }}</td>
+                                        <td class="subtotal">{{ $row['subtotal'] }}</td>
+                                        <td class="actions">
                                             <a href="{{ url('cart/remove', $row['rowid']) }}"><i class="glyphicon glyphicon-remove-sign btn-lg"></i></a>
-                                        </span>
-                                    </li>
+                                        </td>
+                                    </tr>
                                     @endforeach
-                                     <li class="row list-inline footer">
-                                        <span class="qty"></span>
-                                        <span class="name"></span>
-                                        <span class="subtotal">SUBTOTAL</span>
-                                        <span class="actions">{{ $subtotal }}</span>
-                                    </li>
-                                    <li class="row list-inline footer">
-                                        <span class="qty"></span>
-                                        <span class="name"></span>
-                                        <span class="subtotal">HST</span>
-                                        <span class="actions">{{ $tax }}</span>
-                                    </li>
-                                    <li class="row list-inline footer">
-                                        <span class="qty"></span>
-                                        <span class="name"></span>
-                                        <span class="subtotal">TOTAL</span>
-                                        <span class="actions">{{ $total }}</span>
-                                    </li>
-                                </ul>  
-                                     {!! Form::submit('Pay') !!}                                    
+                                    <tr>                                       
+                                        <td colspan="3">SUBTOTAL</td>
+                                        <td>${{ number_format($subtotal, 2) }}</td>
+                                    </tr>
+                                    <tr>                                       
+                                        <td colspan="3">HST</td>
+                                        <td>${{ number_format($tax, 2) }}</td>
+                                    </tr>
+                                    <tr>                                       
+                                        <td colspan="3">TOTAL</td>
+                                        <td>${{ number_format($total, 2) }}</td>
+                                    </tr>
+                                    <tr>                                       
+                                        <td colspan="3">TIP</td>
+                                        <td>{!! Form::text('tip', null) !!}</td>
+                                    </tr>
+                                </table>  
+                              {!! Form::submit('Pay now') !!}                                    
                                     {!! Form::close() !!}
-                                </div>
-			</div>
+                        </div>
 		</div>
+     @if($errors->any())
+                                    <ul class="alert alert-danger">
+                                        @foreach($errors->all() as $error)
+                                        <li>
+                                            {{ $error }}
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
 	</div>
 </div>
 @stop

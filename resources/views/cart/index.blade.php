@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Your cart')
 @section('additionalstyles')
-    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    <!--<link href="{{ asset('/css/custom.css') }}" rel="stylesheet">-->
 @stop
 @section('content')
 <div class="container">

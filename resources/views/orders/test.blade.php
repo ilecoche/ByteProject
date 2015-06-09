@@ -19,14 +19,15 @@
                                     
                                     
                                 <ul>
-                                    <li class="row list-inline headers">
-                                        <span class="order_date">DATE: {{ Carbon::now() }}</span>
-                                        <span class="order_no">ORDER # {{ $order_no }}</span>
-                                        <span class="cust_name">CUSTOMER: 
-                                        {!! Form::text('customer_name', null) !!}
-                                        </span>
-                                        <span class="status">STATUS: pending</span>
+                                    <li>
+                                        DATE: {{ \Carbon\Carbon::now()->format('Y-m-d') }}
+                                        ORDER # {{ $order_no }}
                                     </li>
+                                    <li>
+                                        CUSTOMER: {!! Form::text('customer_name', null) !!}
+                                        TABLE #: {!! Form::text('table_id', null) !!}
+                                    </li>
+                                    
                                 </ul>
                                 <table>
                                     <thead>
@@ -34,11 +35,15 @@
                                         <th class="name">NAME</th>
                                         <th class="subtotal">SUBTOTAL</th>
                                         <th class="actions">ACTIONS</th>
-                                    </thead>>
+                                    </thead>
                                     @foreach($cart as $row)
-                                    {!! Form::hidden('menu_item[]', $row['name']) !!}
-                                    {!! Form::hidden('qty[]', $row['qty']) !!}
-                                    {!! Form::hidden('price[]', $row['price']) !!}
+<!--                                    {!! Form::input('hidden', 'menu_item[]',  $row['name']) !!}
+                                    {!! Form::input('hidden', 'qty[]', $row['qty']) !!}
+                                    {!! Form::input('hidden', 'price[]', $row['price']) !!}-->
+                                    <input name="menu_item[]" type="hidden" value="{!! $row['name'] !!}">
+                                    <input name="qty[]" type="hidden" value="{!! $row['qty'] !!}">
+                                    <input name="price[]" type="hidden" value="{!! $row['price'] !!}">
+
 
                                     <tr>
                                         <td class="qty">
@@ -60,21 +65,34 @@
                                     @endforeach
                                     <tr>                                       
                                         <td colspan="3">SUBTOTAL</td>
-                                        <td>{{ $subtotal }}</td>
+                                        <td>${{ number_format($subtotal, 2) }}</td>
                                     </tr>
                                     <tr>                                       
                                         <td colspan="3">HST</td>
-                                        <td>{{ $tax }}</td>
+                                        <td>${{ number_format($tax, 2) }}</td>
                                     </tr>
                                     <tr>                                       
                                         <td colspan="3">TOTAL</td>
-                                        <td>{{ $total }}</td>
+                                        <td>${{ number_format($total, 2) }}</td>
                                     </tr>
-                                </ul>  
+                                    <tr>                                       
+                                        <td colspan="3">TIP</td>
+                                        <td>{!! Form::text('tip', null) !!}</td>
+                                    </tr>
+                                </table>  
                               {!! Form::submit('Pay now') !!}                                    
                                     {!! Form::close() !!}
                         </div>
 		</div>
+     @if($errors->any())
+                                    <ul class="alert alert-danger">
+                                        @foreach($errors->all() as $error)
+                                        <li>
+                                            {{ $error }}
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
 	</div>
 </div>
 @stop

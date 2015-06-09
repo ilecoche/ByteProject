@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Cart;
-use Product;
+use App\Product;
 use Gloudemans\Shoppingcart\CartCollection;
 use Gloudemans\Shoppingcart\CartRowCollection;
 use Gloudemans\Shoppingcart\CartRowOptionsCollection;
@@ -13,11 +13,11 @@ use Gloudemans\Shoppingcart\CartRowOptionsCollection;
 class CartController extends Controller {
     
         const TAXRATE = .13;
-        
-        public function currencyFormat($amount, $symbol = '$')
-        {
-            return $symbol . number_format( $amount, 2);
-        }
+  
+//        public function currencyFormat($amount, $symbol = '$')
+//        {
+//            return $symbol . number_format( $amount, 2);
+//        }
 
 	/**
         * Add a row to the cart
@@ -36,7 +36,24 @@ class CartController extends Controller {
             //Cart::add('293ad', 'Product 1', 1, 9.99, array('size' => 'large'));
               $input = $request->all();
               //Cart::associate('product')->add($input['id'], $input['name'], $input['qty'], $input['price']);
-    
+                            
+              $options = array();
+
+              if(!empty($input['main_ingredient'])){
+                  $options['main_ingredient'] = $input['main_ingredient'];
+              }
+              
+              if(!empty($input['side'])){
+                  $options['side'] = $input['side'];
+              }
+              
+              if(!empty($input['addon'])){
+                  $options['addon'] = $input['addon'];
+              }
+              
+              if(!empty($input['portion'])){
+                  $options['portion'] = $input['portion'];
+              }
             // Array form
             Cart::add(array('id' => $input['id'], 'name' => $input['name'], 'qty' => $input['qty'], 'price' => $input['price']));
 
@@ -45,8 +62,15 @@ class CartController extends Controller {
             //  array('id' => '293ad', 'name' => 'Product 1', 'qty' => 1, 'price' => 10.00),
             //  array('id' => '4832k', 'name' => 'Product 2', 'qty' => 1, 'price' => 10.00, 'options' => array('size' => 'large'))
             //));
+            $cart = Cart::content(); 
+            $subtotal = Cart::total();
+            $tax = round(($subtotal * self::TAXRATE), 2);
+            $total = $subtotal + $tax;
             
-            return redirect('cart');
+            
+            //return $cart;
+            return view('cart.widget', $this->all());
+            
 	}
 
 	/**
@@ -62,7 +86,14 @@ class CartController extends Controller {
 //            return Response::json( array(
 //                'qty' => $qty
 //            ) );
-            return redirect('cart');
+            $cart = Cart::content(); 
+            $subtotal = Cart::total();
+            $tax = round(($subtotal * self::TAXRATE), 2);
+            $total = $subtotal + $tax;
+            
+            
+            //return $cart;
+            return view('cart.widget', $this->all());
 	}
 
 	/**
@@ -73,8 +104,17 @@ class CartController extends Controller {
         */
 	public function remove($id)
 	{
+           // $products = Product::all();
             Cart::remove($id);
-            return redirect('cart');
+            $cart = Cart::content(); 
+            $subtotal = Cart::total();
+            $tax = round(($subtotal * self::TAXRATE), 2);
+            $total = $subtotal + $tax;
+            
+            
+            //return $cart;
+            return view('cart.widget', $this->all());
+            //return redirect('cart');
 	}
 
 	/**
@@ -100,11 +140,9 @@ class CartController extends Controller {
             $tax = round(($subtotal * self::TAXRATE), 2);
             $total = $subtotal + $tax;
             
-            $subtotal = $this->currencyFormat($subtotal);
-            $tax = $this->currencyFormat($tax);
-            $total = $this->currencyFormat($total);
+            
             //return $cart;
-            return view('cart.index', compact('cart', 'subtotal' ,'tax' ,'total'));
+            return compact('cart', 'subtotal' ,'tax' ,'total');
 	}
 
 	/**
