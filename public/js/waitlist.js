@@ -12,11 +12,12 @@ $(document).ready(function(){
 
   var classes = document.getElementsByClassName('counter');
 
-  counter = 2;
+  counter = 0;
 
   for (i = 0; i < rowCount; i++) {
     if(i === 0){
       classes[i].innerHTML = 'Next';
+      counter++
     }else{
     classes[i].innerHTML = counter++;
     }
