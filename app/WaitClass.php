@@ -39,20 +39,13 @@ class waitClass {
 
 				//grab only entries in waittime table after $hourTime
 
+				//$rowGrab = DB::table('waittime')->count();
+
 				$rowGrab = DB::table('waittime')->where('entrytime', '>=', $hourTime)->get();
 
-				$rowGrabCount = count($rowGrab);
+				var_dump($rowGrab);
 
-				$sum = 0;
-
-				foreach ($rowGrab as $key => $value)
-				{
-					$sum = $sum + $value->waittime;
-				}
-
-				$finalSum = $sum / $rowGrabCount;
-
-				$time = floor($finalSum);
+				//$time = $hourTime;
 
 			}else{
 				$time = '15 Minutes';

@@ -70,8 +70,7 @@ class WaitController extends Controller {
 
 		//delete row from waitlist table
 
-		//
-		//
+		
 
 		//Do average wait calculation
 
