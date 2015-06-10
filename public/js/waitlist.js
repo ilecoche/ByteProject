@@ -1,4 +1,4 @@
-$(document).ready(function(){
+
 
   $.ajaxSetup({
     headers: {
@@ -6,21 +6,27 @@ $(document).ready(function(){
     }
   });
 
-  //line counter
+    //line counter
 
-  var rowCount = $('#waitListTable tr').length - 1;
+  numberCount();
 
-  var classes = document.getElementsByClassName('counter');
+  function numberCount(){
 
-  counter = 0;
+    var rowCount = $('#waitListTable tr').length - 1;
 
-  for (i = 0; i < rowCount; i++) {
-    if(i === 0){
-      classes[i].innerHTML = 'Next';
-      counter++
-    }else{
-    classes[i].innerHTML = counter++;
+    var classes = document.getElementsByClassName('counter');
+
+    counter = 0;
+
+    for (i = 0; i < rowCount; i++) {
+      if(i === 0){
+        classes[i].innerHTML = 'Next';
+        counter++;
+      }else{
+        classes[i].innerHTML = counter++;
+      }
     }
+    return counter;
   }
 
   //add customer party to list
@@ -42,14 +48,13 @@ $(document).ready(function(){
         url: url,
         data: form.serialize(),
         success: function(data){
-            $('#waitListTable tr:last').after('<tr id="' + data[0].id + '">'+ '<td>' + counter++ + '</td>'
+            $('#waitListTable tr:last').after('<tr id="' + data[0].id + '">'+ '<td>' + numberCount() + '</td>'
                                                     + '<td>' + data[0].name + '</td>'
                                                     + '<td>' + data[0].partynumber + '</td>'
                                                     + '<td>' + data[0].email + '</td>'
                                                     + '<td>' + data[0].number + '</td>'
                                                     + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data[0].id + ')" />' + '</td>'
                                                     + '</tr>');
-            alert(data[0].id);
           },
           error: function(e){
             alert(e.message);
@@ -64,8 +69,6 @@ $(document).ready(function(){
     
   });
 
-});
-
 //Seat Customer
 
 function seatCustomer(id){
@@ -75,9 +78,7 @@ function seatCustomer(id){
     $('#waittime').html(data);
     $('#row_' + id).remove();
 
-    alert(id);
-
-    counter--;
+    numberCount();
       
   });
 
