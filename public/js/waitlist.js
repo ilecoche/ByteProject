@@ -41,13 +41,14 @@ $(document).ready(function(){
         url: url,
         data: form.serialize(),
         success: function(data){
-            $('#waitListTable tr:last').after('<tr>'+ '<td>' + counter++ + '</td>'
+            $('#waitListTable tr:last').after('<tr id="' + data[0].id + '">'+ '<td>' + counter++ + '</td>'
                                                     + '<td>' + data[0].name + '</td>'
                                                     + '<td>' + data[0].partynumber + '</td>'
                                                     + '<td>' + data[0].email + '</td>'
                                                     + '<td>' + data[0].number + '</td>'
                                                     + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data[0].id + ')" />' + '</td>'
                                                     + '</tr>');
+            alert(data[0].id);
           },
           error: function(e){
             alert(e.message);
@@ -70,9 +71,13 @@ function seatCustomer(id){
 
   $.post("wait/seat", {id: id}).done(function(data) {
       
-  console.log(data);
-      
+    $('#waittime').html(data);
+    $('#row_' + id).remove();
 
+    alert(id);
+
+    counter--;
+      
   });
 
 }

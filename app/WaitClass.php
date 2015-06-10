@@ -16,13 +16,17 @@ class waitClass {
 
 		if($waitlistEntries == 0){
 
+			//delete wait time table
+
 			DB::table('waittime')->delete();
+
+			$time = '0';
 
 		}elseif($waitlistEntries == 1){
 
 			//default value of 10
 
-			$time = '10 Minutes';
+			$time = '5';
 
 		}else{
 
@@ -43,6 +47,8 @@ class waitClass {
 
 				$rowGrabCount = count($rowGrab);
 
+				//calculate average
+
 				$sum = 0;
 
 				foreach($rowGrab as $key => $value)
@@ -55,7 +61,9 @@ class waitClass {
 				$time = floor($totalSum);
 
 			}else{
-				$time = '15 Minutes';
+
+				//default time of 15
+				$time = '10';
 			}
 
 		}

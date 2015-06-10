@@ -70,19 +70,17 @@ class WaitController extends Controller {
 
 		//delete row from waitlist table
 
-		//
-		//
-		//
+		$waitlistRowDelete = waitlist::whereId($id)->delete();
 
 		//Do average wait calculation
 
 		$waitClass = new waitClass();
 
-		$count = $waitClass->waitListCount();
+		$avgCalc = $waitClass->waitListCount();
 
 		// return $count;
 
-		return $count;
+		return $avgCalc;
 
 		
 
