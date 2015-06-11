@@ -49,13 +49,13 @@
         url: url,
         data: form.serialize(),
         success: function(data){
-            $('<tr id="' + data.data[0].id + '">'+ '<td class="counter">' + counter + '</td>'
+            $('#waitListTable tr:last').after('<tr id="row_' + data.data[0].id + '">'+ '<td class="counter">' + counter + '</td>'
                                             + '<td>' + data.data[0].name + '</td>'
                                             + '<td>' + data.data[0].partynumber + '</td>'
                                             + '<td>' + data.data[0].email + '</td>'
                                             + '<td>' + data.data[0].number + '</td>'
                                             + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data.data[0].id + ')" />' + '</td>'
-                                            + '</tr>').appendTo('#waitListTable');
+                                            + '</tr>');
             $('#waittime').html(data.average);
             numberCount();
           },
