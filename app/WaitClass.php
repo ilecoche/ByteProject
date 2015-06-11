@@ -51,8 +51,12 @@ class waitClass {
 
 					//delete both tables and start over since this would never happen in a restaurant - a count of 0 is returned if there is no action in the application over an hour - this stops the sum from being subtracted by 0.
 
+					//time will be zero since this would mean that no action has taken place in the application and therefore no one is using it
+
 					DB::table('waitlist')->delete();
 					DB::table('waittime')->delete();
+
+					$time = '0';
 
 				}else{
 
