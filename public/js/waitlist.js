@@ -6,6 +6,8 @@
     }
   });
 
+  var counter;
+
     //line counter
 
   numberCount();
@@ -26,7 +28,6 @@
         classes[i].innerHTML = counter++;
       }
     }
-    return counter;
   }
 
   //add customer party to list
@@ -48,13 +49,15 @@
         url: url,
         data: form.serialize(),
         success: function(data){
-            $('#waitListTable tr:last').after('<tr id="' + data[0].id + '">'+ '<td>' + numberCount() + '</td>'
-                                                    + '<td>' + data[0].name + '</td>'
-                                                    + '<td>' + data[0].partynumber + '</td>'
-                                                    + '<td>' + data[0].email + '</td>'
-                                                    + '<td>' + data[0].number + '</td>'
-                                                    + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data[0].id + ')" />' + '</td>'
-                                                    + '</tr>');
+            $('<tr id="' + data.data[0].id + '">'+ '<td class="counter">' + counter + '</td>'
+                                            + '<td>' + data.data[0].name + '</td>'
+                                            + '<td>' + data.data[0].partynumber + '</td>'
+                                            + '<td>' + data.data[0].email + '</td>'
+                                            + '<td>' + data.data[0].number + '</td>'
+                                            + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data.data[0].id + ')" />' + '</td>'
+                                            + '</tr>').appendTo('#waitListTable');
+            $('#waittime').html(data.average);
+            numberCount();
           },
           error: function(e){
             alert(e.message);

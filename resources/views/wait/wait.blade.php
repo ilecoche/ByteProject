@@ -34,7 +34,7 @@
 		{!! Form::submit('Add To Wait List', ['class' => 'submitBtn']) !!}
 		{!! Form::close() !!}
 
-		<div id="waittime"></div>
+		<div><p>Average Wait Time: <span id="waittime">{{$average}}</span> Minutes</p></div>
 
 		<div id="tablediv">
 		
