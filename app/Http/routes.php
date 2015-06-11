@@ -49,4 +49,8 @@ Route::resource('orders', 'OrderController');
 Route::get('payment/{order_id}', 'PaymentController@index');
 Route::post('payment/process', 'PaymentController@process');
 
+/* Wait Time */
 
+Route::get('wait', 'WaitController@waitIndex');
+Route::post('wait', 'WaitController@waitPost');
+Route::post('wait/seat', 'WaitController@waitSeat');
