@@ -69,7 +69,5 @@ class waitClass {
 		}
 
 		return $time;
-
 	}
-
 }

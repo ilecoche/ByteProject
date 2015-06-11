@@ -91,10 +91,5 @@ class WaitController extends Controller {
 		// return $count;
 
 		return $avgCalc;
-
-		
-
 	}
-            
-
 }
