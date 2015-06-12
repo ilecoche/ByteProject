@@ -47,18 +47,33 @@ class waitClass {
 
 				$rowGrabCount = count($rowGrab);
 
-				//calculate average
+				if($rowGrabCount === 0){
 
-				$sum = 0;
+					//delete both tables and start over since this would never happen in a restaurant - a count of 0 is returned if there is no action in the application over an hour - this stops the sum from being subtracted by 0.
 
-				foreach($rowGrab as $key => $value)
-				{
-					$sum = $sum + $value->waittime;
+					//time will be zero since this would mean that no action has taken place in the application and therefore no one is using it
+
+					DB::table('waitlist')->delete();
+					DB::table('waittime')->delete();
+
+					$time = '0';
+
+				}else{
+
+					//calculate average
+
+					$sum = 0;
+
+					foreach($rowGrab as $key => $value)
+					{
+						$sum = $sum + $value->waittime;
+					}
+
+					$totalSum = $sum / $rowGrabCount;
+
+					$time = floor($totalSum);
+
 				}
-
-				$totalSum = $sum / $rowGrabCount;
-
-				$time = floor($totalSum);
 
 			}else{
 
@@ -69,7 +84,5 @@ class waitClass {
 		}
 
 		return $time;
-
 	}
-
 }
