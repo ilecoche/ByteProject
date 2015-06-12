@@ -23,7 +23,7 @@
                         <ul style="list-style: none;">
                             @foreach($productbycategory as $product)
                             <li id="{{ $product->id }}" class="col-md-4 menu-item">
-                                <a href="testimonials" /><img src="images/{{ $product->image }}" alt="{{ $product->dish }}" style="width: 100%; max-width: 300px;"></a>
+                                <a href="{{ url('products_admin',$product->id) }}" /><img src="images/{{ $product->image }}" alt="{{ $product->dish }}" style="width: 100%; max-width: 300px;"></a>
                                 <span class="dish-name">{{ $product->dish }}</span><br/>
                                 <span class="dish-price">{{ $product->price }}</span><br/>
                                 <span class="dish-id" style="visibility: hidden;">{{ $product->id }}</span>
