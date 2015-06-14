@@ -9,6 +9,8 @@ use App\Menu_category;
 use App\Http\Requests\CreateProductRequest;
 use Session;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
 
 
 class ProductAdminController extends Controller {
@@ -46,30 +48,76 @@ class ProductAdminController extends Controller {
             return view('products_admin.index', compact('products', 'message'));
 	}
 
-    public function nutrition()
+    public function nutrition($ndbno)
     {
         // Create a client with a base URI
         $client = new Client(['base_uri' => 'http://api.nal.usda.gov/ndb/']);
         // Request to http://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
         $response = $client->get('http://api.nal.usda.gov/ndb/reports', [
             'query' => [
-                'ndbno' => '21250',
+                'ndbno' => $ndbno,
                 'type' => 'f',
                 'format' => 'json',
                 'api_key' => self::NDBKEY
             ]
         ]);
         $body = json_decode($response->getBody());
-        echo $body->report->food->name. '</br>';
+        $selectedfood = $body->report->food->name;
         $nutrients = array_slice($body->report->food->nutrients , 0, 9);
         //var_dump($nutrients);
         
+        /*
         foreach ($nutrients as $nutrient) {
             echo $nutrient->name . ': Per 100g ' . $nutrient->value . $nutrient->unit . '; ';
             echo 'Per ' . $nutrient->measures[0]->label . ': '. $nutrient->measures[0]->value . $nutrient->unit . '<hr/>';
         }
+        */
         
-        //return view('products_admin.nutrition')->with('response', $response);
+        return view('products_admin.nutrition', compact('selectedfood','nutrients'));
+    }
+    
+    public function usdanumber(Request $request){
+        $input = $request->all();
+        $searchstring = $input['s'];
+    //Request to http://api.nal.usda.gov/ndb/search/?format=json&q=pizza%20thin%20crust&sort=n&max=25&offset=0&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
+
+    // Create a client with a base URI
+        $client = new Client(['base_uri' => 'http://api.nal.usda.gov/ndb/']);
+        try {
+
+            $response = $client->get('http://api.nal.usda.gov/ndb/search', [
+                'query' => [
+                    'format' => 'json',
+                    'q' => $searchstring,
+                    //'q' => 'bdhwjedbjw',
+                    'sort' => 'r',
+                    'max' => '10',
+                    'offeset' => '0',
+                    'api_key' => self::NDBKEY
+                ]
+            ]);
+                $body = json_decode($response->getBody());
+                $foods = $body->list->item;
+                return view('products_admin.usdanumber', compact('foods'));        
+        } catch (ClientException $e) {
+             /*
+             echo 'Uh oh! ' . $e->getMessage() . '<br/>';
+             echo 'Uh oh! ' . $e->getResponse()->getStatusCode();
+             */
+             return "No foods found matching your search";
+
+        }
+/*
+        if ($response->getStatusCode() == 200) {
+            $body = json_decode($response->getBody());
+            $foods = $body->list->item;
+            return view('products_admin.usdanumber', compact('foods'));
+        } else {
+            return view('products_admin.usdanumber')->with('error', 'No results');
+        }
+
+        */
+        
     }
 
 	/**

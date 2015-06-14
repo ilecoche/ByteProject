@@ -23,7 +23,9 @@
                         <ul style="list-style: none;">
                             @foreach($productbycategory as $product)
                             <li id="{{ $product->id }}" class="col-md-4 menu-item">
-                                <a href="{{ url('products_admin',$product->id) }}" /><img src="images/{{ $product->image }}" alt="{{ $product->dish }}" style="width: 100%; max-width: 300px;"></a>
+                                <a href="#" data-toggle="modal" data-target="#myModal" class="details-links">
+                                  <img src="images/{{ $product->image }}" alt="{{ $product->dish }}" style="width: 100%; max-width: 300px;">
+                                </a>
                                 <span class="dish-name">{{ $product->dish }}</span><br/>
                                 <span class="dish-price">{{ $product->price }}</span><br/>
                                 <span class="dish-id" style="visibility: hidden;">{{ $product->id }}</span>
@@ -45,6 +47,25 @@
                 </div>
 	</div><!-- /row-->
 </div><!-- /container -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Loading details ...</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @stop
 @section('additionalscripts')
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -101,9 +122,40 @@
       }
     });
     
-   
+  $(document).on('click', '.details-links', function(event) {
+      event.preventDefault();
+      $( ".modal-body" ).empty();
+
+      var dishid = $(this).parent().attr('id');
+      console.log(dishid);
+      geturl = 'products/' + dishid;
+        $.get(geturl, function(data, status){
+           $( ".modal-body" ).empty().append( data );
+           
+        });
+            
+  });   
+
+  $(document).on('submit',"#addToCartForm", function(event){
+          event.preventDefault();
+          var $form = $(document).find("form#addToCartForm"),
+          fd = $form.serialize(),
+          url = 'cart/add';   
+          console.log($form.attr("id"));
+       
+          $.post(url,fd)
+          .done(function(response){
+             $('#cart-content').html(response);
+          })
+          .fail(function(e){
+            alert(e.message);
+          });
+          $( "#myModal").modal('hide');
+          $( ".modal-body" ).empty();
+
+  });
     
-    
+
     
    
   });
