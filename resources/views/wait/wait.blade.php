@@ -2,6 +2,7 @@
 
 <head>
 	<meta name="csrf-token" content="{!! csrf_token() !!}">
+	<link href="{{ asset('/css/waittime.css') }}" rel="stylesheet">
 </head>
 
 	<body>
@@ -35,6 +36,13 @@
 		{!! Form::close() !!}
 
 		<div><p>Average Wait Time: <span id="waittime">{{$average}}</span> Minutes</p></div>
+		
+		<div class="loader">
+			<div class="flipper">
+				<div class="front"></div>
+				<div class="back"></div>
+			</div>
+		</div>
 
 		<div id="tablediv">
 		

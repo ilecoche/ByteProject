@@ -75,10 +75,13 @@ $('form[add-party]').on('submit', function(e){
 
 function seatCustomer(id){
 
+  $('.loader').show();
+
   $.post("wait/seat", {id: id}).done(function(data) {
     
     $('#waittime').html(data);
     $('#row_' + id).remove();
+    $('.loader').hide();
 
     numberCount();
     
