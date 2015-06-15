@@ -28,6 +28,11 @@ class ProductAdminController extends Controller {
     define('APIKEY', 'f60dabd6813bc369c33a870880947859');
     */
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getNestedArray(){
               $menu_categories = Menu_category::all();
               $products = array();
