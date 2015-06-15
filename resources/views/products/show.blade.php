@@ -4,10 +4,11 @@
                 </div>
 
 				<div class="details-body">
+                                    <p>Description: $ {{ $product->description }} </p>
                                     <p>Price: $ {{ $product->price }} </p>
                                     <p>SKU: {{ $product->sku }}</p>
+                                    <h4>Nutrition Info</h4>
                                     <p>
-                                        Nutrition Info<br/>
                                         {!! $nutrition_info !!}
                                     </p>
                                     {!! Form::open(['action' => 'CartController@add', 'method' => 'POST', 'id' => 'addToCartForm']) !!}
