@@ -14,8 +14,17 @@
         </div>
     </div>
 </div>
+ @if($errors->any())
+                                    <ul class="alert alert-danger">
+                                        @foreach($errors->all() as $error)
+                                        <li>
+                                            {{ $error }}
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
 
-<!--{!! Form::open(['url' => 'reserve', 'class' => 'confirm']) !!}-->
+<!--{!! Form::open(['url' => 'reservation/reserve', 'class' => 'confirm']) !!}-->
 
 {!! Form::open(['action' => 'ReservationController@reserve', 'method' => 'POST', 'class' => 'confirm']) !!}
 
