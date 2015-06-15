@@ -40,7 +40,7 @@
                                         <span class="actions">${{ number_format($total, 2) }}</span>
                                     </li>
                                     <li class="row list-inline footer">
-                                        <a href="{{ url('orders/create') }}"><button value="Checkout">Checkout</button>
+                                        <a href="{{ url('orders/create') }}"><button value="Checkout">Checkout</button></a>
                                     </li>
                                    
                                 </ul>  

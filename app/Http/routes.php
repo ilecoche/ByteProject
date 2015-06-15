@@ -28,10 +28,13 @@ Route::post('check', 'ReservationController@check');
 Route::post('reserve', 'ReservationController@reserve');
 
 /* Products Admin  */
-
+Route::get('products_admin/nutrition/{ndbno}', 'ProductAdminController@nutrition' );
+Route::post('products_admin/usdanumber', 'ProductAdminController@usdanumber' );
 Route::resource('products_admin', 'ProductAdminController');
 
+
 /* Cart */
+//Route::post('cart/addredirect', 'CartController@addredirect');
 Route::post('cart/add', 'CartController@add');
 Route::get('cart', 'CartController@all');
 Route::get('cart/empty', 'CartController@destroy');
@@ -49,4 +52,8 @@ Route::resource('orders', 'OrderController');
 Route::get('payment/{order_id}', 'PaymentController@index');
 Route::post('payment/process', 'PaymentController@process');
 
+/* Wait Time */
 
+Route::get('wait', 'WaitController@waitIndex');
+Route::post('wait', 'WaitController@waitPost');
+Route::post('wait/seat', 'WaitController@waitSeat');

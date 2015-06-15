@@ -10,7 +10,7 @@
 
 				<div class="panel-body">
                                     <!-- removes escaping -->
-                                    {!! Form::model($product, ['method' => 'PATCH', 'action' => ['ProductController@update', $product->id]] ) !!}
+                                    {!! Form::model($product, ['method' => 'PATCH', 'action' => ['ProductAdminController@update', $product->id]] ) !!}
                                     {!! Form::label('dish', 'Dish title: ') !!}
                                     {!! Form::text('dish', null, ['class' => 'form-control']) !!}
                                     {!! Form::label('description', 'Description: ') !!}
@@ -50,6 +50,7 @@
         format: 'yyyy-mm-dd'
         });
     });
+
 </script>
 @stop
 @section('additionalstyles')
