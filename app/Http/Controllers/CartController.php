@@ -70,8 +70,41 @@ class CartController extends Controller {
             
             //return $cart;
             return view('cart.widget', $this->all());
+
             
 	}
+
+    public function addredirect(Request $request)
+    {
+        
+
+            // Basic form
+            //Cart::add('293ad', 'Product 1', 1, 9.99, array('size' => 'large'));
+              $input = $request->all();
+              //Cart::associate('product')->add($input['id'], $input['name'], $input['qty'], $input['price']);
+                            
+              $options = array();
+
+              if(!empty($input['main_ingredient'])){
+                  $options['main_ingredient'] = $input['main_ingredient'];
+              }
+              
+              if(!empty($input['side'])){
+                  $options['side'] = $input['side'];
+              }
+              
+              if(!empty($input['addon'])){
+                  $options['addon'] = $input['addon'];
+              }
+              
+              if(!empty($input['portion'])){
+                  $options['portion'] = $input['portion'];
+              }
+            // Array form
+            Cart::add(array('id' => $input['id'], 'name' => $input['name'], 'qty' => $input['qty'], 'price' => $input['price']));
+
+            //return redirect('products');
+        }
 
 	/**
         * Update the quantity of one row of the cart

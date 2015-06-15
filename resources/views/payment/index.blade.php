@@ -7,7 +7,7 @@
 <div class="container">
     <h1>Credit Card Payment</h1>
     
-    <p>it works! order id {{$order_id}}</p>
+    <p>CHanged! order id {{$order_id}}</p>
     <!-- FORM -->
     {!! Form::open(['url' => 'payment/process', 'method' => 'post','id' => 'billing-form'])!!}
 

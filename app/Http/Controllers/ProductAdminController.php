@@ -8,6 +8,10 @@ use App\Product;
 use App\Menu_category;
 use App\Http\Requests\CreateProductRequest;
 use Session;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
+
 
 class ProductAdminController extends Controller {
 
@@ -16,7 +20,13 @@ class ProductAdminController extends Controller {
 	 *
 	 * @return Response
 	 */
-    
+    const NDBKEY = '7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY';
+ 
+    /*
+    define('APIID', '64b969ff');
+    define('APIKEY', 'f60dabd6813bc369c33a870880947859');
+    */
+
     public function getNestedArray(){
               $menu_categories = Menu_category::all();
               $products = array();
@@ -38,6 +48,78 @@ class ProductAdminController extends Controller {
             return view('products_admin.index', compact('products', 'message'));
 	}
 
+    public function nutrition($ndbno)
+    {
+        // Create a client with a base URI
+        $client = new Client(['base_uri' => 'http://api.nal.usda.gov/ndb/']);
+        // Request to http://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
+        $response = $client->get('http://api.nal.usda.gov/ndb/reports', [
+            'query' => [
+                'ndbno' => $ndbno,
+                'type' => 'f',
+                'format' => 'json',
+                'api_key' => self::NDBKEY
+            ]
+        ]);
+        $body = json_decode($response->getBody());
+        $selectedfood = $body->report->food->name;
+        $nutrients = array_slice($body->report->food->nutrients , 0, 9);
+        //var_dump($nutrients);
+        
+        /*
+        foreach ($nutrients as $nutrient) {
+            echo $nutrient->name . ': Per 100g ' . $nutrient->value . $nutrient->unit . '; ';
+            echo 'Per ' . $nutrient->measures[0]->label . ': '. $nutrient->measures[0]->value . $nutrient->unit . '<hr/>';
+        }
+        */
+        
+        return view('products_admin.nutrition', compact('selectedfood','nutrients'));
+    }
+    
+    public function usdanumber(Request $request){
+        $input = $request->all();
+        $searchstring = $input['s'];
+    //Request to http://api.nal.usda.gov/ndb/search/?format=json&q=pizza%20thin%20crust&sort=n&max=25&offset=0&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
+
+    // Create a client with a base URI
+        $client = new Client(['base_uri' => 'http://api.nal.usda.gov/ndb/']);
+        try {
+
+            $response = $client->get('http://api.nal.usda.gov/ndb/search', [
+                'query' => [
+                    'format' => 'json',
+                    'q' => $searchstring,
+                    //'q' => 'bdhwjedbjw',
+                    'sort' => 'r',
+                    'max' => '10',
+                    'offeset' => '0',
+                    'api_key' => self::NDBKEY
+                ]
+            ]);
+                $body = json_decode($response->getBody());
+                $foods = $body->list->item;
+                return view('products_admin.usdanumber', compact('foods'));        
+        } catch (ClientException $e) {
+             /*
+             echo 'Uh oh! ' . $e->getMessage() . '<br/>';
+             echo 'Uh oh! ' . $e->getResponse()->getStatusCode();
+             */
+             return "No foods found matching your search";
+
+        }
+/*
+        if ($response->getStatusCode() == 200) {
+            $body = json_decode($response->getBody());
+            $foods = $body->list->item;
+            return view('products_admin.usdanumber', compact('foods'));
+        } else {
+            return view('products_admin.usdanumber')->with('error', 'No results');
+        }
+
+        */
+        
+    }
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -45,7 +127,9 @@ class ProductAdminController extends Controller {
 	 */
 	public function create()
 	{
-            return view('products_admin.create');
+        $menu_categories = Menu_category::lists('name', 'id');
+        
+        return view('products_admin.create', compact('menu_categories'));
 	}
 
 	/**
@@ -85,29 +169,7 @@ Session::flash('msg', 'success');
 
 	}
         
-	public function store2(Request $request)
-	{
-            $this->validate($request,
-                [
-                    'dish' => 'required|min:5',
-                    'sku' => 'required',
-                    'menu_category_id' => 'required|Integer',
-                    'price' => 'required'
-                ]
-                );
-            $input = $request->all();
-            Product::create($input);
-//            $product = new Product;
-//            
-//            $product->title = $input['title'];
-//            $product->description = $input['description'];
-//            $product->author = $input['author'];
-//            $product->price = $input['price'];
-//            
-//            $product->save();
-            return redirect('products_admin');
-	}
-        
+	       
         /**
 	 * Remove the specified resource from storage.
 	 *

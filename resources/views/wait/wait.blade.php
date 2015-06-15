@@ -34,6 +34,8 @@
 		{!! Form::submit('Add To Wait List', ['class' => 'submitBtn']) !!}
 		{!! Form::close() !!}
 
+		<div><p>Average Wait Time: <span id="waittime">{{$average}}</span> Minutes</p></div>
+
 		<div id="tablediv">
 		
 		<table id="waitListTable">
@@ -46,7 +48,7 @@
 				<th>Accept</th>
 			</tr>
 			@foreach($entries as $entry)
-					<tr>
+					<tr id="row_{{$entry['id']}}">
 						<td class="counter"></td>
 						<td>{{ $entry['name'] }}</td>
 						<td>{{ $entry['partynumber'] }}</td>

@@ -3,14 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/byte/resources/views/products_admin/create.blade.php</file>
-            <file>file:/C:/xampp/htdocs/byte/app/Http/Requests/CreateProductRequest.php</file>
-            <file>file:/C:/xampp/htdocs/byte/app/product.php</file>
-            <file>file:/C:/xampp/htdocs/byte/app/Http/Controllers/ProductController.php</file>
-            <file>file:/C:/xampp/htdocs/byte/public/images/12.jpg</file>
-            <file>file:/C:/xampp/htdocs/byte/app/Http/routes.php</file>
-            <file>file:/C:/xampp/htdocs/byte/app/Http/Controllers/ProductAdminController.php</file>
-            <file>file:/C:/xampp/htdocs/byte/resources/views/products_admin/index.blade.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/Http/routes.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/public/index.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/order.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/Http/Controllers/WaitController.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/product.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/Http/Controllers/ProductController.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/Http/Requests/CreateProductRequest.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/Http/Controllers/ProductAdminController.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/Http/Controllers/OrderController.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/Http/Controllers/CartController.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/public/js/waitlist.js</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/resources/views/layouts/main.blade.php</file>
+            <file>file:/C:/xampp/htdocs/ByteProject/app/order_item.php</file>
         </group>
     </open-files>
 </project-private>

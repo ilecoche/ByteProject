@@ -15,8 +15,11 @@ class WaitController extends Controller {
 	public function waitIndex()
 	{
 		$waitlist = waitlist::all();
+		$waitClass = new waitClass();
+		$avgCalc = $waitClass->waitListCount();
         return view("wait.wait")
-                ->with("entries", $waitlist);
+                ->with("entries", $waitlist)
+                ->with("average", $avgCalc);
 	}
 
 	public function waitPost()
@@ -38,9 +41,16 @@ class WaitController extends Controller {
 
             $waitlist_row = waitlist::whereId($last_id)->get();
 
-            return $waitlist_row;
-        }
+            $waitClass = new waitClass();
+			$avgCalc = $waitClass->waitListCount();
 
+			$data = array(
+    			'data' => $waitlist_row,
+    			'average' => $avgCalc
+				);
+
+            return $data;
+        }
 	}
 
 	public function waitSeat()
@@ -70,21 +80,16 @@ class WaitController extends Controller {
 
 		//delete row from waitlist table
 
-		
+		$waitlistRowDelete = waitlist::whereId($id)->delete();
 
 		//Do average wait calculation
 
 		$waitClass = new waitClass();
 
-		$count = $waitClass->waitListCount();
+		$avgCalc = $waitClass->waitListCount();
 
 		// return $count;
 
-		return $count;
-
-		
-
+		return $avgCalc;
 	}
-            
-
 }
