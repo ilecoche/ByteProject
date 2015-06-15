@@ -72,51 +72,42 @@
 
 
 <script type="text/javascript">
+
     $(function() {
     $('#datetimepicker3').datepicker({
         format: 'yyyy-mm-dd'
         });
-    
     });
 
 </script>
 
-
-
 <script>
+
     $.ajaxSetup({
     headers: {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     }
-    });
+    }); // $.ajaxSetup({ ...
 
     var loader = $("#ajax-loader");
+
+/*---- get nutrition info based on ndbno --------------------------------------*/
 
     function getNutritionInfo(ndbno) {
         loader.show();
         var ndbnom = ndbno;
-        /*var new_qty = newqty;
-        var geturl = 'product_admin/nutrition/'+row_id + '/' + new_qty;
-        */
-        //console.log(row_id);
-        //console.log(geturl);
+        
         geturl = 'nutrition/' + ndbnom;
+
         $.get(geturl, function(data, status){
             loader.hide();
            $( "#nutrition-info" ).empty().append( data );
            var $form = $( "#mainForm" ),
                 sku = $form.find( "input[name='sku']" ).val(ndbnom);
-        });
-    }
-    
-    /*function usdaNumberInfo(){
-        var searchparam = $('#dishkeywords').val();
-        console.log(searchparam);
-        geturl = 'usdanumber/' + searchparam;
-        $.get(geturl, function(data, status){
-           $('#nutrition-content').html(data);
-        });
-    }*/
+        }); // $.get(geturl, function(data, status){ ...
+    } // function getNutritionInfo(ndbno) ...
+ 
+/*----submitting nutrition API search form. Returns list of sample foods matching search string---*/   
 
     $( "#searchForm" ).submit(function( event ) {
      
@@ -140,15 +131,17 @@
         $( "#nutrition-info" ).empty();
          var $form = $( "#mainForm" ),
                 sku = $form.find( "input[name='sku']" ).val('');
-      });
+      }); // posting.done(function( data ) { .....
 
-    });
+    }); // $( "#searchForm" ).submit(function( event ) { ....
+
+/*------------click on sample food link would pull nutritional info from API-----------  */
 
     $(document).on('click', '.samples', function(event) {
             console.log($(this).attr('id'));
             getNutritionInfo($(this).attr('id'));
             
-        });
+    }); // $(document).on('click', '.samples', function(event) { ....
 
     
 

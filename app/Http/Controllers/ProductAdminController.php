@@ -23,6 +23,7 @@ class ProductAdminController extends Controller {
     const NDBKEY = '7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY';
  
     /*
+    * For nutritionix API 
     define('APIID', '64b969ff');
     define('APIKEY', 'f60dabd6813bc369c33a870880947859');
     */
@@ -39,12 +40,9 @@ class ProductAdminController extends Controller {
 
 	public function index()
 	{
-            //dd(Session::get('msg'));
-            //$message = $msg;
-            //$products = Product::all();
+            
             $products = $this->getNestedArray();
             $message = Session::get('msg');
-            //dd($products);
             return view('products_admin.index', compact('products', 'message'));
 	}
 
@@ -52,6 +50,7 @@ class ProductAdminController extends Controller {
     {
         // Create a client with a base URI
         $client = new Client(['base_uri' => 'http://api.nal.usda.gov/ndb/']);
+
         // Request to http://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
         $response = $client->get('http://api.nal.usda.gov/ndb/reports', [
             'query' => [
@@ -64,14 +63,6 @@ class ProductAdminController extends Controller {
         $body = json_decode($response->getBody());
         $selectedfood = $body->report->food->name;
         $nutrients = array_slice($body->report->food->nutrients , 0, 9);
-        //var_dump($nutrients);
-        
-        /*
-        foreach ($nutrients as $nutrient) {
-            echo $nutrient->name . ': Per 100g ' . $nutrient->value . $nutrient->unit . '; ';
-            echo 'Per ' . $nutrient->measures[0]->label . ': '. $nutrient->measures[0]->value . $nutrient->unit . '<hr/>';
-        }
-        */
         
         return view('products_admin.nutrition', compact('selectedfood','nutrients'));
     }
@@ -79,6 +70,7 @@ class ProductAdminController extends Controller {
     public function usdanumber(Request $request){
         $input = $request->all();
         $searchstring = $input['s'];
+
     //Request to http://api.nal.usda.gov/ndb/search/?format=json&q=pizza%20thin%20crust&sort=n&max=25&offset=0&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
 
     // Create a client with a base URI
@@ -89,7 +81,6 @@ class ProductAdminController extends Controller {
                 'query' => [
                     'format' => 'json',
                     'q' => $searchstring,
-                    //'q' => 'bdhwjedbjw',
                     'sort' => 'r',
                     'max' => '10',
                     'offeset' => '0',
@@ -107,17 +98,7 @@ class ProductAdminController extends Controller {
              return "No foods found matching your search";
 
         }
-/*
-        if ($response->getStatusCode() == 200) {
-            $body = json_decode($response->getBody());
-            $foods = $body->list->item;
-            return view('products_admin.usdanumber', compact('foods'));
-        } else {
-            return view('products_admin.usdanumber')->with('error', 'No results');
-        }
 
-        */
-        
     }
 
 	/**
@@ -140,10 +121,6 @@ class ProductAdminController extends Controller {
         
         public function store(CreateProductRequest $request)
 	{
-            //return "validate";
-            
-            //Product::create($request->all());
-            //return redirect('products_admin');
             
             
              $product = new Product(array(
@@ -192,7 +169,6 @@ Session::flash('msg', 'success');
 	public function show($id)
 	{
             $product = Product::findOrFail($id);
-            //return $product;
            return view('products_admin.show')->with('product',$product);
 	}
 
@@ -204,9 +180,10 @@ Session::flash('msg', 'success');
 	 */
 	public function edit($id)
 	{
-            $product = Product::findOrFail($id);
+            $menu_categories = Menu_category::lists('name', 'id');
 
-            return view('products_admin.edit', compact('product'));
+            $product = Product::findOrFail($id);
+            return view('products_admin.edit', compact('product', 'menu_categories'));
 	}
 
 	/**
