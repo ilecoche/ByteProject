@@ -38,7 +38,7 @@ class ReservationController extends Controller {
     }
     
     public function reserve(Request $request){
-        
+       
         $input = $request->all();
         
         $date = $input['date'];
