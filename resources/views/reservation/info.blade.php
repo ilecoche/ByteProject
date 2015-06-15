@@ -1,19 +1,19 @@
 <h2>Complete your reservation</h2>
 
-<div class="reserve-details">
+ <div class="reserve-details">
     <div class="row">
         <div class="col-sm-4">
             <p>Date: {{ $date }}</p>
         </div>
         <div class="col-sm-4">
             <p>Time: {{ $time }}</p>
-            <!--<p>Time: {{ date("g:i a",strtotime($time)) }}</p>-->
+            <p>Time: {{ date("g:i a",strtotime($time)) }}</p>
         </div>
         <div class="col-sm-4">
             <p>Guests: {{ $capacity }} People</p>
         </div>
     </div>
-</div>
+</div> 
  @if($errors->any())
                                     <ul class="alert alert-danger">
                                         @foreach($errors->all() as $error)
@@ -33,6 +33,7 @@
     {!! Form::hidden('time', $time) !!}
 
     {!! Form::hidden('capacity', $capacity) !!}
+   
 
     <div class="row">
         <div class="col-sm-6">

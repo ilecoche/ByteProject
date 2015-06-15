@@ -18,13 +18,18 @@ class ReservationController extends Controller {
         $input = $request->all();       
         
 
-        
-        if(Session::has('time') !== null){$time = Session::get('time');}
+        if(isset($input['time'])){$time = $input['time'];}
+        else {$time = Session::get('time');}
+         if(isset($input['date'])){$date = $input['date'];}
+        else {$date = Session::get('date');}
+        if(isset($input['capacity'])){$capacity = $input['capacity'];}
+        else {$capacity = Session::get('capacity');}
+        /*if(!empty(Session::get('time'))){$time = Session::get('time');}
         else { $time = $input['time'];}
-        if(Session::has('capacity') !== null){$capacity = Session::get('capacity');}
+        if(!empty(Session::get('capacity'))){$capacity = Session::get('capacity');}
         else {$capacity = $input['capacity'];}
-        if(Session::get('date') !== null) {$date = Session::get('date');}
-        else {$date = $input['date'];}
+        if(!empty(Session::get('date'))) {$date = Session::get('date');}
+        else {$date = $input['date'];}*/
 
         Session::flash('date', $date);
         Session::flash('time', $time);
@@ -42,16 +47,17 @@ class ReservationController extends Controller {
         }
         else {
             $list = ReservationClass::availableTables($date, $minTime, $maxTime);
-            return view("reservation.info")
+           /* return view("reservation.info")
                     ->with('date', $date)
                     ->with('time', $time)
-                    ->with("capacity", $capacity)
-                    ->with('list', $list);
+                    ->with('capacity', $capacity)
+                    ->with('list', $list);*/
+                    return view("reservation.info", compact('date', 'time', 'capacity', 'list'));
         }
     }
     
     public function reserve(Request $request){
-
+        Session::reflash();
         $this->validate($request, 
         [
             'fname' => 'required',
