@@ -16,21 +16,20 @@
                                 </div>
 
 				<div class="panel-body">
+                                    <p>Description: {{ $product->description }} </p>
                                     <p>Price: $ {{ $product->price }} </p>
                                     <p>SKU: {{ $product->sku }}</p>
-                                    {!! Form::open(['url' => 'cart/add']) !!}
-                                            {!! Form::hidden('name', $product->dish) !!}
-                                            {!! Form::hidden('qty', 1) !!}
-                                            {!! Form::hidden('price', $product->price) !!}
-                                            {!! Form::hidden('id', $product->id) !!}
+                                    <span class='link-edit'>
+                                    <a href="{{ action('ProductAdminController@edit',$product->id) }}"><i class="glyphicon glyphicon-edit"></i>Edit</a>
+                                </span>
+                                            |
+                                            
+                                {!! Form::open(['action' => ['ProductAdminController@destroy', $product->id], 'method' => 'DELETE', 'class' => 'form-inline one-button-form']) !!}
+                                    <button type="submit" class="btn btn-link form-inline" >
+                                        <i class="glyphicon glyphicon-remove"></i>Delete
+                                    </button>
+                                                                           {!! Form::close() !!}
 
-                                    
-                                        <div class="form-group">
-                                            {!! Form::button('<i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i> Add to cart', array('type' => 'submit', 'class' => 'btn btn-addtocart form-control')) !!}
-
-                                        </div>
-                                    
-                                    {!! Form::close() !!}
                                 </div>
 			</div>
 		</div>
