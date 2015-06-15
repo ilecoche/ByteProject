@@ -38,7 +38,16 @@ class ReservationController extends Controller {
     }
     
     public function reserve(Request $request){
-       
+
+
+        $this->validate($request, 
+        [
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'phone' => 'required'
+        ]);
+        
         $input = $request->all();
         
         $date = $input['date'];

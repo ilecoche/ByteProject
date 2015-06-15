@@ -1,0 +1,158 @@
+* {
+	padding:0;
+	margin:0;
+}
+
+.reserve-details .row .col-sm-4,
+.reserve .row .col-sm-4,
+.reserve .row .col-sm-6,
+.reserve .row .col-sm-12,
+.confirm .row .col-sm-4,
+.confirm .row .col-sm-6,
+.confirm .row .col-sm-12 {
+	padding-left: 0;
+}
+
+.reserve .row .col-sm-4:last-of-type,
+.reserve .row .col-sm-6:last-of-type,
+.reserve .row .col-sm-12,
+.confirm .row .col-sm-4:last-of-type,
+.confirm .row .col-sm-6:last-of-type,
+.confirm .row .col-sm-12 {
+	padding-right: 0;
+}
+
+.reserve .row,
+.confirm .row {
+	margin: 0;
+}
+
+.reserve-details .row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.reserve-details {
+	padding-bottom: 10px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    border-bottom: 2px dotted #da3743;
+}
+
+.reserve-date,
+.reserve-input {
+	position: relative;
+	box-shadow: none;
+}
+
+.reserve input.form-control {
+	height: 50px;
+}
+
+.reserve input.btn-primary,
+.confirm input.btn-primary  {
+	background-color: #da3743;
+	border: 1px solid #da3743;
+}
+
+.reserve-label {
+	position: absolute;
+    display: block;
+    color: #222;
+    padding: 1.15em;
+    height: 3.75em;
+    width: 100%;
+}
+
+.reserve-select a:hover {
+	text-decoration: none;
+	color: #222;
+	cursor: pointer;
+}
+
+.reserve-label .glyphicon {
+	float: right;
+	padding: 0.25em;
+  	color: #222;
+}
+
+.reserve-select {
+	width: 100%;
+	float: left;
+	margin-bottom: 5%;
+	position: relative;
+}
+
+.reserve-select select,
+.reserve-select input {
+    width: 100%;
+    padding: 15px;
+    -webkit-appearance: none;
+	position: relative;
+	cursor: pointer;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #222;
+}
+
+.loader {
+	color: #da3743;
+	position: absolute;
+	top:50%;
+	left:48%;
+}
+
+.flash {
+	display: inline-block;
+	position: absolute;
+	bottom: 25px;
+	right: 15px;
+	z-index: 100;
+}
+
+/* Datepicker */
+.datepicker-days table.table-condensed {
+	border-collapse: separate;
+	border-spacing: 5px;
+}
+
+.datepicker-days table.table-condensed tfoot {
+	display: none;
+}
+
+td.today.active.day {
+	background: #da3743!important;
+	border-radius: 50%;
+	padding: 5px!important;
+}
+
+td.day {
+	padding: 10px!important;
+}
+
+td.day:hover,
+th.next:hover,
+th.prev:hover {
+	border-radius: 50%;
+	background-color: #ccc;
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+	.reserve-form .row .col-sm-12 {
+		padding-left: 15px;
+	}
+
+	.reserve .row .col-sm-4,
+	.reserve .row .col-sm-6,
+	.confirm .row .col-sm-4,
+	.confirm .row .col-sm-6 {
+		padding-right: 0;
+	}
+
+	.reserve-select {
+		margin-bottom: 2%;
+	}
+}
