@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ReservationClass;
+use Session;
 
 class ReservationController extends Controller {
     
@@ -12,11 +13,23 @@ class ReservationController extends Controller {
     }
     
     public function check(Request $request){
-        $input = $request->all();
         
-        $date = $input['date'];
-        $time = $input['time'];
-        $capacity = $input['capacity'];
+
+        $input = $request->all();       
+        
+
+        
+        if(Session::has('time') !== null){$time = Session::get('time');}
+        else { $time = $input['time'];}
+        if(Session::has('capacity') !== null){$capacity = Session::get('capacity');}
+        else {$capacity = $input['capacity'];}
+        if(Session::get('date') !== null) {$date = Session::get('date');}
+        else {$date = $input['date'];}
+
+        Session::flash('date', $date);
+        Session::flash('time', $time);
+        Session::flash('capacity', $capacity);
+
         $minTime = ReservationClass::getMinTime($time);
         $maxTime = ReservationClass::getMaxTime($time);
         

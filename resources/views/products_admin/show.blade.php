@@ -20,8 +20,8 @@
                                     <p>Price: $ {{ $product->price }} </p>
                                     <p>SKU: {{ $product->sku }}</p>
                                     <span class='link-edit'>
-                                    <a href="{{ action('ProductAdminController@edit',$product->id) }}"><i class="glyphicon glyphicon-edit"></i>Edit</a>
-                                </span>
+                                        <a href="{{ action('ProductAdminController@edit',$product->id) }}"><i class="glyphicon glyphicon-edit"></i>Edit</a>
+                                    </span>
                                             |
                                             
                                 {!! Form::open(['action' => ['ProductAdminController@destroy', $product->id], 'method' => 'DELETE', 'class' => 'form-inline one-button-form']) !!}
