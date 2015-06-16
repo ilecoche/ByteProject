@@ -69,7 +69,6 @@ class ReservationController extends Controller {
         if(Input::get('reserve'))
         {
             $this->postReserve($request);
-
             $inputs = $request->all();
 
             return view('reservation.thanks')->with('data',$inputs);
@@ -92,7 +91,7 @@ class ReservationController extends Controller {
             'phone' => 'required'
         ]);
         
-        $input = $request->all();
+        $input = $request->all(); 
         
         $date = $input['date'];
         $dateformat = date('Y-m-d', strtotime($date));
@@ -102,6 +101,8 @@ class ReservationController extends Controller {
         $lname = $input['lname'];
         $email = $input['email'];
         $phone = $input['phone'];
+
+        //var_dump($dateformat);
         
         ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
 
