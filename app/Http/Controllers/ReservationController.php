@@ -72,7 +72,7 @@ class ReservationController extends Controller {
         }
         else if(Input::get('back'))
         {
-           return Redirect('reservation')->withInput(Input::only('date', 'time', 'capacity'));
+           return Redirect('reservation')->withInput();
         }
     }
 
@@ -91,6 +91,7 @@ class ReservationController extends Controller {
         $input = $request->all();
         
         $date = $input['date'];
+        $date = date('Y-m-d', strtotime($date));
         $time = $input['time'];
         $capacity = $input['capacity'];
         $fname = $input['fname'];
@@ -100,14 +101,18 @@ class ReservationController extends Controller {
         
         ReservationClass::makeReservation($date, $time, $fname, $lname, $phone, $email, $capacity);
         
-        return view("reservation.thanks")
-                ->with('date', $date)
-                ->with('time', $time)
-                ->with('capacity', $capacity)
-                ->with('fname', $fname)
-                ->with('lname', $lname)
-                ->with('email', $email)
-                ->with('phone', $phone);
+        echo 'thanks';
+
+        return Redirect('thanks');
+                // ->with('date', $date)
+                // ->with('time', $time)
+                // ->with('capacity', $capacity)
+                // ->with('fname', $fname)
+                // ->with('lname', $lname)
+                // ->with('email', $email)
+                // ->with('phone', $phone);
+
+                 var_dump($date);
     }
     
 }
