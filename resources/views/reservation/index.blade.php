@@ -1,54 +1,94 @@
-<h1>This is the reservation page</h1>
+<?php 
+    date_default_timezone_set('America/Toronto');
+    $date = date("F j, Y"); 
+?>
 
-<p>{{ date("Y-m-d", time() + 86400) }}</p>
+@extends('app')
 
-{!! Form::open(['url' => 'check']) !!}
-<ul>
-    <li>
-        {!! Form::label('date', 'Date: ') !!}
-        {!! Form::input('date', 'date') !!}
-    </li>
-    <li>
-        {!! Form::label('time', 'Time: ') !!}
-        {!! Form::select('time', [
-                '1200' => '12:00PM',
-                '1230' => '12:30PM',
-                '1300' => '1:00PM',
-                '1330' => '1:30PM',
-                '1400' => '2:00PM',
-                '1430' => '2:30PM',
-                '1500' => '3:00PM',
-                '1530' => '3:30PM',
-                '1600' => '4:00PM',
-                '1630' => '4:30PM',
-                '1700' => '5:00PM',
-                '1730' => '5:30PM',
-                '1800' => '6:00PM',
-                '1830' => '6:30PM',
-                '1900' => '7:00PM',
-                '1930' => '7:30PM',
-                '2000' => '8:00PM',
-                '2030' => '8:30PM'
-            ])
-        !!}
-    </li>
-    <li>
-        {!! Form::label('capacity', 'Size: ') !!}
-        {!! Form::select('capacity', [
-                '2' => '2', 
-                '3' => '3', 
-                '4' => '4', 
-                '5' => '5', 
-                '6' => '6',
-                '7' => '7', 
-                '8' => '8', 
-                '9' => '9', 
-                '10' => '10'
-            ])
-        !!}
-    </li>
-    <li>
-        {!! Form::submit('Next') !!}
-    </li>
-</ul>
-{!! Form::close() !!}
+@section('content')
+
+<div class="container">
+
+    <div class="loader"></div>
+
+    <!--<div class="result-container"></div>-->
+
+    <div class="reserve-container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Make a Resevation</h1>
+        </div>
+    </div>
+
+    {!! Form::open(['action' => 'ReservationController@check', 'method' => 'POST', 'class' => 'reserve']) !!}
+    
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div class="reserve-select">
+                    <a class="reserve-label"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    {!! Form::text('date', $date, array('class' => 'form-control reserve-date')) !!}
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="reserve-select">
+                    <a class="reserve-label"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    {!! Form::select('time',[
+                            '1200' => '12:00 PM',
+                            '1230' => '12:30 PM',
+                            '1300' => '1:00 PM',
+                            '1330' => '1:30 PM',
+                            '1400' => '2:00 PM',
+                            '1430' => '2:30 PM',
+                            '1500' => '3:00 PM',
+                            '1530' => '3:30 PM',
+                            '1600' => '4:00 PM',
+                            '1630' => '4:30 PM',
+                            '1700' => '5:00 PM',
+                            '1730' => '5:30 PM',
+                            '1800' => '6:00 PM',
+                            '1830' => '6:30 PM',
+                            '1900' => '7:00 PM',
+                            '1930' => '7:30 PM',
+                            '2000' => '8:00 PM',
+                            '2030' => '8:30 PM'
+                        ], '1900', array('class' => 'time'))
+                    !!}
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="reserve-select">
+                    <a class="reserve-label"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    {!! Form::select('capacity', [
+                            '1' => '1 person',
+                            '2' => '2 people', 
+                            '3' => '3 people', 
+                            '4' => '4 people', 
+                            '5' => '5 people', 
+                            '6' => '6 people',
+                            '7' => '7 people', 
+                            '8' => '8 people', 
+                            '9' => '9 people', 
+                            '10' => '10 people'
+                        ], '2', array('class' => 'capacity'))
+                    !!}
+                </div>
+            </div>
+        </div><!-- /.row -->
+
+        <div class="row">
+
+            {!! Form::submit('Find a Table', array('class' => 'btn btn-primary form-control')) !!}
+
+         </div><!-- /.row -->
+          
+        {!! Form::close() !!}
+
+    </div>
+
+</div>
+
+@stop

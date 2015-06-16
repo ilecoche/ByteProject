@@ -22,10 +22,12 @@ Route::controllers([
 
 
 /* Reservation */
-
+Route::get('reservation/check', 'ReservationController@check');
+Route::post('reservation/check', 'ReservationController@check');
+//Route::get('reservation/reserve', 'ReservationController@reserve');
+Route::post('reservation/reserve', 'ReservationController@reserve');
 Route::get('reservation', 'ReservationController@index');
-Route::post('check', 'ReservationController@check');
-Route::post('reserve', 'ReservationController@reserve');
+
 
 /* Products Admin  */
 Route::get('products_admin/nutrition/{ndbno}', 'ProductAdminController@nutrition' );
@@ -57,3 +59,13 @@ Route::post('payment/process', 'PaymentController@process');
 Route::get('wait', 'WaitController@waitIndex');
 Route::post('wait', 'WaitController@waitPost');
 Route::post('wait/seat', 'WaitController@waitSeat');
+
+/* Reviews */
+Route::get('testimonials', 'TestimonialController@index');
+Route::get('testimonials/create', 'TestimonialController@create');
+Route::post('testimonials', 'TestimonialController@store');
+Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
+
+/* Map */
+Route::get('map', 'MapController@Index');
+

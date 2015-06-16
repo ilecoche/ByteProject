@@ -1,68 +1,89 @@
-<h1>The place is available</h1>
+<h2>Complete your reservation</h2>
 
-<p>Date: {{ $date }}</p>
+<div class="reserve-details">
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Date: {{ $date }}</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Time: {{ date("g:i a",strtotime($time)) }}</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Guests: {{ $capacity }} People</p>
+        </div>
+    </div>
+</div>
 
-<p>Time: {{ $time }}</p>
+ @if($errors->any())
+    <ul class="alert alert-danger">
+        @foreach($errors->all() as $error)
+        <li>
+            {{ $error }}
+        </li>
+        @endforeach
+    </ul>
+@endif
 
-<p>Size: {{ $capacity }}</p>
+{!! Form::open(['action' => 'ReservationController@reserve', 'method' => 'POST', 'class' => 'confirm']) !!}
 
+    {!! Form::hidden('date', $date) !!}
 
-{!! Form::open(['url' => 'reserve', 'onsubmit' => 'return validate();']) !!}
+    {!! Form::hidden('time', $time) !!}
 
-{!! Form::hidden('date', $date) !!}
+    {!! Form::hidden('capacity', $capacity) !!}
 
-{!! Form::hidden('time', $time) !!}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                {!! Form::text('fname', null, array('placeholder' => 'First Name', 'class' => 'form-control reserve-input', 'id' => 'fname')) !!}
+                <span id="fname-req" style="display: none; color: red;">*Required</span>
+            </div>
+        </div>
 
-{!! Form::hidden('capacity', $capacity) !!}
+        <div class="col-sm-6">
+            <div class="form-group">
+                {!! Form::text('lname', null, array('placeholder' => 'Last Name', 'class' => 'form-control reserve-input', 'id' => 'lname')) !!}
+                <span id="lname-req" style="display: none; color: red;">*Required</span>
+            </div>
+        </div>
+    </div>
 
-<ul>
-    <li>
-        {!! Form::label('fname', 'First name: ') !!}
-        {!! Form::text('fname') !!}
-    </li>
-    <li id="fname-req" style="display: none; color: red;">
-        *Required
-    </li>
-    <li>
-        {!! Form::label('lname', 'Last name: ') !!}
-        {!! Form::text('lname') !!}
-    </li>
-    <li id="lname-req" style="display: none; color: red;">
-        *Required
-    </li>
-    <li>
-        {!! Form::label('email', 'Email: ') !!}
-        {!! Form::text('email') !!}
-    </li>
-    <li id="email-req" style="display: none; color: red;">
-        *Required
-    </li>
-    <li id="email-reg" style="display: none; color: red;">
-        *Invalid
-    </li>
-    <li>
-        {!! Form::label('phone', 'Phone: ') !!}
-        {!! Form::text('phone') !!}
-    </li>
-    <li id="phone-req" style="display: none; color: red;">
-        *Required
-    </li>
-    <li id="phone-reg" style="display: none; color: red;">
-        *Invalid
-    </li>
-</ul>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                {!! Form::text('email', null, array('placeholder' => 'Email', 'class' => 'form-control reserve-input', 'id' => 'email')) !!}
+                <span id="email-req" style="display: none; color: red;">*Required</span>
+                <span id="email-reg" style="display: none; color: red;">*Invalid</span>
+            </div>
+        </div>
+    </div>
 
-{!! Form::submit('Reserve') !!}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                {!! Form::text('phone', null, array('placeholder' => 'Phone Number', 'class' => 'form-control reserve-input', 'id' => 'phone')) !!}
+                <span id="phone-req" style="display: none; color: red;">*Required</span>
+                <span id="phone-reg" style="display: none; color: red;">*Invalid</span>
+            </div>
+        </div>
+    </div>
 
-{!! Form::close() !!}
+    <div class="row">
 
-<ul>
-    @foreach($list as $table)
-    <li>Table: {{ $table->id }}, cap={{ $table->capacity }}</li>
-    @endforeach
-</ul>
+        {!! Form::submit('Reserve', ['name' => 'reserve', 'class' => 'btn btn-primary']) !!}
+        {!! Form::submit('Back', ['name' => 'back', 'class' => 'btn btn-default']) !!}
 
-<script>
+    </div>
+
+    {!! Form::close() !!}
+
+    <!--<ul>
+        @foreach($list as $table)
+        <li>Table: {{ $table->id }}, cap={{ $table->capacity }}</li>
+        @endforeach
+    </ul>-->
+
+<!--<script>
     function validate(){
         var tracker = true; 
         
@@ -128,4 +149,4 @@
             return true;
         }
     }
-</script>
+</script>-->
