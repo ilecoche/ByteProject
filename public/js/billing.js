@@ -22,8 +22,7 @@
         
         stripeResponseHandler: function(status, response){
              this.submitButton.val("Pay Bill");
-            console.log(status);
-            console.log(response);
+
             
             if(response.error){
                $('.payment-error').html(response.error.message + ' Please try again');

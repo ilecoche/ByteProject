@@ -59,3 +59,13 @@ Route::post('payment/process', 'PaymentController@process');
 Route::get('wait', 'WaitController@waitIndex');
 Route::post('wait', 'WaitController@waitPost');
 Route::post('wait/seat', 'WaitController@waitSeat');
+
+/* Reviews */
+Route::get('testimonials', 'TestimonialController@index');
+Route::get('testimonials/create', 'TestimonialController@create');
+Route::post('testimonials', 'TestimonialController@store');
+Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
+
+/* Map */
+Route::get('map', 'MapController@Index');
+

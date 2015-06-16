@@ -41,6 +41,8 @@ $('form[add-party]').on('submit', function(e){
   var email = $('#email').val();
   var number = $('#number').val();
 
+  $('.loader').show();
+
   if (name || partynumber || email || number ){
 
     $.ajax({
@@ -56,6 +58,7 @@ $('form[add-party]').on('submit', function(e){
           + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data.data[0].id + ')" />' + '</td>'
           + '</tr>');
         $('#waittime').html(data.average);
+        $('.loader').hide();
         numberCount();
       },
       error: function(e){
