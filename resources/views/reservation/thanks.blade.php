@@ -1,15 +1,15 @@
 <h1>Thank you!</h1>
 
-{{-- <p>Date: {{ $date }}</p>
+<p>Date: {{ $data['date'] }}</p>
 
-<p>Time: {{ $time }}</p>
+<p>Time: {{ $data['time'] }}</p>
 
-<p>Capacity: {{ $capacity }}</p>
+<p>Capacity: {{ $data['capacity'] }}</p>
 
-<p>First name: {{ $fname }}</p>
+<p>First name: {{ $data['fname'] }}</p>
 
-<p>Last name : {{ $lname }}</p>
+<p>Last name : {{ $data['lname'] }}</p>
 
-<p>Email: {{ $email }}</p>
+<p>Email: {{ $data['email'] }}</p>
 
-<p>Phone: {{ $phone }}</p> --}}
+<p>Phone: {{ $data['phone'] }}</p>
