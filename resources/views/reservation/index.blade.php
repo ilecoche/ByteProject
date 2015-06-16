@@ -11,18 +11,16 @@
 
     <div class="loader"></div>
 
-    <div class="result-container"></div>
+    <!--<div class="result-container"></div>-->
 
     <div class="reserve-container">
 
     <div class="row">
         <div class="col-sm-12">
             <h1>Make a Resevation</h1>
-            <!--<p>{{ date("Y-m-d", time() + 86400) }}</p>-->
         </div>
     </div>
 
-    <!--{!! Form::open(['url' => 'check', 'class' => 'reserve']) !!}-->
     {!! Form::open(['action' => 'ReservationController@check', 'method' => 'POST', 'class' => 'reserve']) !!}
     
         <div class="row">
