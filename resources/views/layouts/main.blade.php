@@ -33,7 +33,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><img src="images/logo.png"/></a>
+                        <a href="#"><img id="logo" src="images/logo.png"></a>
                     </div>
 
                     <!-- toggling -->
