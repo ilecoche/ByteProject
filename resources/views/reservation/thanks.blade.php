@@ -1,6 +1,6 @@
 <h1>Thank you!</h1>
 
-<p>Date: {{ $date }}</p>
+{{-- <p>Date: {{ $date }}</p>
 
 <p>Time: {{ $time }}</p>
 
@@ -12,4 +12,4 @@
 
 <p>Email: {{ $email }}</p>
 
-<p>Phone: {{ $phone }}</p>
+<p>Phone: {{ $phone }}</p> --}}
