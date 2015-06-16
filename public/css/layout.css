@@ -1,0 +1,36 @@
+body {
+    background: #ECECEC;
+/*    overflow-x: auto;*/
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 25%;
+      height: 20%;
+      margin: auto;
+  }
+
+
+#map {
+    width: 80%;
+    height: auto;
+    margin: 0 10%;
+    }
+
+
+.btn {
+    font-size: 16pt;
+}
+
+h3{
+text-align: center;
+}
+
+
+@media (max-width: 768px) {
+
+    .my-carousel {
+        height: 50%;
+    }
+    
+}

@@ -65,3 +65,7 @@ Route::get('testimonials', 'TestimonialController@index');
 Route::get('testimonials/create', 'TestimonialController@create');
 Route::post('testimonials', 'TestimonialController@store');
 Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
+
+/* Map */
+Route::get('map', 'MapController@Index');
+
