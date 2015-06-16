@@ -59,3 +59,6 @@ Route::post('payment/process', 'PaymentController@process');
 Route::get('wait', 'WaitController@waitIndex');
 Route::post('wait', 'WaitController@waitPost');
 Route::post('wait/seat', 'WaitController@waitSeat');
+
+/* Map */
+Route::get('map', 'MapController@Index');
