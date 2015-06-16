@@ -2,9 +2,9 @@
 
 <p>Date: {{ $data['date'] }}</p>
 
-<p>Time: {{ $data['time'] }}</p>
+<p>Time: {{ date("g:i a",strtotime($data['time'])) }}</p>
 
-<p>Capacity: {{ $data['capacity'] }}</p>
+<p>Capacity: {{ $data['capacity'] }} people</p>
 
 <p>First name: {{ $data['fname'] }}</p>
 

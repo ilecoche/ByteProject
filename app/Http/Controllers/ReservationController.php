@@ -85,10 +85,21 @@ class ReservationController extends Controller {
 
         $this->validate($request, 
         [
-            'fname' => 'required',
-            'lname' => 'required',
-            'email' => 'required',
-            'phone' => 'required'
+            'fname' => 'required|min:2',
+            'lname' => 'required|min:2',
+            'email' => 'required|email',
+            'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
+        ],
+        [
+            'fname.required' => 'Please enter your first name',
+            'fname.min' => 'Invalid first name',
+            'lname.required' => 'Please enter your last name',
+            'lname.min' => 'Invalid last name',
+            'email.required' => 'Please enter your email',
+            'email' => 'Invalid email',
+            'phone.required' => 'Please enter your phone number',
+            'phone.regex' => 'Invalid phone number'
+            
         ]);
         
         $input = $request->all(); 
@@ -101,8 +112,6 @@ class ReservationController extends Controller {
         $lname = $input['lname'];
         $email = $input['email'];
         $phone = $input['phone'];
-
-        //var_dump($dateformat);
         
         ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
 
