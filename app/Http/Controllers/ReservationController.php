@@ -69,6 +69,10 @@ class ReservationController extends Controller {
         if(Input::get('reserve'))
         {
             $this->postReserve($request);
+
+            $inputs = $request->all();
+
+            return view('reservation.thanks')->with('data',$inputs);
         }
         else if(Input::get('back'))
         {
@@ -91,7 +95,7 @@ class ReservationController extends Controller {
         $input = $request->all();
         
         $date = $input['date'];
-        $date = date('Y-m-d', strtotime($date));
+        $dateformat = date('Y-m-d', strtotime($date));
         $time = $input['time'];
         $capacity = $input['capacity'];
         $fname = $input['fname'];
@@ -99,20 +103,7 @@ class ReservationController extends Controller {
         $email = $input['email'];
         $phone = $input['phone'];
         
-        ReservationClass::makeReservation($date, $time, $fname, $lname, $phone, $email, $capacity);
-        
-        echo 'thanks';
+        ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
 
-        return Redirect('thanks');
-                // ->with('date', $date)
-                // ->with('time', $time)
-                // ->with('capacity', $capacity)
-                // ->with('fname', $fname)
-                // ->with('lname', $lname)
-                // ->with('email', $email)
-                // ->with('phone', $phone);
-
-                 var_dump($date);
     }
-    
 }
