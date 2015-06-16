@@ -6,25 +6,23 @@
             <p>Date: {{ $date }}</p>
         </div>
         <div class="col-sm-4">
-            <p>Time: {{ $time }}</p>
-            <!--<p>Time: {{ date("g:i a",strtotime($time)) }}</p>-->
+            <p>Time: {{ date("g:i a",strtotime($time)) }}</p>
         </div>
         <div class="col-sm-4">
             <p>Guests: {{ $capacity }} People</p>
         </div>
     </div>
 </div>
- @if($errors->any())
-                                    <ul class="alert alert-danger">
-                                        @foreach($errors->all() as $error)
-                                        <li>
-                                            {{ $error }}
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                    @endif
 
-<!--{!! Form::open(['url' => 'reservation/reserve', 'class' => 'confirm']) !!}-->
+ @if($errors->any())
+    <ul class="alert alert-danger">
+        @foreach($errors->all() as $error)
+        <li>
+            {{ $error }}
+        </li>
+        @endforeach
+    </ul>
+@endif
 
 {!! Form::open(['action' => 'ReservationController@reserve', 'method' => 'POST', 'class' => 'confirm']) !!}
 
@@ -72,7 +70,8 @@
 
     <div class="row">
 
-        {!! Form::submit('Reserve') !!}
+        {!! Form::submit('Reserve', ['name' => 'reserve', 'class' => 'btn btn-primary']) !!}
+        {!! Form::submit('Back', ['name' => 'back', 'class' => 'btn btn-default']) !!}
 
     </div>
 

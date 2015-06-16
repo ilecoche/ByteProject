@@ -24,6 +24,7 @@ Route::controllers([
 /* Reservation */
 Route::get('reservation/check', 'ReservationController@check');
 Route::post('reservation/check', 'ReservationController@check');
+//Route::get('reservation/reserve', 'ReservationController@reserve');
 Route::post('reservation/reserve', 'ReservationController@reserve');
 Route::get('reservation', 'ReservationController@index');
 
