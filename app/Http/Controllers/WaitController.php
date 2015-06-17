@@ -26,30 +26,47 @@ class WaitController extends Controller {
 	{
 		if(Request::ajax()){
 
+			$namePat = "/^[a-z ,.'-]+$/i";
+			$partyPat = "/^[0-9]{1,2}$/";
+			$emailPat = "/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/";
+			$pnumberPat = "/^\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*$/";
+
             $waitlist = new waitlist();
             $dt = date('Y-m-d H:i:s');
 
-            $waitlist->name = Request::input('name');
-            $waitlist->partynumber = Request::input('partynumber');
-            $waitlist->email = Request::input('email');
-            $waitlist->number = Request::input('number');
-            $waitlist->datetime = $dt;
+            //server side validation
 
-            $waitlist->save();
+            $name = Request::input('name');
+            $party = Request::input('partynumber');
+            $email = Request::input('email');
+            $number = Request::input('number');
 
-            $last_id = $waitlist->id;
+            if(!preg_match($namePat, $name) || !preg_match($partyPat, $party) || !preg_match($emailPat, $email) || !preg_match($pnumberPat, $number)){
+				return false;	
+			}else{
 
-            $waitlist_row = waitlist::whereId($last_id)->get();
+	            $waitlist->name = $name;
+	            $waitlist->partynumber = $party;
+	            $waitlist->email = $email;
+	            $waitlist->number = $number;
+	            $waitlist->datetime = $dt;
 
-            $waitClass = new waitClass();
-			$avgCalc = $waitClass->waitListCount();
+	            $waitlist->save();
 
-			$data = array(
-    			'data' => $waitlist_row,
-    			'average' => $avgCalc
-				);
+	            $last_id = $waitlist->id;
 
-            return $data;
+	            $waitlist_row = waitlist::whereId($last_id)->get();
+
+	            $waitClass = new waitClass();
+				$avgCalc = $waitClass->waitListCount();
+
+				$data = array(
+	    			'data' => $waitlist_row,
+	    			'average' => $avgCalc
+					);
+
+	            return $data;
+	        }
         }
 	}
 
