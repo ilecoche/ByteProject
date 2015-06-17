@@ -40,7 +40,7 @@ var counter;
   }
 
   function validateParty(partynumber) {
-    var re = /^[0-9]{2}$/;
+    var re = /^[0-9]{1,2}$/;
     return re.test(partynumber);
   }
 

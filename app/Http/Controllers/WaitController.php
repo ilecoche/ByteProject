@@ -78,15 +78,24 @@ class WaitController extends Controller {
 		$waittime->entrytime = $dt;
 		$waittime->save();
 
+		//send email to customer
+
+		$waitClassEmail = new waitClass();
+
+		$customerEmail = $customerInfo[0]->email;
+		$customerName = $customerInfo[0]->name;
+
+		$waitClassEmail->sendEmail($customerEmail, $customerName);
+
 		//delete row from waitlist table
 
 		$waitlistRowDelete = waitlist::whereId($id)->delete();
 
 		//Do average wait calculation
 
-		$waitClass = new waitClass();
+		$waitClassCalc = new waitClass();
 
-		$avgCalc = $waitClass->waitListCount();
+		$avgCalc = $waitClassCalc->waitListCount();
 
 		// return $count;
 
