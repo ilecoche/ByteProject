@@ -12,5 +12,20 @@ use Request;
 
 class OrderstatsController extends Controller {
 
+	public function orderstats(){
+
+		$orderstatsClass = new orderstatsClass();
+
+		//best selling items
+
+		$best_selling_items = $orderstatsClass->bestSellingItems();
+
+		//best selling days
+
+		// $best_selling_days = $orderstatsClass->bestSellingDays();
+
+		return view("orderstats.orderstats")
+						->with("items", $best_selling_items);
+	}
 
 }
