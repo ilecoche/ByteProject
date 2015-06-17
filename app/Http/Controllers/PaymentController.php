@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\DB;
 use Session;
 
 class PaymentController extends Controller {
-
+    
+    // passing order id from Irinas Order controller
     public function index($order_id) {
-
+        
+        // Querys to get order related information
         $order = DB::table('orders')
                 ->join('order_item', 'orders.id', '=', 'order_item.order_id')
                 ->select('order_item.menu_item', 'order_item.price', 'order_item.qty')
@@ -27,8 +29,8 @@ class PaymentController extends Controller {
                 ->where('order_item.order_id', '=', $order_id)
                 ->first();
 
-
-
+        
+        // return the view with order id, order array and bill array
         return view('payment.index')->with('order_id', $order_id)->with('order', $order)->with('bill', $bill);
     }
 
@@ -59,6 +61,7 @@ class PaymentController extends Controller {
                         "source" => $token,
                         "receipt_email" => Request::input('email'))
             );
+            // if card is declined for several reasons
         } catch (\Stripe\Error\Card $e) {
             //get variables again if error is triggered
             $order = DB::table('orders')
@@ -79,16 +82,18 @@ class PaymentController extends Controller {
             return Redirect::refresh()->withFlashMessage($e->getMessage())->with('order_id', $order_id)->with('order', $order)->with('bill', $bill);
         }
 
-
+        // if no errors update status order to completed
         $order->status = 'completed';
         $order->update();
 
+        // get info of client to render in sucess page
         $bill = DB::table('orders')
                 ->join('order_item', 'orders.id', '=', 'order_item.order_id')
                 ->select('orders.total', 'orders.tip', 'orders.tax', 'orders.customer_name', 'orders.table_id')
                 ->where('order_item.order_id', '=', $order_id)
                 ->first();
-
+        
+        // passing bill array to view 
         return view('payment.process')->with('bill', $bill);
     }
 
