@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{!! csrf_token() !!}">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>BYTE - Admin</title>
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin.css')}}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -57,22 +57,22 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-dashboard"></i> Placed Orders</a>
+                        <a href="#"><span class="glyphicon glyphicon-star"></span> Placed Orders</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i>Testimonials</a>
+                        <a href="#"><span class="glyphicon glyphicon-comment"></span> Testimonials</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i>Reservations</a>
+                        <a href="#"><span class="glyphicon glyphicon-book"></span> Reservations</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i>Wait Time</a>
+                        <a href="#"><span class="glyphicon glyphicon-time"></span> Wait Time</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-desktop"></i>Order Stats</a>
+                        <a href="#"><span class="glyphicon glyphicon-signal"></span> Order Stats</a>
                     </li>
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>Info </a>
+                        <a href="#"><span class="glyphicon glyphicon-cog"></span> Info </a>
                     </li>
                 </ul>
             </div>
@@ -81,11 +81,11 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <!--<div class="container-fluid">-->
 
                     @yield('content')
 
-            </div>
+            <!--</div>-->
             <!-- /.container-fluid -->
 
         </div>
@@ -93,7 +93,9 @@
 
     </div>
     <!-- /#wrapper -->
-
+ <!-- Stripe -->
+            <script src="https://js.stripe.com/v2/"></script>
+            @yield('additionalscripts')
 
 </body>
 

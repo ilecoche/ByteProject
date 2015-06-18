@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTestimonialRequest;
-
+use Auth;
 //use Request;// dont' need it if not using Request facade in the store() method
 
 use App\Testimonial;
@@ -17,8 +17,14 @@ class TestimonialController extends Controller {
 	 */
 	public function index()
 	{
+			if(Auth::check()){
+				$layout = 'layouts.admin';
+			}
+			else {
+				$layout = 'layouts.main';
+			}
             $testimonials = Testimonial::latest()->get();
-            return view('testimonials.index', compact('testimonials'));
+            return view('testimonials.index', compact('testimonials', 'layout'));
 	}
 
 	/**

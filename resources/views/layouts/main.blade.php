@@ -44,7 +44,7 @@
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
-                    <!--    </div>-->
+                    <!--</div>-->
                 </nav>
 
                 <div >

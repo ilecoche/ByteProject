@@ -1,32 +1,31 @@
-@extends('layouts.main')
-@section('title', 'Products')
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit Menu')
 @section('additionalstyles')
-    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/menu.css') }}" rel="stylesheet">
 @stop
 @section('content')
 <div class="container">
 	<div class="row">
-                                <div class="col-md-10 col-md-offset-1 message">
+        <div class="col-md-10 col-md-offset-1 message">
 
             @if(isset($message))
-                        {{$message}}
-                        @else
-                        Product not added
-                    @endif
-                                        </div>
+                {{$message}}
+            @endif
 
-		<div class="col-md-10 col-md-offset-1">
+        </div>
+
+		<div class="col-md-12">
                     
 				<div>
-                                    <span class="addnew">
-                                        <a href="{{ url('products_admin/create') }}"><i class="glyphicon glyphicon-plus"></i>Add new</a>
-                                    </span>
-                                </div><!-- add new -->
+                    <span class="addnew">
+                        <a href="{{ url('products_admin/create') }}"><i class="glyphicon glyphicon-plus"></i>Add new</a>
+                    </span>
+                </div><!-- add new -->
 
-				<div class="category">
-                                    @foreach($products as $category => $productbycategory)
+				<div class="menu-category-admin clearfix">
+                    @foreach($products as $category => $productbycategory)
                     <h2>{{ $category }}</h2>
-                    <div class="product-listing col-md-10 col-md-offset-1">
+                    <div class="product-listing col-md-12">
                         <ul style="list-style: none;">
                             @foreach($productbycategory as $product)
                             <li id="{{ $product->id }}" class="col-md-4 menu-item">
@@ -40,11 +39,11 @@
                                 </span>
                                             |
                                             
-                                {!! Form::open(['action' => ['ProductAdminController@destroy', $product->id], 'method' => 'DELETE', 'class' => 'form-inline one-button-form']) !!}
+                                {!! Form::open(['action' => ['ProductAdminController@destroy', $product->id], 'method' => 'DELETE', 'class' => 'form-inline  one-button-form']) !!}
                                     <button type="submit" class="btn btn-link form-inline" >
                                         <i class="glyphicon glyphicon-remove"></i>Delete
                                     </button>
-                                                                           {!! Form::close() !!}
+                                {!! Form::close() !!}
 
                             </li>
                             @endforeach
@@ -52,8 +51,7 @@
                     </div>
                     @endforeach
                                     
-                                </div><!-- category -->
-	
+                </div><!-- category -->
 		</div>
 	</div>
 </div>

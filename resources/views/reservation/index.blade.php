@@ -3,21 +3,21 @@
     $date = date("F j, Y"); 
 ?>
 
-@extends('app')
+@extends('layouts.main')
+<link href="{{ asset('css/reservations.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 @section('content')
 
 <div class="container">
 
-    <div class="loader"></div>
-
-    <!--<div class="result-container"></div>-->
+    <div class="reserve-loader"></div>
 
     <div class="reserve-container">
 
     <div class="row">
         <div class="col-sm-12">
-            <h1>Make a Resevation</h1>
+            <h1 id="reserve-title">Make a Resevation</h1>
         </div>
     </div>
 
@@ -28,7 +28,7 @@
             <div class="col-sm-4">
                 <div class="reserve-select">
                     <a class="reserve-label"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                    {!! Form::text('date', $date, array('class' => 'form-control reserve-date')) !!}
+                    {!! Form::text('date', $date, array('class' => 'form-control reserve-date', 'id' => 'date')) !!}
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                             '1930' => '7:30 PM',
                             '2000' => '8:00 PM',
                             '2030' => '8:30 PM'
-                        ], '1900', array('class' => 'time'))
+                        ], '1900', array('class' => 'time reserve-select', 'id' => 'time'))
                     !!}
                 </div>
             </div>
@@ -73,7 +73,7 @@
                             '8' => '8 people', 
                             '9' => '9 people', 
                             '10' => '10 people'
-                        ], '2', array('class' => 'capacity'))
+                        ], '2', array('class' => 'capacity', 'id' => 'capacity'))
                     !!}
                 </div>
             </div>
@@ -91,4 +91,10 @@
 
 </div>
 
+@stop
+
+@section('additionalscripts')
+    {!! HTML::script('js/reservations.js') !!}
+    {!! HTML::script('js/bootstrap-datepicker.js') !!}
+    {!! HTML::script('js/datepicker.js') !!}
 @stop

@@ -1,5 +1,5 @@
-@extends('layouts.main')
-@section('title', 'Products')
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit menu')
 @section('additionalstyles')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop
@@ -12,7 +12,7 @@
 
 				<div class="panel-body">
                                     <!-- removes escaping -->
-                                    {!! Form::model($product, ['id' => 'mainForm', 'method' => 'PATCH', 'action' => ['ProductAdminController@update', $product->id]] ) !!}
+                                    {!! Form::model($product, ['id' => 'mainForm', 'files' => true, 'method' => 'PATCH', 'action' => ['ProductAdminController@update', $product->id]] ) !!}
                                     
                                     {!! Form::label('dish', 'Dish title: ') !!}
                                     {!! Form::text('dish', null, ['class' => 'form-control']) !!}
@@ -28,6 +28,9 @@
                                     
                                     {!! Form::label('sku', 'SKU: ') !!}
                                     {!! Form::text('sku', null, ['class' => 'form-control']) !!}
+
+                                    {!! Form::label('image', 'Image: ') !!}
+                                    {!! Form::file('image', ['class' => 'form-control']) !!}
                                                                                
                                     {!! Form::submit('Update Dish') !!}                                    
                                     {!! Form::close() !!}

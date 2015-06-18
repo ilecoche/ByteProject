@@ -33,16 +33,20 @@ class ProductAdminController extends Controller {
         $this->middleware('auth');
     }
 
+    // function to get products grouped by categories
     public function getNestedArray(){
               $menu_categories = Menu_category::all();
               $products = array();
               foreach($menu_categories as $mc){
                   $productByCategory = Product::where('menu_category_id', '=', $mc['id'])->get();
-                  $products[$mc['name']] = $productByCategory;
+                  if(count($productByCategory)){
+                    $products[$mc['name']] = $productByCategory;
+                  }
               }
               return $products;
           }
 
+    // function to get products to display and message if new product was added
 	public function index()
 	{
             
@@ -51,6 +55,7 @@ class ProductAdminController extends Controller {
             return view('products_admin.index', compact('products', 'message'));
 	}
 
+    // function to get nutrition info based on ndbno number returned by API food search
     public function nutrition($ndbno)
     {
         // Create a client with a base URI
@@ -67,17 +72,19 @@ class ProductAdminController extends Controller {
         ]);
         $body = json_decode($response->getBody());
         $selectedfood = $body->report->food->name;
+
+        // get first 10 elements of the array, the rest are vitamins and microelements
         $nutrients = array_slice($body->report->food->nutrients , 0, 9);
         
         return view('products_admin.nutrition', compact('selectedfood','nutrients'));
     }
     
+    // function to get ndbno number from food search result list selected by user
     public function usdanumber(Request $request){
         $input = $request->all();
         $searchstring = $input['s'];
 
     //Request to http://api.nal.usda.gov/ndb/search/?format=json&q=pizza%20thin%20crust&sort=n&max=25&offset=0&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
-
     // Create a client with a base URI
         $client = new Client(['base_uri' => 'http://api.nal.usda.gov/ndb/']);
         try {
@@ -96,10 +103,7 @@ class ProductAdminController extends Controller {
                 $foods = $body->list->item;
                 return view('products_admin.usdanumber', compact('foods'));        
         } catch (ClientException $e) {
-             /*
-             echo 'Uh oh! ' . $e->getMessage() . '<br/>';
-             echo 'Uh oh! ' . $e->getResponse()->getStatusCode();
-             */
+             
              return "No foods found matching your search";
 
         }
@@ -135,17 +139,24 @@ class ProductAdminController extends Controller {
                 'price' => $request->get('price')
             ));
 
+        // save product without image first
             $product->save();
 
+        // get last inserted product id and use it to identify image
             $imageName = $product->sku . '-' . $product->id . '.' . 
             $request->file('image')->getClientOriginalExtension();
 
+        // save the new image
             $request->file('image')->move(
                 base_path() . '/public/images/', $imageName
             );
             $product->image = $imageName;
+
+        // update product with new image name
             $product->update();
-Session::flash('msg', 'success');
+
+        // save message in the flash session
+            Session::flash('msg', 'success');
 
     return redirect('products_admin');  
 
@@ -199,6 +210,9 @@ Session::flash('msg', 'success');
 	 */
 	public function update(Request $request, $id)
 	{
+        ob_start(); // not needed if output_buffering is on in php.ini
+        ob_implicit_flush(); // implicitly calls flush() after every ob_flush()
+
             $product = Product::findOrFail($id);
             $this->validate($request,
                 [
@@ -208,8 +222,31 @@ Session::flash('msg', 'success');
                     'price' => 'required'
                 ]
                 );
+
             
             $product->update($request->all());
+
+            if($request->file('image')) {
+
+            // get product id and sku and use it to identify image
+                $imageName = $product->sku . '-' . $product->id . '.' . 
+                $request->file('image')->getClientOriginalExtension();
+
+            // save the new image
+                $request->file('image')->move(
+                    base_path() . '/public/images/', $imageName
+                );
+                $product->image = $imageName;
+
+            // update product with new image name
+                $product->update();
+                //flush();
+                ob_clean();
+                ob_flush();
+                //clearstatcache ();
+                $products = Product::all();
+
+            } // if updated image was submitted
             
             return redirect('products_admin');
         }
