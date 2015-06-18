@@ -1,5 +1,5 @@
-@extends('layouts.main')
-@section('title', 'Products')
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit Menu')
 @section('additionalstyles')
     <link href="{{ asset('/css/menu.css') }}" rel="stylesheet">
 @stop
