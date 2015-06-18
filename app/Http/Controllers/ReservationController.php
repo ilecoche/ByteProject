@@ -153,6 +153,7 @@ class ReservationController extends Controller {
         if(Request::ajax()){
 
             $id = Request::input('id');
+            
             $table = Tables::whereId($id)->delete();
 
         }

@@ -1,11 +1,12 @@
-<html>
+@extends("layouts.admin")
+
+@section("content")
 
 <head>
 	<meta name="csrf-token" content="{!! csrf_token() !!}">
-	<link href="{{ asset('/css/waittime.css') }}" rel="stylesheet">
 </head>
 
-	<body>
+	<div class="container-fluid">
 
 		<h1>Wait Time</h1>
 
@@ -77,9 +78,8 @@
 
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
  	<script src="js/waitlist.js" type="text/javascript"></script>
+ 	
+	</div>
 
-	</body>
-
-	
-</html>
+@stop
 
