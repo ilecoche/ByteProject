@@ -1,16 +1,19 @@
-				<div class="details-header">
-                    {{ $product->dish }}
-                    <em>in {{ $product->menu_category->name }}</em>
-                </div>
+				
 
 				<div class="details-body">
-                                    <p>Description: $ {{ $product->description }} </p>
+                                    @if( $product->description )
+                                        <p>Description: {{ $product->description }} </p>
+                                    @endif
                                     <p>Price: $ {{ $product->price }} </p>
-                                    <p>SKU: {{ $product->sku }}</p>
+                                    @if( $product->sku )
+                                        <p>SKU: {{ $product->sku }}</p>
+                                    @endif
+                                    @if( $nutrition_info )
                                     <h4>Nutrition Info</h4>
                                     <p>
                                         {!! $nutrition_info !!}
                                     </p>
+                                    @endif
                                     {!! Form::open(['action' => 'CartController@add', 'method' => 'POST', 'id' => 'addToCartForm']) !!}
                                             {!! Form::hidden('name', $product->dish) !!}
                                             {!! Form::hidden('qty', 1) !!}

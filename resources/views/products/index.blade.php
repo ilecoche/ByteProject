@@ -135,6 +135,8 @@
 
       var dishid = $(this).parent().attr('id');
       console.log(dishid);
+      var dishname = $(this).parent().find('.dish-name').html();
+      console.log(dishname);
       geturl = 'products/' + dishid;
         $.get(geturl, function(data, status){
 
@@ -143,7 +145,8 @@
           var $header = $(data).filter('.details-header').contents();
           console.log($header);
 
-          $("#myModalLabel").html($header);
+          //$("#myModalLabel").html($header);
+          $("#myModalLabel").html(dishname);
           $( ".modal-body" ).empty().append( data );
           var $sampletitle = $(document).find("#food-sample-title");
           console.log($sampletitle.html());
