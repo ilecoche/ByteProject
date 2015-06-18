@@ -28,7 +28,7 @@
             <div class="col-sm-4">
                 <div class="reserve-select">
                     <a class="reserve-label"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                    {!! Form::text('date', $date, array('class' => 'form-control reserve-date')) !!}
+                    {!! Form::text('date', $date, array('class' => 'form-control reserve-date', 'id' => 'date')) !!}
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                             '1930' => '7:30 PM',
                             '2000' => '8:00 PM',
                             '2030' => '8:30 PM'
-                        ], '1900', array('class' => 'time'))
+                        ], '1900', array('class' => 'time', 'id' => 'time'))
                     !!}
                 </div>
             </div>
@@ -73,7 +73,7 @@
                             '8' => '8 people', 
                             '9' => '9 people', 
                             '10' => '10 people'
-                        ], '2', array('class' => 'capacity'))
+                        ], '2', array('class' => 'capacity', 'id' => 'capacity'))
                     !!}
                 </div>
             </div>
