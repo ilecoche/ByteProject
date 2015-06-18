@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Request;
 use App\ReservationClass;
+use App\Tables;
 use Session;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -13,6 +14,8 @@ class ReservationController extends Controller {
     public function index(){
         return view("reservation.index");
     }
+
+    // --- Check for reservation availability --- //
     
     public function check(){
 
@@ -61,6 +64,8 @@ class ReservationController extends Controller {
             }
         }
     }
+
+    // --- Confirm reservation --- //
     
     public function reserve(){
 
@@ -80,31 +85,30 @@ class ReservationController extends Controller {
             $phone = $input['phone'];
 
             //$this->validate($input, 
-            $validator = Validator::make(Input::all(),
-            [
-                'fname' => 'required|min:2',
-                'lname' => 'required|min:2',
-                'email' => 'required|email',
-                'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
-            ],
-            [
-                'fname.required' => 'Please enter your first name',
-                'fname.min' => 'Invalid first name',
-                'lname.required' => 'Please enter your last name',
-                'lname.min' => 'Invalid last name',
-                'email.required' => 'Please enter your email',
-                'email' => 'Invalid email',
-                'phone.required' => 'Please enter your phone number',
-                'phone.regex' => 'Invalid phone number'
+            // $validator = Validator::make(Input::all(),
+            // [
+            //     'fname' => 'required|min:2',
+            //     'lname' => 'required|min:2',
+            //     'email' => 'required|email',
+            //     'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
+            // ],
+            // [
+            //     'fname.required' => 'Please enter your first name',
+            //     'fname.min' => 'Invalid first name',
+            //     'lname.required' => 'Please enter your last name',
+            //     'lname.min' => 'Invalid last name',
+            //     'email.required' => 'Please enter your email',
+            //     'email' => 'Invalid email',
+            //     'phone.required' => 'Please enter your phone number',
+            //     'phone.regex' => 'Invalid phone number'
                 
-            ]);
+            // ]);
 
-            if ($validator->fails()){
+            //if ($validator->fails()){
               //validation fails to send response with validation errors
               // print $validator object to see each validation errors and display validation errors in your views
              //return Redirect::to('signup')->withErrors($validator);
-                echo 'that sux';
-            }
+            //}
 
             ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
                 
@@ -158,5 +162,51 @@ class ReservationController extends Controller {
         
         ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
 
+    }
+
+    // --- Manage Tables --- //
+
+    public function getTables(){
+        $tables = Tables::all();
+        return view('reservation.tables')
+            ->with('tables', $tables);
+    }
+
+    public function store()
+    {
+        if(Request::ajax()){
+        
+            $table = new Tables;
+            $table->table_num = Request::input('table_num');
+            $table->capacity = Request::input('capacity');
+            $table->save();
+
+            $last_table = $table->id;
+
+            $tables = Tables::whereId($last_table)->get();
+
+            $input = Request::all();
+
+            $table_num = $input['table_num'];
+            $capacity = $input['capacity'];
+
+            $data = array(
+                'id' => $tables,
+                'table_num' => $table_num,
+                'capacity' => $capacity
+            );
+
+            return $data;
+        }
+    }  
+
+    public function destroy()
+    {
+        if(Request::ajax()){
+
+            $id = Request::input('id');
+            $table = Tables::whereId($id)->delete();
+
+        }
     }
 }
