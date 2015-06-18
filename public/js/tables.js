@@ -7,7 +7,7 @@ $.ajaxSetup({
 // ---- Add table ---- //
 
 $('#add_table').on('submit', function(e) {
-
+    console.log('hi');
 	e.preventDefault();
 
 	var form = $(this);
@@ -42,12 +42,9 @@ $('#add_table').on('submit', function(e) {
 
 function deleteRow(id)
 {
-    //$('$delete_table')
-    $.post('tables/delete', {
-        id: id
-    }).done(
-        function(data){
 
+    $.post('tables/delete', {id: id}).done(
+        function(data){
             $('#' + id).remove();
         });
 }

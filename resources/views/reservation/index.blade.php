@@ -3,21 +3,21 @@
     $date = date("F j, Y"); 
 ?>
 
-@extends('app')
+@extends('layouts.main')
+<link href="{{ asset('css/reservations.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 @section('content')
 
 <div class="container">
 
-    <div class="loader"></div>
-
-    <!--<div class="result-container"></div>-->
+    <div class="reserve-loader"></div>
 
     <div class="reserve-container">
 
     <div class="row">
         <div class="col-sm-12">
-            <h1>Make a Resevation</h1>
+            <h1 id="reserve-title">Make a Resevation</h1>
         </div>
     </div>
 
@@ -91,4 +91,10 @@
 
 </div>
 
+@stop
+
+@section('additionalscripts')
+    {!! HTML::script('js/reservations.js') !!}
+    {!! HTML::script('js/bootstrap-datepicker.js') !!}
+    {!! HTML::script('js/datepicker.js') !!}
 @stop

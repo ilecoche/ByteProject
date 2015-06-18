@@ -84,84 +84,32 @@ class ReservationController extends Controller {
             $email = $input['email'];
             $phone = $input['phone'];
 
-            //$this->validate($input, 
-            // $validator = Validator::make(Input::all(),
-            // [
-            //     'fname' => 'required|min:2',
-            //     'lname' => 'required|min:2',
-            //     'email' => 'required|email',
-            //     'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
-            // ],
-            // [
-            //     'fname.required' => 'Please enter your first name',
-            //     'fname.min' => 'Invalid first name',
-            //     'lname.required' => 'Please enter your last name',
-            //     'lname.min' => 'Invalid last name',
-            //     'email.required' => 'Please enter your email',
-            //     'email' => 'Invalid email',
-            //     'phone.required' => 'Please enter your phone number',
-            //     'phone.regex' => 'Invalid phone number'
+            /*
+            $validator = Validator::make(Input::all(),
+            [
+                'fname' => 'required|min:2',
+                'lname' => 'required|min:2',
+                'email' => 'required|email',
+                'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
+            ],
+            [
+                'fname.required' => 'Please enter your first name',
+                'fname.min' => 'Invalid first name',
+                'lname.required' => 'Please enter your last name',
+                'lname.min' => 'Invalid last name',
+                'email.required' => 'Please enter your email',
+                'email' => 'Invalid email',
+                'phone.required' => 'Please enter your phone number',
+                'phone.regex' => 'Invalid phone number'
                 
-            // ]);
-
-            //if ($validator->fails()){
-              //validation fails to send response with validation errors
-              // print $validator object to see each validation errors and display validation errors in your views
-             //return Redirect::to('signup')->withErrors($validator);
-            //}
+            ]);
+            */
 
             ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
                 
             return view('reservation.thanks')->with('data',$input);
          
         }
-    }
-
-    public function postReserve(Request $request){
-
-        Session::reflash();
-
-        $this->validate($request, 
-        [
-            'fname' => 'required|min:2',
-            'lname' => 'required|min:2',
-            'email' => 'required|email',
-            'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
-        ],
-        [
-            'fname.required' => 'Please enter your first name',
-            'fname.min' => 'Invalid first name',
-            'lname.required' => 'Please enter your last name',
-            'lname.min' => 'Invalid last name',
-            'email.required' => 'Please enter your email',
-            'email' => 'Invalid email',
-            'phone.required' => 'Please enter your phone number',
-            'phone.regex' => 'Invalid phone number'
-            
-        ]);
-        
-        $input = Request::all(); 
-        
-        $date = $input['date'];
-        $dateformat = date('Y-m-d', strtotime($date));
-        $time = $input['time'];
-        $capacity = $input['capacity'];
-        $fname = $input['fname'];
-        $lname = $input['lname'];
-        $email = $input['email'];
-        $phone = $input['phone'];
-
-        // $date = $input['date'];
-        // $dateformat = date('Y-m-d', strtotime($date));
-        // $time = $input['time'];
-        // $capacity = $input['capacity'];
-        // $fname = $input['fname'];
-        // $lname = $input['lname'];
-        // $email = $input['email'];
-        // $phone = $input['phone'];
-        
-        ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
-
     }
 
     // --- Manage Tables --- //
@@ -205,6 +153,7 @@ class ReservationController extends Controller {
         if(Request::ajax()){
 
             $id = Request::input('id');
+            
             $table = Tables::whereId($id)->delete();
 
         }

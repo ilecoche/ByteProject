@@ -22,10 +22,10 @@ $('form.reserve').submit(function(e){
 			data: form.serialize(),
 			beforeSend: function(){
 				$('.reserve-container').hide();
-				$('.loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
+				$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
 			},
 			complete: function(){
-				$('.loader').hide();
+				$('.reserve-loader').hide();
 			},
 			success: function(data){
 				//console.log(data);
@@ -64,10 +64,10 @@ $('form.confirm').submit(function(e){
 			data: form.serialize(),
 			beforeSend: function(){
 				$('.reserve-container').hide();
-				$('.loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
+				$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
 			},
 			complete: function(){
-				$('.loader').hide();
+				$('.reserve-loader').hide();
 				console.log(data); 
 			},
 			success: function(data){
