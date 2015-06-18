@@ -77,3 +77,8 @@ Route::get('placed_orders', 'PlacedOrdersController@index');
 
 // Placed Orders Partial Views
 Route::get('placed_orders/pending_orders_partial' , 'PlacedOrdersController@partialorder');
+Route::get('placed_orders/pending_payment_partial', 'PlacedOrdersController@partialpayment');
+
+
+// EDIT ORDER WHEN FOOD IS READY
+Route::post('placed_orders' , 'PlacedOrdersController@editorder');

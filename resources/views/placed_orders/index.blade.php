@@ -7,7 +7,9 @@
 @section('content')
 <div class="container-fluid">
     <h1>Placed Orders Tool</h1>
+    
     <div id='placed'><!-- Placeholder for Ajax Call --></div>
+    <div id='not_paid'><!-- Placeholder for Ajax Call --></div>
 </div>
 @stop
 @section('additionalscripts')
