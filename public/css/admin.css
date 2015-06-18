@@ -27,6 +27,12 @@ body {
     background-color: #fff;
 }
 
+.SR{
+    background: #3d3d58;
+    border: #3d3d58;
+    color: #ffeec9;     
+}
+
 .huge {
     font-size: 50px;
     line-height: normal;

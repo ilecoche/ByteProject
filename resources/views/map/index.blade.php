@@ -55,7 +55,7 @@
     <div class="col-sm-4">
     <div class="panel ">
       <div class="panel-heading SR">Estimated wait time</div>
-      <div class="panel-body">3 hours</div>
+      <div class="panel-body">{{ $avg}}</div>
     </div>
         </div>
   </div>
