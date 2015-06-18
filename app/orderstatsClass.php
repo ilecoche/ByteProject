@@ -98,6 +98,4 @@ class orderstatsClass {
 
         return $total_rev;
 	}
-
-
 }

@@ -13,16 +13,15 @@ class imageSliderAdminController extends Controller {
         return view('ImagesAdmin.index');
     }
     public function store(Request $request){
-        
+
         // get last inserted product id and use it to identify image
             
-            $request->file('image')->getClientOriginalExtension();
-
+           $image =  $request->file('image')->getClientOriginalName();
         // save the new image
             $request->file('image')->move(
-                base_path() . '/public/images/slider'
+                base_path() . '/public/images/slider/', $image
             );
-            $request->save();
+            return redirect('/');
     }
     
 }
