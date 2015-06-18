@@ -18,7 +18,7 @@ class orderstatsClass {
     	return $best_selling_items;
 	}
 
-	public function bestSellingDay(){
+	public function bestSellingDays(){
 
 		$today = date("Y-m-d");
 	    $todayTime = strtotime(date("Y-m-d"));
@@ -26,14 +26,25 @@ class orderstatsClass {
 	    $weekAgoTime = $todayTime - 604800;
 	    $weekAgoDate = date("Y-m-d", $weekAgoTime);
 
-	    $best_selling_day = DB::table('orders')
+	    $best_selling_days = DB::table('orders')
 					->select(DB::raw('id, order_no, date, SUM(total) as total'))
 		            ->groupBy('date')
-		            ->where(DB::raw('date BETWEEN ' . $today . ' and ' . $weekAgoDate))
+		            ->where('date', '<=', $today)
+					->where('date', '>=', $weekAgoDate)
 					->orderByRaw('SUM(total) DESC')
                     ->get();
 
-        var_dump($best_selling_day);
+        return $best_selling_days;
+
+	}
+
+	public function totalTips(){
+
+		$today = date("Y-m-d");
+	    $todayTime = strtotime(date("Y-m-d"));
+
+	    $weekAgoTime = $todayTime - 604800;
+	    $weekAgoDate = date("Y-m-d", $weekAgoTime);
 
 	}
 
