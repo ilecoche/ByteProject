@@ -28,8 +28,9 @@ class ProductController extends Controller {
               $products = array();
               foreach($menu_categories as $mc){
                   $productByCategory = Product::where('menu_category_id', '=', $mc['id'])->get();
-                  $products[$mc['name']] = $productByCategory;
-              }
+                  if(count($productByCategory)){
+                    $products[$mc['name']] = $productByCategory;
+                  }              }
               return $products;
           }
 
@@ -57,18 +58,6 @@ class ProductController extends Controller {
                       //dd($cds);
             return view('products.index', compact('products','cart','subtotal','tax', 'total'));
 	}
-	
-        public function send(){
-            $product = Product::find(3);
-            $viewvalues = ['product' => $product];
-            $dataheaders = ['to' => "ilecoche@gmail.com", 'subject' => 'Welcome'];
-            Mail::send('emails.welcome',
-                    $viewvalues,
-                    function($message) use ($dataheaders){
-                        $message->to($dataheaders['to'])
-                                ->subject($dataheaders['subject']);
-                    });
-        }
 
         /**
    * Display the specified resource.
@@ -79,11 +68,12 @@ class ProductController extends Controller {
   public function show($id)
   {
             $product = Product::findOrFail($id);
-            if(!empty($product->sku)){
+              if(!empty($product->sku)){
               $nutrition_info = (new ProductAdminController)->nutrition($product->sku);
             } else  {
               $nutrition_info = 'Not available';
             }
+
            return view('products.show', compact('product', 'nutrition_info'));
   }
 
