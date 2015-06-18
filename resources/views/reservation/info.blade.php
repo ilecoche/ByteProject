@@ -1,5 +1,5 @@
+<div class="reserve-container">
 <h2>Complete your reservation</h2>
-
 <div class="reserve-details">
     <div class="row">
         <div class="col-sm-4">
@@ -26,24 +26,24 @@
 
 {!! Form::open(['action' => 'ReservationController@reserve', 'method' => 'POST', 'class' => 'confirm']) !!}
 
-    {!! Form::hidden('date', $date) !!}
+    {!! Form::hidden('date', $date, array('id' => 'date')) !!}
 
-    {!! Form::hidden('time', $time) !!}
+    {!! Form::hidden('time', $time, array('id' => 'time')) !!}
 
-    {!! Form::hidden('capacity', $capacity) !!}
+    {!! Form::hidden('capacity', $capacity, array('id' => 'capacity')) !!}
 
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                {!! Form::text('fname', null, array('placeholder' => 'First Name', 'class' => 'form-control reserve-input', 'id' => 'fname')) !!}
-                <span id="fname-req" style="display: none; color: red;">*Required</span>
+                {!! Form::text('fname', null, array('placeholder' => 'First Name', 'class' => 'form-control reserve-input required', 'id' => 'fname')) !!}
+                <span class="error" style="display: none; color: red;">*Required</span>
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="form-group">
-                {!! Form::text('lname', null, array('placeholder' => 'Last Name', 'class' => 'form-control reserve-input', 'id' => 'lname')) !!}
-                <span id="lname-req" style="display: none; color: red;">*Required</span>
+                {!! Form::text('lname', null, array('placeholder' => 'Last Name', 'class' => 'form-control reserve-input required', 'id' => 'lname')) !!}
+                <span class="error" style="display: none; color: red;">*Required</span>
             </div>
         </div>
     </div>
@@ -51,9 +51,9 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                {!! Form::text('email', null, array('placeholder' => 'Email', 'class' => 'form-control reserve-input', 'id' => 'email')) !!}
-                <span id="email-req" style="display: none; color: red;">*Required</span>
-                <span id="email-reg" style="display: none; color: red;">*Invalid</span>
+                {!! Form::text('email', null, array('placeholder' => 'Email', 'class' => 'form-control reserve-input required', 'id' => 'email')) !!}
+                <span class="error" style="display: none; color: red;">*Required</span>
+                <span id="email-reg" style="display: none; color: red;"></span>
             </div>
         </div>
     </div>
@@ -61,27 +61,22 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                {!! Form::text('phone', null, array('placeholder' => 'Phone Number', 'class' => 'form-control reserve-input', 'id' => 'phone')) !!}
-                <span id="phone-req" style="display: none; color: red;">*Required</span>
-                <span id="phone-reg" style="display: none; color: red;">*Invalid</span>
+                {!! Form::text('phone', null, array('placeholder' => 'Phone Number', 'class' => 'form-control reserve-input required', 'id' => 'phone')) !!}
+                <span class="error" style="display: none; color: red;">*Required</span>
+                <span id="phone-reg" style="display: none; color: red;"></span>
             </div>
         </div>
     </div>
 
     <div class="row">
 
-        {!! Form::submit('Reserve', ['name' => 'reserve', 'class' => 'btn btn-primary']) !!}
-        {!! Form::submit('Back', ['name' => 'back', 'class' => 'btn btn-default']) !!}
+        {!! Form::submit('Reserve', ['name' => 'reserve', 'id' => 'reserve-btn', 'class' => 'btn btn-primary']) !!}
+        <!--{!! Form::submit('Back', ['name' => 'back', 'class' => 'btn btn-default']) !!}-->
 
     </div>
 
-    {!! Form::close() !!}
-
-    <!--<ul>
-        @foreach($list as $table)
-        <li>Table: {{ $table->id }}, cap={{ $table->capacity }}</li>
-        @endforeach
-    </ul>-->
+{!! Form::close() !!}
+</div>
 
 <!--<script>
     function validate(){
@@ -150,3 +145,4 @@
         }
     }
 </script>-->
+{!! HTML::script('js/reservations.js') !!}
