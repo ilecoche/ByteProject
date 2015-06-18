@@ -23,7 +23,6 @@ class CreateProductRequest extends Request {
 	{
 		return [
                     'dish' => 'required|min:5',
-                    'sku' => 'required',
                     'menu_category_id' => 'required|Integer',
                     'price' => 'required',
                     'image' => 'required|mimes:png,jpeg'

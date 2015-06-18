@@ -1,5 +1,5 @@
-@extends('layouts.main')
-@section('title', 'Products')
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit menu')
 @section('additionalstyles')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop

@@ -24,11 +24,20 @@ class OrderstatsController extends Controller {
 
 		$best_selling_days = $orderstatsClass->bestSellingDays();
 
+		//total tips
+
+		$total_tips = $orderstatsClass->totalTips();
+
+		//total revenue
+
+		$total_revenue = $orderstatsClass->totalRevenue();
+
 		return view("orderstats.orderstats")
 						->with("items", $best_selling_items)
-						->with("days", $best_selling_days);
+						->with("days", $best_selling_days)
+						->with("tips", $total_tips)
+						->with("total", $total_revenue);
 
-		//total tips
 	}
 
 }
