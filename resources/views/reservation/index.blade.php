@@ -54,7 +54,7 @@
                             '1930' => '7:30 PM',
                             '2000' => '8:00 PM',
                             '2030' => '8:30 PM'
-                        ], '1900', array('class' => 'time', 'id' => 'time'))
+                        ], '1900', array('class' => 'time reserve-select', 'id' => 'time'))
                     !!}
                 </div>
             </div>
