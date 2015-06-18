@@ -6,9 +6,9 @@
         <div class="container-fluid">
                 @foreach($map as $c) 
                     <h1>
-                        <a href="{{ url( $c->website) }}">{{ $c->business_name }}</a>
+                        <a href="{{ $c->website }}">{{ $c->business_name }}</a>
                     </h1>
-
+                    
                 
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -50,11 +50,11 @@
       </a>
     </div>
     <div class="row">
-    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block">Menu</a> </div>
-    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block">Reserve</a> </div>
+    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block SR">Menu</a> </div>
+    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block SR">Reserve</a> </div>
     <div class="col-sm-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Estimated wait time</div>
+    <div class="panel ">
+      <div class="panel-heading SR">Estimated wait time</div>
       <div class="panel-body">3 hours</div>
     </div>
         </div>
@@ -73,7 +73,7 @@
       <div  class="col-sm-5">
           <iframe
 			width=100%
-			height="450"
+			height=400
 			frameborder="0" style="border:0"
 			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD0rSvjg9kPCCIjiHV7HFJeLacxbjZ0-rE
 			  &q={{ $c->address }}+ {{ $c->city }} +CA"/>
