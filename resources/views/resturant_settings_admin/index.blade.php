@@ -1,5 +1,5 @@
-@extends('layouts.main')
-
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit menu')
 @section('content')
  <h2>Resturant Information</h2>
 @foreach($map as $m) 

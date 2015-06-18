@@ -1,3 +1,5 @@
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit menu')
 @if($errors->any())
     @foreach($errors->all() as $e)
         <li>
@@ -6,8 +8,8 @@
     @endforeach
 @endif
 
-
-
+@section('content')
+<div class='container-fluid'>
 {!! Form::model($map, ['id' => 'mainForm', 'method' => 'PATCH', 'url' => 'rest/update' ]) !!}
 
 {!! Form::label('business_name', 'Hours of operation: ') !!}
@@ -72,3 +74,5 @@
                                                                                
 {!! Form::submit('Update Resturant') !!}                                    
 {!! Form::close() !!}
+</div>
+@stop

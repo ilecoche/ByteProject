@@ -4,10 +4,10 @@ use App\Map;
 use Illuminate\Http\Request;
 class resturantAdminController extends Controller {
 
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function  index(){
         $map = Map::all();
@@ -49,6 +49,7 @@ class resturantAdminController extends Controller {
             $resturant->update($request->all());
             return redirect('rest');
     }
+    
     
 
 }
