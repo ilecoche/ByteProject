@@ -22,13 +22,14 @@
     @endif
     
      <!-- Table that shows the billing details. I made it small so responsiveness is easier -->
+     <!-- It has an if and else statement in case a credit card error triggered -->
     <table id="cust_order">
         <tr>
             <th>Number of items</th>
             <th>Item and price</th>
             <th>price per item</th>
         </tr>
-        @if(Session::has('flash_message'))
+        @if(Session::has('flash_message')) <!-- This means the card was rejected -->
         @foreach(Session::get('order') as $items)
         <tr>
             <td>{{$items->qty}}</td>
@@ -36,7 +37,7 @@
             <td>{{$items->price * $items->qty }}</td>
         </tr>
         @endforeach
-        @else
+        @else <!-- Payment went trough -->
         @foreach($order as $items)
         <tr>
             <td>{{$items->qty}}</td>
@@ -59,6 +60,7 @@
         <tr>
             <th colspan='2'>Tip</th>
             <th>
+                <!-- Error Messages was triggered -->
                  @if(Session::has('flash_message'))
                     {{Session::get('bill')->tip}}
                 @else
@@ -70,6 +72,7 @@
         <tr>
             <th colspan='2'>Total payment</th>
             <th>
+                <!-- Error Messages was triggered -->
                 @if(Session::has('flash_message'))
                     {{Session::get('bill')->total}}
                 @else

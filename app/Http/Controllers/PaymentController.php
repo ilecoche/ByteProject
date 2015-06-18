@@ -47,11 +47,13 @@ class PaymentController extends Controller {
 // Get id to create query
         $order_id = Request::input('order_id');
 
+// Get Email to sent online receipt
+        $email = Request::input('email');
+
 //query to get price  
         $order = order::findorFail($order_id);
         $total = $order->total;
         $tip = $order->tip;
-
 
 // Create the charge on Stripe's servers - this will charge the user's card
         try {
@@ -59,8 +61,10 @@ class PaymentController extends Controller {
                         "amount" => ($total + $tip) * 100, // amount in cents, again
                         "currency" => "cad",
                         "source" => $token,
-                        "receipt_email" => Request::input('email'))
-            );
+                        "receipt_email" => Request::input('email'),
+                        "description" => "Charge by the Byte Application at this restaurant"
+                                              
+            ));
             // if card is declined for several reasons
         } catch (\Stripe\Error\Card $e) {
             //get variables again if error is triggered
@@ -94,65 +98,9 @@ class PaymentController extends Controller {
                 ->first();
         
         // passing bill array to view 
-        return view('payment.process')->with('bill', $bill);
+        return view('payment.process')->with('bill', $bill)->with('email', $email);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create() {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store() {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id) {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id) {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id) {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id) {
-        //
-    }
+   
 
 }
