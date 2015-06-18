@@ -49,8 +49,8 @@
       </a>
     </div>
     <div class="row">
-    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block SR">Menu</a> </div>
-    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block SR">Reserve</a> </div>
+    <div class="col-sm-4"><a href="{{ url('products')}}" class="btn btn-primary center-block SR">Menu</a> </div>
+    <div class="col-sm-4"><a href="{{ url('reservation') }}" class="btn btn-primary center-block SR">Reserve</a> </div>
     <div class="col-sm-4">
     <div class="panel ">
       <div class="panel-heading SR">Estimated wait time</div>
