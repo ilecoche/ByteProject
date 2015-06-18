@@ -1,5 +1,3 @@
-alert('hi');
-
 $.ajaxSetup({
   headers: {
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -44,12 +42,9 @@ $('#add_table').on('submit', function(e) {
 
 function deleteRow(id)
 {
-    //$('$delete_table')
-    $.post('tables/delete', {
-        id: id
-    }).done(
-        function(data){
 
+    $.post('tables/delete', {id: id}).done(
+        function(data){
             $('#' + id).remove();
         });
 }
