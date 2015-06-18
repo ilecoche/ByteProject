@@ -5,11 +5,10 @@
 @stop
 @section('content')
 <div class="container">
+    <!-- sucess page for payment -->
     <h1>Credit Card payment was successful</h1>
     
-    
-    
-    <p>Thank you and come back soon!</p>
+    <p>Thank you {{$bill->customer_name}} and come back soon to our restaurant!</p>
    
 </div>
 @stop
