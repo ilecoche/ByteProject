@@ -13,7 +13,7 @@
 
 @section('content')
 <div class='container-fluid'>
-
+    <h1>Edit Information</h1>
 {!! Form::model($map, ['id' => 'mainForm', 'method' => 'PATCH', 'url' => 'rest/update' ]) !!}
 
 {!! Form::label('business_name', 'Hours of operation: ') !!}
@@ -76,7 +76,7 @@
 
 
                                                                                
-{!! Form::submit('Update Resturant') !!}                                    
+{!! Form::submit('Update Resturant') !!}                                
 
 {!! Form::close() !!}
 </div>
