@@ -102,7 +102,7 @@ $('form[add-party]').on('submit', function(e){
           + '<td>' + data.data[0].partynumber + '</td>'
           + '<td>' + data.data[0].email + '</td>'
           + '<td>' + data.data[0].number + '</td>'
-          + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data.data[0].id + ')" />' + '</td>'
+          + '<td>' + '<input type="button" value="+" onClick="seatCustomer(' + data.data[0].id + ')" class="btn SR"/>' + '</td>'
           + '</tr>');
 
         //display new average, hide animation, change counter value
