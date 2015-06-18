@@ -69,6 +69,9 @@ class ReservationController extends Controller {
         if(Input::get('reserve'))
         {
             $this->postReserve($request);
+            $inputs = $request->all();
+
+            return view('reservation.thanks')->with('data',$inputs);
         }
         else if(Input::get('back'))
         {
@@ -82,16 +85,27 @@ class ReservationController extends Controller {
 
         $this->validate($request, 
         [
-            'fname' => 'required',
-            'lname' => 'required',
-            'email' => 'required',
-            'phone' => 'required'
+            'fname' => 'required|min:2',
+            'lname' => 'required|min:2',
+            'email' => 'required|email',
+            'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
+        ],
+        [
+            'fname.required' => 'Please enter your first name',
+            'fname.min' => 'Invalid first name',
+            'lname.required' => 'Please enter your last name',
+            'lname.min' => 'Invalid last name',
+            'email.required' => 'Please enter your email',
+            'email' => 'Invalid email',
+            'phone.required' => 'Please enter your phone number',
+            'phone.regex' => 'Invalid phone number'
+            
         ]);
         
-        $input = $request->all();
+        $input = $request->all(); 
         
         $date = $input['date'];
-        $date = date('Y-m-d', strtotime($date));
+        $dateformat = date('Y-m-d', strtotime($date));
         $time = $input['time'];
         $capacity = $input['capacity'];
         $fname = $input['fname'];
@@ -99,20 +113,7 @@ class ReservationController extends Controller {
         $email = $input['email'];
         $phone = $input['phone'];
         
-        ReservationClass::makeReservation($date, $time, $fname, $lname, $phone, $email, $capacity);
-        
-        echo 'thanks';
+        ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
 
-        return Redirect('thanks');
-                // ->with('date', $date)
-                // ->with('time', $time)
-                // ->with('capacity', $capacity)
-                // ->with('fname', $fname)
-                // ->with('lname', $lname)
-                // ->with('email', $email)
-                // ->with('phone', $phone);
-
-                 var_dump($date);
     }
-    
 }

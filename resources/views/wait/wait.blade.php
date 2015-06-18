@@ -9,6 +9,8 @@
 
 		<h1>Wait Time</h1>
 
+		<span id="error"></span>
+
 		{!! Form::open(['add-party']) !!}
 			
 			<ul>
@@ -16,18 +18,22 @@
 				<li>
 					{!! Form::label('name', 'Name') !!}
 					{!! Form::text('name', null, ['placeholder' => 'Enter Name']) !!}
+					<span id="nameerror"></span>
 				</li>
 				<li>
 					{!! Form::label('partynumber', 'Party Amount') !!}
 					{!! Form::text('partynumber', null, ['placeholder' => 'Enter Party Amount']) !!}
+					<span id="partyerror"></span>
 				</li>
 				<li>
 					{!! Form::label('email', 'Email') !!}
 					{!! Form::text('email', null, ['placeholder' => 'Enter Email']) !!}
+					<span id="emailerror"></span>
 				</li>
 				<li>
 					{!! Form::label('number', 'Phone Number') !!}
 					{!! Form::text('number', null, ['placeholder' => 'Enter Phone Number']) !!}
+					<span id="phoneerror"></span>
 				</li>
 
 			</ul>

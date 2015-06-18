@@ -69,3 +69,6 @@ Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
 /* Map */
 Route::get('map', 'MapController@Index');
 
+/* Order Stats */
+Route::get('orderstats', 'OrderstatsController@orderstats');
+
