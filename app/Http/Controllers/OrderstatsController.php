@@ -20,12 +20,13 @@ class OrderstatsController extends Controller {
 
 		$best_selling_items = $orderstatsClass->bestSellingItems();
 
-		//best selling days
+		//best selling day
 
-		// $best_selling_days = $orderstatsClass->bestSellingDays();
+		$best_selling_day = $orderstatsClass->bestSellingDay();
 
 		return view("orderstats.orderstats")
 						->with("items", $best_selling_items);
+						//->with("day", $best_selling_day);
 	}
 
 }

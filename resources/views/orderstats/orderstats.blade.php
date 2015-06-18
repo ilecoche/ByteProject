@@ -4,7 +4,9 @@
 
 	<ul>
 		<li>{{ $item->menu_item }}</li>
-		<li>{{ $item->totalqty }}</li>
+		<li>Quantity: {{ $item->totalqty }}</li>
 	</ul>
 
 @endforeach
+
+<h2>Best Selling Day This Week</h2>
