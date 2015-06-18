@@ -84,6 +84,11 @@ body {
     color: #ffeec9;     
 }
 
+.SR:hover {
+    background: #56566C !important;
+    color: #fff;
+}
+
 #logo {
     width: 100px;
     padding: 5px;
