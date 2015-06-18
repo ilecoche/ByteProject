@@ -23,7 +23,7 @@ class orderstatsClass {
 		$today = date("Y-m-d");
 	    $todayTime = strtotime(date("Y-m-d"));
 
-	    $weekAgoTime = $todayTime - 604800;
+	    $weekAgoTime = $todayTime - 518400;
 	    $weekAgoDate = date("Y-m-d", $weekAgoTime);
 
 	    $best_selling_days = DB::table('orders')
@@ -34,7 +34,13 @@ class orderstatsClass {
 					->orderByRaw('SUM(total) DESC')
                     ->get();
 
-        return $best_selling_days;
+        $data = array(
+	    			'week_ago_day' => date('l', $weekAgoTime),
+	    			'week_ago' => $weekAgoDate,
+	    			'days' => $best_selling_days
+					);
+
+        return $data;
 
 	}
 
@@ -42,10 +48,55 @@ class orderstatsClass {
 
 		$today = date("Y-m-d");
 	    $todayTime = strtotime(date("Y-m-d"));
+	    $todayInWeek = date('w') + 1;
+	    $endOfLastWeek = $todayTime - (86400 * $todayInWeek);
+	    $endOfLastWeekDate = date("Y-m-d", $endOfLastWeek);
+	    $endOfLastWeekDateTime = strtotime($endOfLastWeekDate);
+	    $beginningOfLastWeekDateTime = $endOfLastWeekDateTime - 518400;
+	    $beginningOfLastWeekDate = date("Y-m-d", $beginningOfLastWeekDateTime);
 
-	    $weekAgoTime = $todayTime - 604800;
-	    $weekAgoDate = date("Y-m-d", $weekAgoTime);
+	    $total_tips = DB::table('orders')
+					->select(DB::raw('id, order_no, date, SUM(tip) as tiptotal'))
+		            ->groupBy('date')
+		            ->where('date', '<=', $endOfLastWeekDate)
+					->where('date', '>=', $beginningOfLastWeekDate)
+					->orderByRaw('SUM(tip) DESC')
+                    ->get();
 
+        $totalValue = DB::table('orders')
+					->select(DB::raw('SUM(tip) as tiptotalfull'))
+		            ->where('date', '<=', $endOfLastWeekDate)
+					->where('date', '>=', $beginningOfLastWeekDate)
+                    ->get();
+
+        $data = array(
+	    			'week_end' => $endOfLastWeekDate,
+	    			'week_start' => $beginningOfLastWeekDate,
+	    			'tips' => $total_tips,
+	    			'totalTip' => $totalValue
+					);
+
+        return $data;
+	}
+
+	public function totalRevenue(){
+
+		$today = date("Y-m-d");
+	    $todayTime = strtotime(date("Y-m-d"));
+	    $todayInWeek = date('w') + 1;
+	    $endOfLastWeek = $todayTime - (86400 * $todayInWeek);
+	    $endOfLastWeekDate = date("Y-m-d", $endOfLastWeek);
+	    $endOfLastWeekDateTime = strtotime($endOfLastWeekDate);
+	    $beginningOfLastWeekDateTime = $endOfLastWeekDateTime - 518400;
+	    $beginningOfLastWeekDate = date("Y-m-d", $beginningOfLastWeekDateTime);
+
+	    $total_rev = DB::table('orders')
+					->select(DB::raw('SUM(total) as totalfull'))
+		            ->where('date', '<=', $endOfLastWeekDate)
+					->where('date', '>=', $beginningOfLastWeekDate)
+                    ->get();
+
+        return $total_rev;
 	}
 
 
