@@ -1,5 +1,5 @@
-@extends('layouts.main')
-@section('title', 'Products')
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit menu')
 @section('additionalstyles')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop
@@ -50,7 +50,7 @@
 		</div>
         <div class="col-md-4" style="position: relative;">
             <h2>Search Nutrition Info</h2>
-            <form action="/" id="searchForm">
+            <form action="#" id="searchForm">
               <input type="text" name="s" placeholder="Search...">
               <button type="submit"><i class="glyphicon glyphicon-search btn-lg"></i></button>
             </form>

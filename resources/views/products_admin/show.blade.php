@@ -1,5 +1,5 @@
-@extends('layouts.main')
-@section('title')
+@extends('layouts.admin')
+@section('title', 'Byte | Admin Panel | Edit menu')
 {{ $product->title }}
 @stop
 @section('additionalstyles')
