@@ -72,7 +72,10 @@ Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
 
 /* Map */
 Route::get('map', 'MapController@Index');
-
+Route::resource('rest','resturantAdminController');
 /* Order Stats */
 Route::get('orderstats', 'OrderstatsController@orderstats');
 
+/*Images*/
+Route::get('image','imageSliderAdminController@create');
+Route::post('image','imageSliderAdminController@create');
