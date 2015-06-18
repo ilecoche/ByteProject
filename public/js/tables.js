@@ -1,3 +1,5 @@
+alert('hi');
+
 $.ajaxSetup({
   headers: {
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -7,7 +9,7 @@ $.ajaxSetup({
 // ---- Add table ---- //
 
 $('#add_table').on('submit', function(e) {
-
+    console.log('hi');
 	e.preventDefault();
 
 	var form = $(this);

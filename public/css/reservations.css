@@ -3,6 +3,10 @@
 	margin:0;
 }
 
+#reserve-title {
+	margin-bottom: 20px;
+}
+
 .reserve-details .row .col-sm-4,
 .reserve .row .col-sm-4,
 .reserve .row .col-sm-6,
@@ -36,7 +40,7 @@
 	padding-bottom: 10px;
     margin-bottom: 30px;
     margin-top: 20px;
-    border-bottom: 2px dotted #da3743;
+    border-bottom: 2px dotted #3d3d58;
 }
 
 .reserve-date,
@@ -74,6 +78,8 @@
 	float: right;
 	padding: 0.25em;
   	color: #222;
+  	position: relative;
+  	z-index: 2;
 }
 
 .reserve-select {
@@ -92,12 +98,12 @@
 	cursor: pointer;
 	border: 1px solid #ddd;
 	border-radius: 4px;
-	background-color: transparent;
+	background-color: #fff;
 	color: #222;
 }
 
-.loader {
-	color: #da3743;
+.reserve-loader {
+	color: #3d3d58;
 	position: absolute;
 	top:50%;
 	left:48%;
