@@ -1,8 +1,8 @@
-@extends('layouts.main')
-@section('title', 'Testimonials')
-@section('additionalstyles')
-    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
-@stop
+@extends($layout)
+    @section('title', 'Byte | Testimonials Admin')
+    @section('additionalstyles')
+        <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    @stop
 @section('content')
 <div class="container">
 	<div class="row">
