@@ -85,4 +85,21 @@ class waitClass {
 
 		return $time;
 	}
+
+	public function sendEmail($email, $name){
+		
+		$to = $email;
+		
+		$final_subject = 
+			'Your Table Is Ready!';
+		
+		$final_message = "Hello " . $name . ". Your table is now ready! Please return within 5 minutes to keep your assigned table.";
+		
+		$final_headers = "From: seating@restaurant.com" .
+						 "Reply-To: seating@restaurant.com" .
+						 "X-Mailer: PHP/" . phpversion();
+		
+		mail($to, $final_subject, $final_message, $final_headers);
+
+	}
 }

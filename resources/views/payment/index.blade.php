@@ -1,16 +1,19 @@
 @extends('layouts.main')
 @section('title', 'Payment')
 @section('additionalstyles')
+<!-- This css is to format the table that shows the bill's details. Jordan can delete this if he wants to apply his own style -->
 <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
 @stop
 @section('content')
 <div class="container">
+    <!-- If statement to handle Card processing Errors -->
     @if(Session::has('flash_message'))
     <h1>Credit Card Payment for table {{Session::get('bill')->table_id}} (Client: {{Session::get('bill')->customer_name}})</h1>
     @else
     <h1>Credit Card Payment for table {{$bill->table_id}} (Client: {{$bill->customer_name}})</h1>
     @endif
     
+     <!-- If statement to display the error message if card is declined for several reasons -->
     @if(Session::has('flash_message'))
 
     <p class="flash_message">
@@ -18,8 +21,7 @@
     </p>
     @endif
     
-    {{Session::get('customer_name')}}
-
+     <!-- Table that shows the billing details. I made it small so responsiveness is easier -->
     <table id="cust_order">
         <tr>
             <th>Number of items</th>
@@ -83,7 +85,7 @@
     <!-- FORM -->
     {!! Form::open(['url' => 'payment/process', 'method' => 'post','id' => 'billing-form'])!!}
 
-    <!-- To use the stripe with Laravel no name attr so It does not go to our server -->
+    <!-- To use the stripe with Laravel no name attr so It does not go to our server. DO NOT ADD NAME ATTRIBUTES. ONLY EMAIL HAS ONE -->
     <ol id="insert_form">
         <li>
             @if(Session::has('flash_message'))
@@ -117,7 +119,7 @@
 </div>
 @stop
 @section('additionalscripts')
-
+ <!-- this is the script I need to send the payment to the Stripe Server -->
 <script src="{{ asset('/js/billing.js') }}" type="text/javascript"></script>
 
 @stop
