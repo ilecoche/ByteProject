@@ -21,12 +21,16 @@ Route::controllers([
 ]);
 
 
-/* Reservation */
+/* Reservations */
+//Public
 Route::get('reservation/check', 'ReservationController@check');
 Route::post('reservation/check', 'ReservationController@check');
-//Route::get('reservation/reserve', 'ReservationController@reserve');
 Route::post('reservation/reserve', 'ReservationController@reserve');
 Route::get('reservation', 'ReservationController@index');
+//Admin
+Route::get('tables', 'ReservationController@getTables');
+Route::post('tables', 'ReservationController@store');
+Route::post('tables/delete', 'ReservationController@destroy');
 
 
 /* Products Admin  */
