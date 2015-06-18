@@ -92,7 +92,9 @@
 
     </div>
     <!-- /#wrapper -->
-
+ <!-- Stripe -->
+            <script src="https://js.stripe.com/v2/"></script>
+            @yield('additionalscripts')
 
 </body>
 
