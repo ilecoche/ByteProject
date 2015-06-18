@@ -52,15 +52,16 @@ class PaymentController extends Controller {
         $total = $order->total;
         $tip = $order->tip;
 
-
 // Create the charge on Stripe's servers - this will charge the user's card
         try {
             $charge = \Stripe\Charge::create(array(
                         "amount" => ($total + $tip) * 100, // amount in cents, again
                         "currency" => "cad",
                         "source" => $token,
-                        "receipt_email" => Request::input('email'))
-            );
+                        "receipt_email" => Request::input('email'),
+                        "description" => "Charge by the Byte Application at this restaurant"
+                                              
+            ));
             // if card is declined for several reasons
         } catch (\Stripe\Error\Card $e) {
             //get variables again if error is triggered
