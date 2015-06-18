@@ -62,17 +62,20 @@
                     <li>
                         <a href="#"><span class="glyphicon glyphicon-comment"></span> Testimonials</a>
                     </li>
+                     <li>
+                        <a href="{{ url('products_admin') }}"><span class="glyphicon glyphicon-list-alt"></span> Menu</a>
+                    </li>
                     <li>
                         <a href="#"><span class="glyphicon glyphicon-book"></span> Reservations</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-time"></span> Wait Time</a>
+                        <a href="{{ url('wait') }}"><span class="glyphicon glyphicon-time"></span> Wait Time</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-signal"></span> Order Stats</a>
+                        <a href="{{ url('orderstats') }}"><span class="glyphicon glyphicon-signal"></span> Order Stats</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-cog"></span> Info </a>
+                        <a href="{{ url('rest') }}"><span class="glyphicon glyphicon-cog"></span> Info </a>
                     </li>
                 </ul>
             </div>
