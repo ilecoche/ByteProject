@@ -72,3 +72,8 @@ Route::get('map', 'MapController@Index');
 /* Order Stats */
 Route::get('orderstats', 'OrderstatsController@orderstats');
 
+/* Placed Orders */
+Route::get('placed_orders', 'PlacedOrdersController@index');
+
+// Placed Orders Partial Views
+Route::get('placed_orders/pending_orders_partial' , 'PlacedOrdersController@partialorder');
