@@ -1,15 +1,17 @@
 @extends('layouts.main')
 @section('title', 'Payment')
 @section('additionalstyles')
-    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+
+
 @stop
 @section('content')
 <div class="container">
     <!-- sucess page for payment -->
     <h1>Credit Card payment was successful</h1>
     
-    <p>Thank you {{$bill->customer_name}} and come back soon to our restaurant!</p>
-   
+    <!-- Retrieves the name and email of costumer -->
+    <p>Thank you {{$bill->customer_name}}. We have sent an receipt of your purchase at {{$email}}</p>
+    <p>Come back soon</p>
 </div>
 @stop
 @section('additionalscripts')
