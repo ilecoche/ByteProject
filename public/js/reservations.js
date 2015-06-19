@@ -56,7 +56,7 @@ $('form.confirm').submit(function(e){
 	var email = $('#email').val();
 	var phone = $('#phone').val();
 
-	if(first || last || email || phone)
+	if(first && last && email && phone)
 	{
 		$.ajax({
 			type: method,
@@ -86,3 +86,33 @@ $('form.confirm').submit(function(e){
 	e.preventDefault();
 
 });
+
+// $('form.back').submit(function(e){
+
+// 	var form = $(this);
+// 	var method = form.find('input[name="_method"]').val() || 'POST';
+// 	var url = form.prop('action');
+
+// 	$.ajax({
+// 		type: method,
+// 		url: url,
+// 		data: form.serialize(),
+// 		beforeSend: function(){
+// 			$('.reserve-container').hide();
+// 			$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
+// 		},
+// 		complete: function(){
+// 			$('.reserve-loader').hide();
+// 		},
+// 		success: function(data){
+// 			console.log(data);
+// 			$('.reserve-container').html(data).fadeIn(); 
+//         },
+// 		error: function(e){
+// 	    	alert(e.message);
+// 	  	}
+// 	});
+
+// 	e.preventDefault();
+
+// });
