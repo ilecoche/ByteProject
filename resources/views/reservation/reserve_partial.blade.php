@@ -1,20 +1,3 @@
-<?php 
-    date_default_timezone_set('America/Toronto');
-    $date = date("F j, Y"); 
-?>
-
-@extends('layouts.main')
-
-@section('additionalstyles')
-
-    <link href="{{ asset('css/reservations.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-datepicker.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-@stop
-
-@section('content')
-
 <div class="container">
 
     <div class="reserve-loader"></div>
@@ -96,12 +79,3 @@
     </div>
 
 </div>
-
-@stop
-
-@section('additionalscripts')
-    {!! HTML::script('js/reservations.js') !!}
-    {!! HTML::script('js/bootstrap-datepicker.js') !!}
-    {!! HTML::script('js/datepicker.js') !!}
-    {!! HTML::script('js/jquery.validate.js') !!}
-@stop
