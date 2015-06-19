@@ -21,16 +21,12 @@ Route::controllers([
 ]);
 
 
-/* Reservations */
-//Public
+/* Reservation */
 Route::get('reservation/check', 'ReservationController@check');
 Route::post('reservation/check', 'ReservationController@check');
 Route::post('reservation/reserve', 'ReservationController@reserve');
 Route::get('reservation', 'ReservationController@index');
-//Admin
-Route::get('tables', 'ReservationController@getTables');
-Route::post('tables', 'ReservationController@store');
-Route::post('tables/delete', 'ReservationController@destroy');
+Route::post('reservation', 'ReservationController@back');
 
 
 /* Products Admin  */
@@ -72,10 +68,17 @@ Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
 
 /* Map */
 Route::get('map', 'MapController@Index');
-Route::resource('rest','resturantAdminController');
+
 /* Order Stats */
 Route::get('orderstats', 'OrderstatsController@orderstats');
 
-/*Images*/
-Route::get('image','imageSliderAdminController@create');
-Route::post('image','imageSliderAdminController@create');
+/* Placed Orders */
+Route::get('placed_orders', 'PlacedOrdersController@index');
+
+// Placed Orders Partial Views
+Route::get('placed_orders/pending_orders_partial' , 'PlacedOrdersController@partialorder');
+Route::get('placed_orders/pending_payment_partial', 'PlacedOrdersController@partialpayment');
+
+
+// EDIT ORDER WHEN FOOD IS READY
+Route::post('placed_orders' , 'PlacedOrdersController@editorder');

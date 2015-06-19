@@ -1,29 +1,34 @@
 <div class="reserve-container">
-<h2>Complete your reservation</h2>
-<div class="reserve-details">
-    <div class="row">
-        <div class="col-sm-4">
-            <p>Date: {{ $date }}</p>
+<h2>Step 2: Complete your reservation</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel">
+            <div class="panel-heading SR">DATE</div>
+            <div class="panel-body">
+                <p class="res-detail-title">{{ $date }}</p>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <p>Time: {{ date("g:i a",strtotime($time)) }}</p>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel">
+            <div class="panel-heading SR">TIME</div>
+            <div class="panel-body">
+                <p class="res-detail-title">{{ date("g:i a",strtotime($time)) }}</p>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <p>Guests: {{ $capacity }} People</p>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel">
+            <div class="panel-heading SR">GUESTS</div>
+            <div class="panel-body">
+                <p class="res-detail-title">{{ $capacity }} people</p>
+            </div>
         </div>
     </div>
 </div>
 
- @if($errors->any())
-    <ul class="alert alert-danger">
-        @foreach($errors->all() as $error)
-        <li>
-            {{ $error }}
-        </li>
-        @endforeach
-    </ul>
-@endif
-
+<h3>Personal Information</h3>
+        
 {!! Form::open(['action' => 'ReservationController@reserve', 'method' => 'POST', 'class' => 'confirm']) !!}
 
     {!! Form::hidden('date', $date, array('id' => 'date')) !!}
@@ -69,14 +74,26 @@
     </div>
 
     <div class="row">
+        <div class="res-confirm-btn">
+                {!! Form::submit('Reserve', ['name' => 'reserve', 'id' => 'reserve-btn', 'class' => 'btn btn-primary SR']) !!}
 
-        {!! Form::submit('Reserve', ['name' => 'reserve', 'id' => 'reserve-btn', 'class' => 'btn btn-primary']) !!}
-        <!--{!! Form::submit('Back', ['name' => 'back', 'class' => 'btn btn-default']) !!}-->
+            {!! Form::close() !!}
+        </div>
 
+        <div class="res-confirm-btn">
+            {!! Form::open(['action' => 'ReservationController@back', 'method' => 'POST', 'class' => 'back']) !!}
+
+                {!! Form::hidden('date', $date, array('id' => 'date')) !!}
+
+                {!! Form::hidden('time', $time, array('id' => 'time')) !!}
+
+                {!! Form::hidden('capacity', $capacity, array('id' => 'capacity')) !!}
+
+                {!! Form::submit('Back to Step 1', ['name' => 'back', 'id' => 'back-btn', 'class' => 'btn btn-default']) !!}
+
+            {!! Form::close() !!}
+        </div>
     </div>
-
-{!! Form::close() !!}
-</div>
 
 <!--<script>
     function validate(){

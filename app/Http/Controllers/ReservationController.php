@@ -23,27 +23,9 @@ class ReservationController extends Controller {
             
             $input = Request::all();  
 
-            if(!isset($input['date'])){
-                $date = Session::get('date');
-            }else{
-                $date = $input['date'];
-            }
-
-            if(!isset($input['time'])){
-                $time = Session::get('time');
-            }else{
-                $time = $input['time'];
-            }
-
-            if(!isset($input['capacity'])){
-                $capacity = Session::get('capacity');
-            }else{
-                $capacity = $input['capacity'];
-            }
-
-            Session::flash('date', $date);
-            Session::flash('time', $time);
-            Session::flash('capacity', $capacity);
+            $date = $input['date'];
+            $time = $input['time'];
+            $capacity = $input['capacity'];
 
             $minTime = ReservationClass::getMinTime($time);
             $maxTime = ReservationClass::getMaxTime($time);
@@ -60,6 +42,7 @@ class ReservationController extends Controller {
                 
                 $list = ReservationClass::availableTables($date, $minTime, $maxTime);
 
+                //var_dump($input);
                 return view("reservation.info")->with($input);
             }
         }
@@ -71,12 +54,12 @@ class ReservationController extends Controller {
 
         if(Request::ajax()){
 
-            Session::reflash();
-
             $input = Request::all();
 
             $date = $input['date'];
-            $dateformat = date('Y-m-d', strtotime($date));
+            $dateformat = (date('Y-m-d', strtotime($date)));
+            //$dateformat = Carbon::createFromFormat('Y-m-d', $date);
+            //var_dump($dateformat);
             $time = $input['time'];
             $capacity = $input['capacity'];
             $fname = $input['fname'];
@@ -157,5 +140,28 @@ class ReservationController extends Controller {
             $table = Tables::whereId($id)->delete();
 
         }
+    }
+
+    public function back()
+    {
+        //if(Request::ajax()){
+        
+            $input = Request::all();
+
+            $date = $input['date'];
+            $time = $input['time'];
+            $capacity = $input['capacity'];
+
+            // $data = array(
+            //     'date' => $date,
+            //     'time' => $time,
+            //     'capacity' => $capacity
+            // );
+
+            //var_dump($input);
+
+            return redirect('reservation')->withInput();
+
+        //}
     }
 }
