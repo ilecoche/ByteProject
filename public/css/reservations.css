@@ -36,28 +36,31 @@
 	margin-right: 0;
 }
 
-.reserve-details {
-	padding-bottom: 10px;
-    margin-bottom: 30px;
-    margin-top: 20px;
-    border-bottom: 2px dotted #3d3d58;
+.res-detail {
+	margin-right: 30px;
+	display: inline-block;
+}
+
+.res-confirm-btn {
+	display: inline-block;
 }
 
 .reserve-date,
 .reserve-input {
 	position: relative;
 	box-shadow: none;
+	height: 40px;
 }
 
 .reserve input.form-control {
 	height: 50px;
 }
 
-.reserve input.btn-primary,
+/*.reserve input.btn-primary,
 .confirm input.btn-primary  {
 	background-color: #da3743;
 	border: 1px solid #da3743;
-}
+}*/
 
 .reserve-label {
 	position: absolute;
