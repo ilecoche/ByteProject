@@ -103,4 +103,5 @@
     {!! HTML::script('js/reservations.js') !!}
     {!! HTML::script('js/bootstrap-datepicker.js') !!}
     {!! HTML::script('js/datepicker.js') !!}
+    {!! HTML::script('js/jquery.validate.js') !!}
 @stop
