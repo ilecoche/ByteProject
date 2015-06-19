@@ -8,7 +8,10 @@
                     <h1>
                         <a href="{{ $c->website }}">{{ $c->business_name }}</a>
                     </h1>
-                    
+        <?php 
+            define('IMG_FOLDER', '../public/images/slider/');
+            $files = glob(IMG_FOLDER . '*');
+        ?>             
                 
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -22,21 +25,17 @@
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img src="food.jpeg" alt="food">
+           <div class="item active">
+          <img src="../public/images/slider/food.jpg" alt="food">
         </div>
-
-        <div class="item">
-          <img src="food.jpeg" alt="food">
-        </div>
-
-        <div class="item">
-          <img src="food.jpeg" alt="food">
-        </div>
-
-        <div class="item">
-          <img src="food.jpeg" alt="food">
-        </div>
+          <?php
+          foreach($files as $file){
+              echo "<div class='item'>";
+                echo "<img src=" . $file ." alt='food'>";
+                echo "</div>";
+              
+          }
+          ?>
       </div>
 
       <!-- Left and right controls -->
@@ -50,12 +49,12 @@
       </a>
     </div>
     <div class="row">
-    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block SR">Menu</a> </div>
-    <div class="col-sm-4"><a href="#" class="btn btn-primary center-block SR">Reserve</a> </div>
+    <div class="col-sm-4"><a href="{{ url('products')}}" class="btn btn-primary center-block SR">Menu</a> </div>
+    <div class="col-sm-4"><a href="{{ url('reservation') }}" class="btn btn-primary center-block SR">Reserve</a> </div>
     <div class="col-sm-4">
     <div class="panel ">
       <div class="panel-heading SR">Estimated wait time</div>
-      <div class="panel-body">3 hours</div>
+      <div class="panel-body">{{ $avg}}</div>
     </div>
         </div>
   </div>
