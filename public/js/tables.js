@@ -6,36 +6,39 @@ $.ajaxSetup({
 
 // ---- Add table ---- //
 
-$('#add_table').on('submit', function(e) {
-    console.log('hi');
-	e.preventDefault();
+$('form.add_table').validate({
 
-	var form = $(this);
-    var method = form.find('input[name="_method"]').val() || 'POST';
-    var url = form.prop('action');
+    // Validation rules
+    rules: {
+        table_num: "required",
+        capacity: "required"
+    },
+    
+    // Validation error messages
+    messages: {
+        table_num: "Please enter the table number",
+        capacity: "Please enter the table capacity"
+    },
 
-	var capacity = $('#capacity').val();
-	var tableNum = $('#table_num').val();
+    submitHandler: function(form) {
 
-	if(capacity || tableNum){
+        var method = $(form).find('input[name="_method"]').val() || 'POST';
+        var url = $(form).prop('action');
 
-	   $.ajax({
+	    $.ajax({
             type: method,
             url: url,
-            data: form.serialize(),
+            data: $(form).serialize(),
             success: function(data){
         
-                $('#all_tables tr:last').after('<tr id="' + data.id[0].id + '"><td>' + data.table_num + '</td><td>' + data.capacity + '</td><td><button type="submit" onClick="deleteRow(' + data.id[0].id + ')"><span class="glyphicon glyphicon-remove"></span></button</td></tr>');
+                $('#all_tables tr:last').after('<tr id="' + data.id[0].id + '"><td>' + data.table_num + '</td><td>' + data.capacity + '</td><td class="delete-table"><button type="submit" onClick="deleteRow(' + data.id[0].id + ')" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button</td></tr>');
                 
                 $('#capacity').val('');
                 $('#table_num').val('');
             }
         });     
-	}
-	else
-	{
-		alert("Check your fields");
-	}
+    	
+    }
 });
 
 // ---- Delete table ---- //

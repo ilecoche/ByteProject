@@ -1,4 +1,4 @@
-<h1>Thank you!</h1>
+<h1>Thank you! <span class="glyphicon glyphicon-ok-sign"></span></h1>
 
 <p>Date: {{ $data['date'] }}</p>
 

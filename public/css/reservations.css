@@ -136,6 +136,21 @@ th.prev:hover {
 	background-color: #ccc;
 }
 
+/* CMS - Manage Tables */
+
+.manage-tables {
+	margin-bottom: 30px;
+}
+
+.manage-tables .row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#all_tables td.delete-table {
+	text-align: right;
+}
+
 /* Responsive */
 @media(max-width:768px){
 

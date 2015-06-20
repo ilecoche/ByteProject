@@ -4,10 +4,9 @@ $.ajaxSetup({
   }
 });
 
-//Step 1
+// --- Step 1 - Pick reservation date --- //
 
 $('form.reserve').submit(function(e){
-
 
 	var form = $(this);
 	var method = form.find('input[name="_method"]').val() || 'POST';
@@ -47,7 +46,7 @@ $('form.reserve').submit(function(e){
 
 });
 
-//Step 2
+// --- Step 2 - Personal information --- //
 
 $('form.confirm').validate({
 
@@ -72,37 +71,32 @@ $('form.confirm').validate({
     
     submitHandler: function(form) {
 
-    	$('form.confirm').submit(function(e){
-	    	e.preventDefault();
+		var method = $(form).find('input[name="_method"]').val() || 'POST';
+		var url = $(form).prop('action');
 
-	    	var form = $(this);
-			var method = form.find('input[name="_method"]').val() || 'POST';
-			var url = form.prop('action');
-
-	    	$.ajax({
-				type: method,
-				url: url,
-				data: form.serialize(),
-				beforeSend: function(){
-					$('.reserve-container').hide();
-					$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
-				},
-				complete: function(){
-					$('.reserve-loader').hide();
-				},
-				success: function(data){
-					//console.log(data);
-					$('.reserve-container').html(data).fadeIn(); 
-		        },
-				error: function(e){
-			    	alert(e.message);
-			  	}
-			});
+    	$.ajax({
+			type: method,
+			url: url,
+			data: $(form).serialize(),
+			beforeSend: function(){
+				$('.reserve-container').hide();
+				$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
+			},
+			complete: function(){
+				$('.reserve-loader').hide();
+			},
+			success: function(data){
+				//console.log(data);
+				$('.reserve-container').html(data).fadeIn(); 
+	        },
+			error: function(e){
+		    	alert(e.message);
+		  	}
 		});
+		return false;
     }
 });
 
-//});
 
 // $('form.back').submit(function(e){
 
