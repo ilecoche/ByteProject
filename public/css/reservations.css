@@ -1,8 +1,3 @@
-* {
-	padding:0;
-	margin:0;
-}
-
 #reserve-title {
 	margin-bottom: 20px;
 }
@@ -55,12 +50,6 @@
 .reserve input.form-control {
 	height: 50px;
 }
-
-/*.reserve input.btn-primary,
-.confirm input.btn-primary  {
-	background-color: #da3743;
-	border: 1px solid #da3743;
-}*/
 
 .reserve-label {
 	position: absolute;
