@@ -36,6 +36,9 @@ $('form.add_table').validate({
                 $('#capacity').val('');
                 $('#table_num').val('');
             }
+            error: function(e){
+                alert(e.message);
+            }
         });     
     	
     }

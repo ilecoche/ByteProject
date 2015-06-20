@@ -86,7 +86,6 @@ $('form.confirm').validate({
 				$('.reserve-loader').hide();
 			},
 			success: function(data){
-				//console.log(data);
 				$('.reserve-container').html(data).fadeIn(); 
 	        },
 			error: function(e){
