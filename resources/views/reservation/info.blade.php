@@ -75,7 +75,7 @@
 
     <div class="row">
         <div class="res-confirm-btn">
-                {!! Form::submit('Reserve', ['name' => 'reserve', 'id' => 'reserve-btn', 'class' => 'btn btn-primary SR']) !!}
+                {!! Form::submit('Reserve', ['id' => 'reserve-btn', 'class' => 'btn btn-primary SR', 'onClick' => 'validate()']) !!}
 
             {!! Form::close() !!}
         </div>
