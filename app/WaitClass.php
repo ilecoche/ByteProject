@@ -45,9 +45,7 @@ class waitClass {
 
 				$rowGrab = DB::table('waittime')->where('entrytime', '>=', $hourTime)->get();
 
-				$rowGrabCount = count($rowGrab);
-
-				if($rowGrabCount === 0){
+				if(empty($rowGrab)){
 
 					//delete both tables and start over since this would never happen in a restaurant - a count of 0 is returned if there is no action in the application over an hour - this stops the sum from being subtracted by 0.
 
@@ -61,7 +59,8 @@ class waitClass {
 				}else{
 
 					//calculate average
-
+					
+					$rowGrabCount = count($rowGrab);					
 					$sum = 0;
 
 					foreach($rowGrab as $key => $value)
