@@ -1,6 +1,6 @@
 <div class="reserve-container">
 
-    <h2>Step 2: Complete your reservation</h2>
+    <h2>Complete your reservation</h2>
 
     <div class="row">
         <div class="col-sm-4">
@@ -64,7 +64,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                {!! Form::text('phone', null, array('placeholder' => 'Phone Number', 'class' => 'form-control reserve-input required', 'id' => 'phone')) !!}
+                {!! Form::text('phone', null, array('placeholder' => 'Phone (e.g. 212-999-0983)', 'class' => 'form-control reserve-input required', 'id' => 'phone')) !!}
             </div><!-- /.form-group -->
         </div><!-- /.col-sm-12 -->
     </div><!-- /.row -->
@@ -86,7 +86,7 @@
 
                 {!! Form::hidden('capacity', $capacity, array('id' => 'capacity')) !!}
 
-                {!! Form::submit('Back to Step 1', ['name' => 'back', 'id' => 'back-btn', 'class' => 'btn btn-default']) !!}
+                {!! Form::submit('Previous', ['name' => 'back', 'id' => 'back-btn', 'class' => 'btn btn-default']) !!}
 
             {!! Form::close() !!}
 

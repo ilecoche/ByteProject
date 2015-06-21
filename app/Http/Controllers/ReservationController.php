@@ -42,7 +42,6 @@ class ReservationController extends Controller {
                 
                 $list = ReservationClass::availableTables($date, $minTime, $maxTime);
 
-                //var_dump($input);
                 return view("reservation.info")->with($input);
             }
         }
@@ -59,7 +58,6 @@ class ReservationController extends Controller {
             $date = $input['date'];
             $dateformat = (date('Y-m-d', strtotime($date)));
             //$dateformat = Carbon::createFromFormat('Y-m-d', $date);
-            //var_dump($dateformat);
             $time = $input['time'];
             $capacity = $input['capacity'];
             $fname = $input['fname'];

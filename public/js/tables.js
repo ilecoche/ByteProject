@@ -10,14 +10,26 @@ $('form.add_table').validate({
 
     // Validation rules
     rules: {
-        table_num: "required",
-        capacity: "required"
+        table_num: {
+            required: true,
+            number: true
+        },
+        capacity: {
+            required: true,
+            number: true
+        }
     },
     
     // Validation error messages
     messages: {
-        table_num: "Please enter the table number",
-        capacity: "Please enter the table capacity"
+        table_num: {
+            required: "Please enter the table number",
+            number: "Please enter a number"
+        },
+        capacity: {
+            required: "Please enter the table capacity",
+            number: "Please select a table capacity"
+        }
     },
 
     submitHandler: function(form) {
@@ -33,9 +45,13 @@ $('form.add_table').validate({
         
                 $('#all_tables tr:last').after('<tr id="' + data.id[0].id + '"><td>' + data.table_num + '</td><td>' + data.capacity + '</td><td class="delete-table"><button type="submit" onClick="deleteRow(' + data.id[0].id + ')" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button</td></tr>');
                 
-                $('#capacity').val('');
-                $('#table_num').val('');
-            }
+                if($('#table_num').val())
+                {
+                    $(this).attr("placeholder", "Enter Table Number");
+                }
+                //$('#table_num').val('placeholder', 'Table Number');
+                $('#capacity').val('--');
+            },
             error: function(e){
                 alert(e.message);
             }

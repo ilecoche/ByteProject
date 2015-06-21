@@ -51,22 +51,43 @@ $('form.reserve').submit(function(e){
 $('form.confirm').validate({
 
     // Validation rules
+    
     rules: {
-        fname: "required",
-        lname: "required",
+        fname: {
+        	required: true,
+        	minlength: 2
+        },
+        lname: {
+        	required: true,
+        	minlength: 2
+        },
         email: {
             required: true,
             email: true
         },
-        phone: "required"
+        phone: {
+        	required: true,
+        	"phoneUS": true
+        }
     },
     
     // Validation error messages
     messages: {
-        fname: "Please enter your first name",
-        lname: "Please enter your last name",
-        email: "Please enter a valid email address",
-        phone: "Please enter your phone number"
+        fname: {
+        	required: "Please enter your first name",
+        	minlength: "Invalid first name"
+        },
+        lname: {
+        	required: "Please enter your last name",
+        	minlength: "Invalid last name"
+        },
+        email: {
+        	required: "Please enter your email address",
+        	email: "Invalid email address",
+        },
+        phone: {
+        	required: "Please enter your phone number"
+        }
     },
     
     submitHandler: function(form) {

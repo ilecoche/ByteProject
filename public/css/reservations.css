@@ -1,3 +1,11 @@
+.bk {
+	width: 100%;
+	height: 300px;
+    background: url(../images/reserve/reserve5.jpg) no-repeat; 
+    background-size: 100% auto;
+    opacity: 0.8;
+}
+
 #reserve-title {
 	margin-bottom: 20px;
 }
@@ -170,6 +178,12 @@ th.prev:hover {
 
 #all_tables td.delete-table {
 	text-align: right;
+}
+
+/* validation */
+
+.error {
+	color: red;
 }
 
 /* Responsive */
