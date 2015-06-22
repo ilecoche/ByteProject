@@ -23,18 +23,18 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <h1 id="reserve-title">Step 1: Check for Availability</h1>
+            <h1 id="reserve-title">Make a Reservation</h1>
         </div>
     </div>
 
     {!! Form::open(['action' => 'ReservationController@check', 'method' => 'POST', 'class' => 'reserve']) !!}
-    
+
         <div class="row">
 
             <div class="col-sm-4">
                 <div class="reserve-select">
                     <a class="reserve-label"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                    {!! Form::text('date', $date, array('class' => 'form-control reserve-date', 'id' => 'date')) !!}
+                    {!! Form::text('date', $date, ['class' => 'form-control reserve-date', 'id' => 'date', 'onchange' => 'checkDate()']) !!}
                 </div>
             </div>
 
@@ -91,17 +91,18 @@
 
          </div><!-- /.row -->
           
-        {!! Form::close() !!}
+    {!! Form::close() !!}
 
-    </div>
+    </div><!-- /.reserve-container -->
 
-</div>
+</div><!-- container -->
 
 @stop
 
 @section('additionalscripts')
+    {!! HTML::script('js/jquery.validate.js') !!}
+    {!! HTML::script('js/additional-methods.js') !!}
     {!! HTML::script('js/reservations.js') !!}
     {!! HTML::script('js/bootstrap-datepicker.js') !!}
-    {!! HTML::script('js/datepicker.js') !!}
-    {!! HTML::script('js/jquery.validate.js') !!}
+    {!! HTML::script('js/datepicker-custom.js') !!}
 @stop
