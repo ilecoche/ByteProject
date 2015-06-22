@@ -20,6 +20,7 @@
     <div class="reserve-loader"></div>
 
     <div class="reserve-container">
+
     <div class="row">
         <div class="col-sm-12">
             <h1 id="reserve-title">Make a Reservation</h1>
@@ -27,7 +28,7 @@
     </div>
 
     {!! Form::open(['action' => 'ReservationController@check', 'method' => 'POST', 'class' => 'reserve']) !!}
-    
+
         <div class="row">
 
             <div class="col-sm-4">
@@ -90,22 +91,14 @@
 
          </div><!-- /.row -->
           
-        {!! Form::close() !!}
+    {!! Form::close() !!}
 
-    </div>
+    </div><!-- /.reserve-container -->
 
-</div>
-
-<script>
-
-function checkDate(){
-
-    //alert('hi');
-}
-
-</script>
+</div><!-- container -->
 
 @stop
+
 @section('additionalscripts')
     {!! HTML::script('js/jquery.validate.js') !!}
     {!! HTML::script('js/additional-methods.js') !!}

@@ -11,36 +11,26 @@ $('form.reserve').submit(function(e){
 	var form = $(this);
 	var method = form.find('input[name="_method"]').val() || 'POST';
 	var url = form.prop('action');
-
-	var date = $('#date').val();
-	var time = $('#time').val();
-	var capacity = $('#capacity').val();
-
-	if(date || time || capacity)
-	{
-		$.ajax({
-			type: method,
-			url: url,
-			data: form.serialize(),
-			beforeSend: function(){
-				$('.reserve-container').hide();
-				$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
-			},
-			complete: function(){
-				$('.reserve-loader').hide();
-			},
-			success: function(data){
-				//console.log(data);
-				$('.reserve-container').html(data).fadeIn(); 
-	        },
-			error: function(e){
-		    	alert(e.message);
-		  	}
-		});
-
-	}else{
-		alert('Something is not right');
-	}
+	
+	$.ajax({
+		type: method,
+		url: url,
+		data: form.serialize(),
+		beforeSend: function(){
+			$('.reserve-container').hide();
+			$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
+		},
+		complete: function(){
+			$('.reserve-loader').hide();
+		},
+		success: function(data){
+			//console.log(data);
+			$('.reserve-container').html(data).fadeIn(); 
+        },
+		error: function(e){
+	    	alert(e.message);
+	  	}
+	});
 
 	e.preventDefault();
 
@@ -118,8 +108,11 @@ $('form.confirm').validate({
 });
 
 
-// $('form.back').submit(function(e){
 
+// --- Go back to step one --- //
+
+// $('form.goback').submit(function(e){
+	
 // 	var form = $(this);
 // 	var method = form.find('input[name="_method"]').val() || 'POST';
 // 	var url = form.prop('action');
@@ -136,7 +129,7 @@ $('form.confirm').validate({
 // 			$('.reserve-loader').hide();
 // 		},
 // 		success: function(data){
-// 			console.log(data);
+// 			//console.log(data);
 // 			$('.reserve-container').html(data).fadeIn(); 
 //         },
 // 		error: function(e){

@@ -64,7 +64,19 @@
 		{!! Form::close() !!}
 
 		<div class="col-md-4 col-md-offset-1">
-			<h2 style="text-align:center;">Today's Reservations</h2>  
+			<h2 style="text-align:center;">Today's Reservations</h2>
+
+			@foreach ($reservations as $r)
+
+			<p>table num: {{ $r->table_num }}</p>
+			<p>{{ date("g:i a",strtotime($r->time)) }}</p>
+			<p>{{ $r->first_name }} {{ $r->last_name }}</p>
+			<p>{{ $r->phone }}</p>
+			<p>{{ $r->email }}</p>
+			<p>{{ $r->capacity }} people</p>
+
+					  	
+			@endforeach
 		</div>
 
 	</div><!-- /.row -->
