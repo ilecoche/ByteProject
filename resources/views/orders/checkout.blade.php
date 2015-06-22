@@ -71,7 +71,8 @@
                                         <td>{!! Form::text('tip', null) !!}</td>
                                     </tr>
                                 </table>  
-                              {!! Form::submit('Place Order') !!}                                    
+                              {!! Form::submit('Place Order') !!} 
+                              <button type="button" onclick="window.location='{{ url("products") }}'">Want to keep ordering</button>
                                     {!! Form::close() !!}
                         </div>
 		</div>
