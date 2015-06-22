@@ -3,3 +3,15 @@
 .env
 
 nbproject/private/private.xml
+
+config/app.php
+
+composer.json
+
+composer.json
+
+composer.lock
+
+*.lock
+
+composer.json

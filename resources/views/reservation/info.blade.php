@@ -78,7 +78,7 @@
         </div><!-- /.res-confirm-btn -->
 
         <div class="res-confirm-btn">
-            {!! Form::open(['action' => 'ReservationController@back', 'method' => 'POST', 'class' => 'back']) !!}
+            {!! Form::open(['action' => 'ReservationController@back', 'method' => 'POST', 'class' => 'goback']) !!}
 
                 {!! Form::hidden('date', $date, array('id' => 'date')) !!}
 
@@ -95,4 +95,6 @@
 </div><!-- /.reserve-container -->
 
 <!-- Scripts -->
+{!! HTML::script('js/jquery.validate.js') !!}
+{!! HTML::script('js/additional-methods.js') !!}
 {!! HTML::script('js/reservations.js') !!}

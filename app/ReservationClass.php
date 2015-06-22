@@ -145,5 +145,17 @@ class ReservationClass {
     public static function getTotalCap(){
         return DB::table('tables')->sum('capacity');
     }
+
+    public static function getTodayReservations($today){
+
+        $today_reservations = DB::table('reservation')
+                ->select('reservation.id', 'date', 'time', 'first_name', 'last_name', 'phone', 'email', 'reservation.capacity', 'table_id', 'table_num')
+                ->join('tables_reservations', 'tables_reservations.reservation_id', '=', 'reservation.id')
+                ->join('tables', 'tables.id', '=', 'tables_reservations.table_id')
+                ->where('date', '=', $today)
+                ->get();
+
+        return $today_reservations;
+    }
     
 }
