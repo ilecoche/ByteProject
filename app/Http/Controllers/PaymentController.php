@@ -9,6 +9,15 @@ use Request;
 use App\Order;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+
+// TO DESTROY THE SHOPPING CART
+use Cart;
+//use Product;
+use Gloudemans\Shoppingcart\CartCollection;
+use Gloudemans\Shoppingcart\CartRowCollection;
+use Gloudemans\Shoppingcart\CartRowOptionsCollection;
+
+
 use Session;
 
 class PaymentController extends Controller {
@@ -96,6 +105,9 @@ class PaymentController extends Controller {
                 ->select('orders.total', 'orders.tip', 'orders.tax', 'orders.customer_name', 'orders.table_id')
                 ->where('order_item.order_id', '=', $order_id)
                 ->first();
+        
+        
+        Cart::destroy();
         
         // passing bill array to view 
         return view('payment.process')->with('bill', $bill)->with('email', $email);
