@@ -24,23 +24,24 @@ class ReservationController extends Controller {
             $input = Request::all();  
 
             $date = $input['date'];
+            $dateformat = (date('Y-m-d', strtotime($date)));
             $time = $input['time'];
             $capacity = $input['capacity'];
 
             $minTime = ReservationClass::getMinTime($time);
             $maxTime = ReservationClass::getMaxTime($time);
             
-            $cap = ReservationClass::checkTables($date, $minTime, $maxTime);
+            $cap = ReservationClass::checkTables($dateformat, $minTime, $maxTime);
             
             $totalCap = ReservationClass::getTotalCap();
             
             if(($cap + $capacity) > $totalCap) {
-                //return view("reservation.full");
-                echo 'The reservation time is full';
+
+                return view("reservation.full");
             }
             else {
                 
-                $list = ReservationClass::availableTables($date, $minTime, $maxTime);
+                $list = ReservationClass::availableTables($dateformat, $minTime, $maxTime);
 
                 return view("reservation.info")->with($input);
             }
@@ -57,7 +58,6 @@ class ReservationController extends Controller {
 
             $date = $input['date'];
             $dateformat = (date('Y-m-d', strtotime($date)));
-            //$dateformat = Carbon::createFromFormat('Y-m-d', $date);
             $time = $input['time'];
             $capacity = $input['capacity'];
             $fname = $input['fname'];
@@ -96,9 +96,18 @@ class ReservationController extends Controller {
     // --- Manage Tables --- //
 
     public function getTables(){
+
         $tables = Tables::all();
+
+        $today = date("Y-m-d");
+
+        $reservations = ReservationClass::getTodayReservations($today);
+
+        //var_dump($reservations);
+        
         return view('reservation.tables')
-            ->with('tables', $tables);
+            ->with('tables', $tables)
+            ->with('reservations', $reservations);
     }
 
     public function store()
@@ -143,20 +152,12 @@ class ReservationController extends Controller {
     public function back()
     {
         //if(Request::ajax()){
-        
+
             $input = Request::all();
 
             $date = $input['date'];
             $time = $input['time'];
             $capacity = $input['capacity'];
-
-            // $data = array(
-            //     'date' => $date,
-            //     'time' => $time,
-            //     'capacity' => $capacity
-            // );
-
-            //var_dump($input);
 
             return redirect('reservation')->withInput();
 

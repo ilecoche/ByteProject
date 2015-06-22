@@ -44,13 +44,9 @@ $('form.add_table').validate({
             success: function(data){
         
                 $('#all_tables tr:last').after('<tr id="' + data.id[0].id + '"><td>' + data.table_num + '</td><td>' + data.capacity + '</td><td class="delete-table"><button type="submit" onClick="deleteRow(' + data.id[0].id + ')" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button</td></tr>');
-                
-                if($('#table_num').val())
-                {
-                    $(this).attr("placeholder", "Enter Table Number");
-                }
-                //$('#table_num').val('placeholder', 'Table Number');
-                $('#capacity').val('--');
+              
+                $('#table_num').val('');
+                $('#capacity').val('');
             },
             error: function(e){
                 alert(e.message);
