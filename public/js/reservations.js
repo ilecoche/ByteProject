@@ -4,6 +4,8 @@ $.ajaxSetup({
   }
 });
 
+// --- Step 1 - Pick reservation date --- //
+
 $('form.reserve').submit(function(e){
 
 	var form = $(this);
@@ -44,48 +46,77 @@ $('form.reserve').submit(function(e){
 
 });
 
+// --- Step 2 - Personal information --- //
 
-$('form.confirm').submit(function(e){
-	//alert('hi');
-	var form = $(this);
-	var method = form.find('input[name="_method"]').val() || 'POST';
-	var url = form.prop('action');
+$('form.confirm').validate({
 
-	var first = $('#fname').val();
-	var last = $('#lname').val();
-	var email = $('#email').val();
-	var phone = $('#phone').val();
+    // Validation rules
+    
+    rules: {
+        fname: {
+        	required: true,
+        	minlength: 2
+        },
+        lname: {
+        	required: true,
+        	minlength: 2
+        },
+        email: {
+            required: true,
+            email: true
+        },
+        phone: {
+        	required: true,
+        	"phoneUS": true
+        }
+    },
+    
+    // Validation error messages
+    messages: {
+        fname: {
+        	required: "Please enter your first name",
+        	minlength: "Invalid first name"
+        },
+        lname: {
+        	required: "Please enter your last name",
+        	minlength: "Invalid last name"
+        },
+        email: {
+        	required: "Please enter your email address",
+        	email: "Invalid email address",
+        },
+        phone: {
+        	required: "Please enter your phone number"
+        }
+    },
+    
+    submitHandler: function(form) {
 
-	if(first && last && email && phone)
-	{
-		$.ajax({
+		var method = $(form).find('input[name="_method"]').val() || 'POST';
+		var url = $(form).prop('action');
+
+    	$.ajax({
 			type: method,
 			url: url,
-			data: form.serialize(),
+			data: $(form).serialize(),
 			beforeSend: function(){
 				$('.reserve-container').hide();
 				$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
 			},
 			complete: function(){
 				$('.reserve-loader').hide();
-				console.log(data); 
 			},
 			success: function(data){
-				$('.reserve-container').html(data).fadeIn();
-				console.log(data); 
+				$('.reserve-container').html(data).fadeIn(); 
 	        },
 			error: function(e){
 		    	alert(e.message);
 		  	}
 		});
-
-	}else{
-		alert('Something is not right');
-	}
-
-	e.preventDefault();
-
+		return false;
+    }
 });
+
 
 // $('form.back').submit(function(e){
 
