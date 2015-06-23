@@ -47,7 +47,7 @@ class resturantAdminController extends Controller {
                 );
             
             $resturant->update($request->all());
-            return redirect('rest');
+            return redirect('restaurantAdmin');
     }
     
     
