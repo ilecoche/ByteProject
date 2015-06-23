@@ -79,7 +79,7 @@ Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
 Route::get('restaurant', 'MapController@Index');
 
 /*Restaurant Settings */
-Route::get('restaurantAdmin', 'restaurantAdminController@Index');
+Route::get('restaurantAdmin', 'resturantAdminController@Index');
 
 /* Order Stats */
 Route::get('orderstats', 'OrderstatsController@orderstats');
