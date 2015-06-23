@@ -184,6 +184,13 @@ class ReservationClass {
             ->delete();
     }
 
+     public static function deleteTablesReservation($id)
+    {
+        $delete = DB::table('tables_reservations')
+            ->where('reservation_id', '=', $id)
+            ->delete();
+    }
+
     public function sendEmail($email, $name){
         
         $to = $email;
