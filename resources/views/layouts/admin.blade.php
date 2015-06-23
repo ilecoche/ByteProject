@@ -75,7 +75,7 @@
                         <a href="{{ url('orderstats') }}"><span class="glyphicon glyphicon-signal"></span> Order Stats</a>
                     </li>
                     <li>
-                        <a href="{{ url('rest') }}"><span class="glyphicon glyphicon-cog"></span> Info </a>
+                        <a href="{{ url('restaurantAdmin') }}"><span class="glyphicon glyphicon-cog"></span> Info </a>
                     </li>
                 </ul>
             </div>
