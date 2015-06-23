@@ -147,15 +147,33 @@ class ReservationClass {
     }
 
     public static function getTodayReservations($today){
-
-        $today_reservations = DB::table('reservation')
-                ->select('reservation.id', 'date', 'time', 'first_name', 'last_name', 'phone', 'email', 'reservation.capacity', 'table_id', 'table_num')
-                ->join('tables_reservations', 'tables_reservations.reservation_id', '=', 'reservation.id')
-                ->join('tables', 'tables.id', '=', 'tables_reservations.table_id')
+        
+        $restoday = DB::table('reservation')
+                ->select('id', 'capacity')
                 ->where('date', '=', $today)
+                ->orderBy('time')
                 ->get();
 
-        return $today_reservations;
+        return $restoday;
+    } 
+
+    public static function getReservationTables($reservationID){
+            
+        $reserveArray = array();
+
+        foreach($reservationID as $reservation)
+        {
+            $today_reservations = DB::table('tables')
+                    ->select('reservation.id', 'table_num', 'first_name', 'last_name', 'time', 'phone', 'email', 'reservation.capacity')
+                    ->join('tables_reservations', 'tables_reservations.table_id', '=', 'tables.id')
+                    ->join('reservation', 'tables_reservations.reservation_id', '=', 'reservation.id')
+                    ->where('tables_reservations.reservation_id', '=', $reservation->id)
+                    ->get();
+
+            array_push($reserveArray, $today_reservations);
+
+        }
+
+        return $reserveArray;
     }
-    
 }

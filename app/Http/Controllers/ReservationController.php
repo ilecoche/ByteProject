@@ -99,15 +99,19 @@ class ReservationController extends Controller {
 
         $tables = Tables::all();
 
+        date_default_timezone_set('America/Toronto');
         $today = date("Y-m-d");
 
-        $reservations = ReservationClass::getTodayReservations($today);
+        $reservationsToday = ReservationClass::getTodayReservations($today);
 
-        //var_dump($reservations);
+        $reservationTables = ReservationClass::getReservationTables($reservationsToday);
+        
+        //var_dump($reservationsToday);
+        //var_dump($reservationTables);
         
         return view('reservation.tables')
             ->with('tables', $tables)
-            ->with('reservations', $reservations);
+            ->with('rtables', $reservationTables);
     }
 
     public function store()
