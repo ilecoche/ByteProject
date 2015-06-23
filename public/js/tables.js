@@ -66,3 +66,11 @@ function deleteRow(id)
             $('#' + id).remove();
         });
 }
+
+function cancelReservation(id)
+{
+    $.post('tables/cancel', {id: id}).done(
+        function(data){
+            $('#' + id).remove();
+        });
+}

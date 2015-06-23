@@ -32,6 +32,10 @@ Route::post('reservation', 'ReservationController@back');
 Route::get('tables', 'ReservationController@getTables');
 Route::post('tables', 'ReservationController@store');
 Route::post('tables/delete', 'ReservationController@destroy');
+Route::post('tables/cancel', 'ReservationController@cancelReservation');
+Route::get('reservation/reservation_partial', 'ReservationController@todayReservations');
+
+
 
 
 /* Products Admin  */

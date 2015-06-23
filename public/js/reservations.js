@@ -106,37 +106,3 @@ $('form.confirm').validate({
 		return false;
     }
 });
-
-
-
-// --- Go back to step one --- //
-
-// $('form.goback').submit(function(e){
-	
-// 	var form = $(this);
-// 	var method = form.find('input[name="_method"]').val() || 'POST';
-// 	var url = form.prop('action');
-
-// 	$.ajax({
-// 		type: method,
-// 		url: url,
-// 		data: form.serialize(),
-// 		beforeSend: function(){
-// 			$('.reserve-container').hide();
-// 			$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
-// 		},
-// 		complete: function(){
-// 			$('.reserve-loader').hide();
-// 		},
-// 		success: function(data){
-// 			//console.log(data);
-// 			$('.reserve-container').html(data).fadeIn(); 
-//         },
-// 		error: function(e){
-// 	    	alert(e.message);
-// 	  	}
-// 	});
-
-// 	e.preventDefault();
-
-// });
