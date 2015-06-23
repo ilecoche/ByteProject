@@ -176,4 +176,28 @@ class ReservationClass {
 
         return $reserveArray;
     }
+
+    public static function deleteReservation($id)
+    {
+        $delete = DB::table('reservation')
+            ->where('id', '=', $id)
+            ->delete();
+    }
+
+    public function sendEmail($email, $name){
+        
+        $to = $email;
+        
+        $final_subject = 
+            'Thank You!';
+        
+        $final_message = "Hello " . $name . ". Thank you for booking a reservation!";
+        
+        $final_headers = "From: byteteam2015@gmail.com" .
+                         "Reply-To: byteteam2015@gmail.com" .
+                         "X-Mailer: PHP/" . phpversion();
+        
+        mail($to, $final_subject, $final_message, $final_headers);
+
+    }
 }

@@ -65,53 +65,31 @@ class ReservationController extends Controller {
             $email = $input['email'];
             $phone = $input['phone'];
 
-            /*
-            $validator = Validator::make(Input::all(),
-            [
-                'fname' => 'required|min:2',
-                'lname' => 'required|min:2',
-                'email' => 'required|email',
-                'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
-            ],
-            [
-                'fname.required' => 'Please enter your first name',
-                'fname.min' => 'Invalid first name',
-                'lname.required' => 'Please enter your last name',
-                'lname.min' => 'Invalid last name',
-                'email.required' => 'Please enter your email',
-                'email' => 'Invalid email',
-                'phone.required' => 'Please enter your phone number',
-                'phone.regex' => 'Invalid phone number'
-                
-            ]);
-            */
-
             ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
+
+            //ReservationClass::sendEmail($email, $fname);
                 
             return view('reservation.thanks')->with('data',$input);
          
         }
     }
 
-    // --- Manage Tables --- //
+    // --- Manage Tables & Reservations --- //
 
     public function getTables(){
 
         $tables = Tables::all();
 
-        date_default_timezone_set('America/Toronto');
-        $today = date("Y-m-d");
+        // date_default_timezone_set('America/Toronto');
+        // $today = date("Y-m-d");
 
-        $reservationsToday = ReservationClass::getTodayReservations($today);
+        // $reservationsToday = ReservationClass::getTodayReservations($today);
 
-        $reservationTables = ReservationClass::getReservationTables($reservationsToday);
-        
-        //var_dump($reservationsToday);
-        //var_dump($reservationTables);
+        // $reservationTables = ReservationClass::getReservationTables($reservationsToday);
         
         return view('reservation.tables')
-            ->with('tables', $tables)
-            ->with('rtables', $reservationTables);
+            ->with('tables', $tables);
+            //->with('rtables', $reservationTables);
     }
 
     public function store()
@@ -155,16 +133,37 @@ class ReservationController extends Controller {
 
     public function back()
     {
-        //if(Request::ajax()){
+        $input = Request::all();
 
-            $input = Request::all();
+        $date = $input['date'];
+        $time = $input['time'];
+        $capacity = $input['capacity'];
 
-            $date = $input['date'];
-            $time = $input['time'];
-            $capacity = $input['capacity'];
+        return redirect('reservation')->withInput();
+    }
 
-            return redirect('reservation')->withInput();
+    public function cancelReservation()
+    {
+        if(Request::ajax()){
 
-        //}
+            $id = Request::input('id');
+            
+            $reservation = ReservationClass::deleteReservation($id);
+
+        }
+    }
+
+    public function todayReservations()
+    {
+        date_default_timezone_set('America/Toronto');
+        $today = date("Y-m-d");
+
+        $reservationsToday = ReservationClass::getTodayReservations($today);
+
+        $reservationTables = ReservationClass::getReservationTables($reservationsToday);
+        
+        return view('reservation.reservation_partial')
+            //->with('tables', $tables)
+            ->with('rtables', $reservationTables);
     }
 }

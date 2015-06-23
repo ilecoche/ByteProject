@@ -1,5 +1,10 @@
-<div class="alert alert-info reserve-alert">
-The reservation for the selected date and time if full. Please choose another time.
+<div class="row thanks-container">
+	<div class="md-col-6">
+
+		<h1>Aw shucks... <i class="fa fa-meh-o"></i></h1>
+		<p>The reservation time you've selected is full. Please select another time.</p>
+		
+		<button class="btn btn-primary SR" href="#">Okay</button>
+
+	</div>
 </div>
-
-

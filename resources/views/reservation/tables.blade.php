@@ -47,9 +47,9 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						{!! Form::select('capacity', [
-							'default' => '--',
-							2 => '2',
-							4 => '4'
+							'default' => 'Select Table Capacity',
+							2 => '2 people',
+							4 => '4 people'
 						], '--', array('class' => 'form-control reserve-select ', 'id' => 'capacity')) 
 						!!}
 					</div>
@@ -66,38 +66,8 @@
 
 		<div class="col-md-4 col-md-offset-1">
 			<h2 style="text-align:center;">Today's Reservations</h2>
-				<table class="table">
-					
-					@foreach($rtables as $table)
-					<tr>
-						<td>
-							<p>
-								<strong>@ {{ date("g:i a",strtotime($table[0]->time)) }}</strong> /
-
-								<?php $cap = $table[0]->capacity ?>
-								@if($cap == 1)
-									<strong><?php echo $cap ?> person</strong> /
-								@else
-									<strong><?php echo $cap ?> people</strong> /
-								@endif
-
-								<strong>Tables</strong>
-									@foreach($table as $t)
-										( <strong>{{ $t->table_num }}</strong> )
-									@endforeach
-							</p>
-
-							<div>{{ $table[0]->first_name }} {{ $table[0]->last_name }}</div>
-							<div>{{ $table[0]->phone }}</div>
-							<div>{{ $table[0]->email }}</div>
-
-							<button type="submit" onClick="cancelReservation({{ $table[0]->id }})" class="btn btn-default">Cancel</button>
-
-						</td>
-					</tr>
-					@endforeach
-
-				</table>
+				
+			<div id="today"></div>
 
 		</div>
 
@@ -111,5 +81,6 @@
 	
     <script src="{{ asset('js/jquery.validate.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/tables.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/todayreservations.js') }}" type="text/javascript"></script>
 
 @stop
