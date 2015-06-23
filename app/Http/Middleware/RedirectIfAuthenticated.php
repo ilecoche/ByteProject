@@ -35,7 +35,7 @@ class RedirectIfAuthenticated {
 	{
 		if ($this->auth->check())
 		{
-			return RedirectResponse(url('/placed_orders'));
+			return new RedirectResponse(url('/placed_orders'));
 		}
 
 		return $next($request);
