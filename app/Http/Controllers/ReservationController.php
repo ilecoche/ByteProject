@@ -148,7 +148,8 @@ class ReservationController extends Controller {
 
             $id = Request::input('id');
             
-            $reservation = ReservationClass::deleteReservation($id);
+            ReservationClass::deleteReservation($id);
+            ReservationClass::deleteTablesReservations($id);
 
         }
     }
