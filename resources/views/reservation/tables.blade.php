@@ -12,6 +12,14 @@
 <div class="manage-tables">
 
 	<div class="row">
+
+		<div class="col-md-5 col-md-offset-1">
+
+			<h2 style="text-align:center;">Today's Reservations</h2>	
+			<div id="today"></div>
+
+		</div>
+
 		<div class="col-md-4 col-md-offset-1">
 			<h2 style="text-align:center;">Manage Tables</h2>  
 				
@@ -63,13 +71,6 @@
 		</div>
 
 		{!! Form::close() !!}
-
-		<div class="col-md-4 col-md-offset-1">
-			<h2 style="text-align:center;">Today's Reservations</h2>
-				
-			<div id="today"></div>
-
-		</div>
 
 	</div><!-- /.row -->
 </div><!-- /.manage-tables -->
