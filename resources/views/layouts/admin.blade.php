@@ -66,7 +66,7 @@
                         <a href="{{ url('products_admin') }}"><span class="glyphicon glyphicon-list-alt"></span> Menu</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-book"></span> Reservations</a>
+                        <a href="{{ url('tables')}}"><span class="glyphicon glyphicon-book"></span> Reservations</a>
                     </li>
                     <li>
                         <a href="{{ url('wait') }}"><span class="glyphicon glyphicon-time"></span> Wait Time</a>
