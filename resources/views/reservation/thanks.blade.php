@@ -6,7 +6,14 @@
 
 		<div class="thanks-details">
 			<p>Reservation Date and Time: <strong>{{ $data['date'] }}</strong> @ <strong>{{ date("g:i a",strtotime($data['time'])) }}</strong></p>
-			<p>Number of Guests: <strong>{{ $data['capacity'] }} people</strong></p>
+			<p>Number of Guests: 
+				<?php $cap = $data['capacity'] ?>
+				@if($cap == 1)
+					<strong><?php echo $cap ?> person</strong>
+				@else
+					<strong><?php echo $cap ?> people</strong>
+				@endif
+			</p>
 			<p>A confirmation email has been sent to: <strong>{{ $data['email'] }}</strong></p>
 		</div>
 	</div>

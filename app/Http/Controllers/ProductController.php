@@ -71,7 +71,7 @@ class ProductController extends Controller {
               if(!empty($product->sku)){
               $nutrition_info = (new ProductAdminController)->nutrition($product->sku);
             } else  {
-              $nutrition_info = 'Not available';
+              $nutrition_info = 'No nutrition information available at the moment';
             }
 
            return view('products.show', compact('product', 'nutrition_info'));

@@ -62,21 +62,28 @@ class ProductAdminController extends Controller {
         $client = new Client(['base_uri' => 'http://api.nal.usda.gov/ndb/']);
 
         // Request to http://api.nal.usda.gov/ndb/reports/?ndbno=01009&type=f&format=json&api_key=7nEAe6LI7yfT7R4IxPjZSafCpqNUZGz2FU27MugY
-        $response = $client->get('http://api.nal.usda.gov/ndb/reports', [
-            'query' => [
-                'ndbno' => $ndbno,
-                'type' => 'f',
-                'format' => 'json',
-                'api_key' => self::NDBKEY
-            ]
-        ]);
-        $body = json_decode($response->getBody());
-        $selectedfood = $body->report->food->name;
+        try {
+            $response = $client->get('http://api.nal.usda.gov/ndb/reports', [
+                'query' => [
+                    'ndbno' => $ndbno,
+                    'type' => 'f',
+                    'format' => 'json',
+                    'api_key' => self::NDBKEY
+                ]
+            ]);
 
-        // get first 10 elements of the array, the rest are vitamins and microelements
-        $nutrients = array_slice($body->report->food->nutrients , 0, 9);
-        
-        return view('products_admin.nutrition', compact('selectedfood','nutrients'));
+            $body = json_decode($response->getBody());
+            $selectedfood = $body->report->food->name;
+
+            // get first 10 elements of the array, the rest are vitamins and microelements
+            $nutrients = array_slice($body->report->food->nutrients , 0, 9);
+            
+            return view('products_admin.nutrition', compact('selectedfood','nutrients'));
+        } catch (ClientException $e) {
+             
+             return "No nutrition info available at the moment";
+
+        }
     }
     
     // function to get ndbno number from food search result list selected by user
@@ -217,7 +224,6 @@ class ProductAdminController extends Controller {
             $this->validate($request,
                 [
                     'dish' => 'required|min:5',
-                    'sku' => 'required',
                     'menu_category_id' => 'required|Integer',
                     'price' => 'required'
                 ]
