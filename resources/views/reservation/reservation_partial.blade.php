@@ -22,6 +22,8 @@
 			<div>{{ $table[0]->first_name }} {{ $table[0]->last_name }}</div>
 			<div>{{ $table[0]->phone }}</div>
 			<div>{{ $table[0]->email }}</div>
+		</td>
+		<td>
 
 			<button type="submit" onClick="cancelReservation({{ $table[0]->id }})" class="btn btn-default">Cancel</button>
 
