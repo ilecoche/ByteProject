@@ -1,33 +1,34 @@
 <div class="reserve-container">
 <div class="thanks-container">
     <h2>Complete your reservation</h2>
-
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel">
-                <div class="panel-heading SR">DATE</div>
-                <div class="panel-body">
-                    <p class="res-detail-title">{{ $date }}</p>
-                </div>
-            </div><!-- /.panel -->
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-            <div class="panel">
-                <div class="panel-heading SR">TIME</div>
-                <div class="panel-body">
-                    <p class="res-detail-title">{{ date("g:i a",strtotime($time)) }}</p>
-                </div>
-            </div><!-- /.panel -->
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-            <div class="panel">
-                <div class="panel-heading SR">GUESTS</div>
-                <div class="panel-body">
-                    <p class="res-detail-title">{{ $capacity }} people</p>
-                </div>
-            </div><!-- /.panel -->
-        </div><!-- /.col-sm-4 -->
-    </div><!-- /.row -->
+    <div class="reserve-details">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel">
+                    <div class="panel-heading SR">DATE</div>
+                    <div class="panel-body">
+                        <p class="res-detail-title">{{ $date }}</p>
+                    </div>
+                </div><!-- /.panel -->
+            </div><!-- /.col-sm-4 -->
+            <div class="col-sm-4">
+                <div class="panel">
+                    <div class="panel-heading SR">TIME</div>
+                    <div class="panel-body">
+                        <p class="res-detail-title">{{ date("g:i a",strtotime($time)) }}</p>
+                    </div>
+                </div><!-- /.panel -->
+            </div><!-- /.col-sm-4 -->
+            <div class="col-sm-4">
+                <div class="panel">
+                    <div class="panel-heading SR">GUESTS</div>
+                    <div class="panel-body">
+                        <p class="res-detail-title">{{ $capacity }} people</p>
+                    </div>
+                </div><!-- /.panel -->
+            </div><!-- /.col-sm-4 -->
+        </div><!-- /.row -->
+    </div><!-- /.reserve-details -->
 
     <h3>Personal Information</h3>
             
