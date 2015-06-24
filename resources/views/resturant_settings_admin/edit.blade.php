@@ -14,7 +14,7 @@
 @section('content')
 <div class='container-fluid'>
     <h1>Edit Information</h1>
-{!! Form::model($map, ['id' => 'mainForm', 'method' => 'PATCH', 'url' => 'rest/update' ]) !!}
+{!! Form::model($map, ['id' => 'mainForm', 'method' => 'PATCH', 'action' => 'resturantAdminController@update' ]) !!}
 
 {!! Form::label('business_name', 'Hours of operation: ') !!}
 {!! Form::text('business_name', null, ['class' => 'form-control']) !!}

@@ -12,6 +12,11 @@ use Request;
 
 class WaitController extends Controller {
 
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	public function waitIndex()
 	{
 		$waitlist = waitlist::all();

@@ -76,7 +76,13 @@ Route::post('testimonials', 'TestimonialController@store');
 Route::get('testimonials/destroy/{id}', 'TestimonialController@destroy');
 
 /* Map */
-Route::get('map', 'MapController@Index');
+Route::get('restaurant', 'MapController@Index');
+
+/*Restaurant Settings */
+//Route::get('restaurantAdmin', 'resturantAdminController@Index');
+Route::resource('restaurantAdmin','resturantAdminController');
+//Route::get('restaurantAdmin/edit', 'resturantAdminController@show');
+//Route::Patch('restaurantAdmin/update', 'resturantAdminController@update');
 
 /* Order Stats */
 Route::get('orderstats', 'OrderstatsController@orderstats');
