@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{!! csrf_token() !!}">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>BYTE - Admin</title>
 
@@ -42,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">BYTE</a>
+                <span class="navbar-brand">BYTE</span>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-nav navbar-right">
