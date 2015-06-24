@@ -13,7 +13,16 @@
 	margin-bottom: 20px;
 }
 
-.reserve-details .row .col-sm-4,
+.reserve-details .panel {
+	box-shadow: none;
+}
+
+.reserve-details .panel-body {
+	border: 1px solid #ccc;
+	border-radius: 0px 0px 4px 4px;
+}
+
+.row .col-sm-4,
 .reserve .row .col-sm-4,
 .reserve .row .col-sm-6,
 .reserve .row .col-sm-12,
