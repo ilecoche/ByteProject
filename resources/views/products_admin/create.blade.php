@@ -5,7 +5,7 @@
 @stop
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8">
 			<div class="panel panel-default">
@@ -27,7 +27,7 @@
                                     {!! Form::text('price', null, ['class' => 'form-control', 'size' => '10']) !!}
                                    
                                     {!! Form::label('sku', 'SKU: ') !!}
-                                    {!! Form::text('sku', null, ['class' => 'form-control']) !!}
+                                    {!! Form::text('sku', null, ['class' => 'form-control', 'placeholder' => 'Search nutrition to find sku']) !!}
 
                                     {!! Form::label('image', 'Image: ') !!}
                                     {!! Form::file('image', ['class' => 'form-control']) !!}
@@ -66,31 +66,11 @@
         </div>
 	</div>
 </div>
-@stop
-@section('additionalscripts')
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
 
-
-<script type="text/javascript">
-
-    $(function() {
-    $('#datetimepicker3').datepicker({
-        format: 'yyyy-mm-dd'
-        });
-    });
-
-</script>
 
 <script>
-
-    $.ajaxSetup({
-    headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-    }
-    }); // $.ajaxSetup({ ...
-
-    var loader = $("#ajax-loader");
-
+$(function() {
+    
 /*---- get nutrition info based on ndbno --------------------------------------*/
 
     function getNutritionInfo(ndbno) {
@@ -108,6 +88,16 @@
     } // function getNutritionInfo(ndbno) ...
  
 /*----submitting nutrition API search form. Returns list of sample foods matching search string---*/   
+
+
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+    }); // $.ajaxSetup({ ...
+
+    var loader = $("#ajax-loader");
+
 
     $( "#searchForm" ).submit(function( event ) {
      
@@ -143,10 +133,7 @@
             
     }); // $(document).on('click', '.samples', function(event) { ....
 
-    
+});
 
 </script>
-@stop
-@section('additionalstyles')
-<link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
 @stop

@@ -19,7 +19,7 @@
         {!! Form::open(['url' => 'placed_orders'])!!}
         <p>
             {!! Form::hidden('order_id', $order_id) !!}
-            {!! Form::submit('Order Ready',['class' => 'btn btn-primary form-control'] )!!}
+            {!! Form::submit('Order Ready',['class' => 'btn btn-primary form-control SR'] )!!}
         </p>
         {!! Form::close()!!}
         </li>

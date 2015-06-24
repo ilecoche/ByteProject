@@ -1,0 +1,78 @@
+/*products.css*/
+
+
+  h1 { padding: .2em; margin: 0; }
+  #cart { 
+  	float: left; 
+  	position: absolute; 
+  	top: 80px; 
+  	bottom:35px; 
+  	right: 0; 
+  	width: 450px; 
+  	min-height: 400px; 
+  	margin-top: -20px; 
+  	background: #3d3d58 url(../images/table_setting.png) 50% 50px no-repeat;
+  }
+
+  #cart h2 {color: white;}
+
+  #cart-content {
+  	border-radius: 3px;
+  	padding-bottom: 20px; 
+  	background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  #cart-content table{
+	width: 90%;
+	margin: 0 auto;
+	font-size: 1em;
+	font-weight: 600;
+  }
+
+   #expand-cart {display: none; }
+
+  .btn-checkout {
+  	background-color: #da3743;
+  	border-color: #da3743;
+  }
+
+  #catalog {width: calc(100% - 455px); margin: 10px;}
+  .catalog-row {position: relative;}
+  .menu-item {text-align: center; width: 300px; padding: 0; height: 340px; outline: #555 solid 1px; list-style: none; margin: 5px;}
+
+  ul.product-listing {list-style: none;}
+  .product-image {width: 100%; max-width: 300px;}
+  .dish-id {visibility: hidden;}
+  #ajax-loader {position: absolute; top:0; bottom: 0; left: 0; right: 0; padding: 20% 45%; min-height: 100px; z-index: 10; display:none;}
+
+  .modal-body {min-height: 200px;}
+
+  .ui-state-default {background-color: #3d3d58; background-image: none;}
+
+  .ui-accordion-header {color: #fff;}
+
+  @media (max-width: 925px) {
+  
+ #cart { 
+  	float: none;
+  	position: fixed;
+  	top: 80px; 
+  	width: 100%;
+  	height: 200px; 
+  	min-height: 200px; 
+  	z-index: 10;
+  	padding-bottom: 20px; 
+  	background: #3d3d58 url(../images/table_setting.png) 50% 50px no-repeat;
+  	overflow: hidden;
+  }
+
+  #expand-cart {display: inline-block;}
+
+  .expanded {height: auto; overflow: visible;}
+
+  nav.navbar.navbar-default.navbar-static-top {position: fixed; width: 100%;}
+
+  #catalog {width: 100%; display: block; float: none; margin: 280px auto 10px auto;}
+
+.footer {position: static;}
+  }

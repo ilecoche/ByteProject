@@ -48,7 +48,7 @@ class ReservationController extends Controller {
         }
     }
 
-    // --- Confirm reservation --- //
+    // --- Confirm reservation and insert into database --- //
     
     public function reserve(){
 
@@ -65,50 +65,39 @@ class ReservationController extends Controller {
             $email = $input['email'];
             $phone = $input['phone'];
 
-            /*
-            $validator = Validator::make(Input::all(),
-            [
-                'fname' => 'required|min:2',
-                'lname' => 'required|min:2',
-                'email' => 'required|email',
-                'phone' => 'required|regex:/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/',
-            ],
-            [
-                'fname.required' => 'Please enter your first name',
-                'fname.min' => 'Invalid first name',
-                'lname.required' => 'Please enter your last name',
-                'lname.min' => 'Invalid last name',
-                'email.required' => 'Please enter your email',
-                'email' => 'Invalid email',
-                'phone.required' => 'Please enter your phone number',
-                'phone.regex' => 'Invalid phone number'
-                
-            ]);
-            */
-
             ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
+
+            //ReservationClass::sendEmail($email, $fname);
                 
             return view('reservation.thanks')->with('data',$input);
          
         }
     }
 
-    // --- Manage Tables --- //
+    // --- Go back to first reservation step --- //
+
+    public function back()
+    {
+        $input = Request::all();
+
+        $date = $input['date'];
+        $time = $input['time'];
+        $capacity = $input['capacity'];
+
+        return redirect('reservation')->withInput();
+    }
+
+    // --- Get restaurant tables for CMS --- //
 
     public function getTables(){
 
         $tables = Tables::all();
-
-        $today = date("Y-m-d");
-
-        $reservations = ReservationClass::getTodayReservations($today);
-
-        //var_dump($reservations);
         
         return view('reservation.tables')
-            ->with('tables', $tables)
-            ->with('reservations', $reservations);
+            ->with('tables', $tables);
     }
+
+    // --- Insert restaurant tables for CMS --- //
 
     public function store()
     {
@@ -138,6 +127,8 @@ class ReservationController extends Controller {
         }
     }  
 
+    // --- Delete restaurant tables for CMS --- //
+
     public function destroy()
     {
         if(Request::ajax()){
@@ -149,18 +140,32 @@ class ReservationController extends Controller {
         }
     }
 
-    public function back()
+    // --- Cancel and delete restaurant tables for CMS --- //
+
+    public function cancelReservation()
     {
-        //if(Request::ajax()){
+        if(Request::ajax()){
 
-            $input = Request::all();
+            $id = Request::input('id');
+            
+            ReservationClass::deleteReservation($id);
+            ReservationClass::deleteTablesReservations($id);
 
-            $date = $input['date'];
-            $time = $input['time'];
-            $capacity = $input['capacity'];
+        }
+    }
 
-            return redirect('reservation')->withInput();
+    // --- Get today's reservations --- //
 
-        //}
+    public function todayReservations()
+    {
+        date_default_timezone_set('America/Toronto');
+        $today = date("Y-m-d");
+
+        $reservationsToday = ReservationClass::getTodayReservations($today);
+
+        $reservationTables = ReservationClass::getReservationTables($reservationsToday);
+        
+        return view('reservation.reservation_partial')
+            ->with('rtables', $reservationTables);
     }
 }

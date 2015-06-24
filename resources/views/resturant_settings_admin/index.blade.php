@@ -23,7 +23,7 @@
     
     
     <form>
-        <button class='btn SR'><a href="{{ url('rest/edit') }}">Click here to edit </a></button>
+        <button class='btn SR'><a href="{{ url('restaurantAdmin/edit') }}">Click here to edit </a></button>
     </form>
 @endforeach
 @stop

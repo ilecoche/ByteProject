@@ -57,16 +57,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-star"></span> Placed Orders</a>
+                        <a href="{{ url('placed_orders')  }}"><span class="glyphicon glyphicon-star"></span> Placed Orders</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-comment"></span> Testimonials</a>
+                        <a href="{{ url('testimonials')}}"><span class="glyphicon glyphicon-comment"></span> Testimonials</a>
                     </li>
                      <li>
                         <a href="{{ url('products_admin') }}"><span class="glyphicon glyphicon-list-alt"></span> Menu</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-book"></span> Reservations</a>
+                        <a href="{{ url('tables')}}"><span class="glyphicon glyphicon-book"></span> Reservations</a>
                     </li>
                     <li>
                         <a href="{{ url('wait') }}"><span class="glyphicon glyphicon-time"></span> Wait Time</a>
@@ -75,7 +75,7 @@
                         <a href="{{ url('orderstats') }}"><span class="glyphicon glyphicon-signal"></span> Order Stats</a>
                     </li>
                     <li>
-                        <a href="{{ url('rest') }}"><span class="glyphicon glyphicon-cog"></span> Info </a>
+                        <a href="{{ url('restaurantAdmin') }}"><span class="glyphicon glyphicon-cog"></span> Info </a>
                     </li>
                 </ul>
             </div>
