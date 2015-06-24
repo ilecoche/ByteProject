@@ -34,7 +34,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="#"><img id="logo" src="images/logo.png"></a>
+                        <a href="{{ url('/')}}"><img id="logo" src="images/logo.png"></a>
                     </div>
 
                     <!-- toggling -->
