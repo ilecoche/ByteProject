@@ -48,7 +48,7 @@ class ReservationController extends Controller {
         }
     }
 
-    // --- Confirm reservation and insert into database --- //
+    // --- Confirm reservation --- //
     
     public function reserve(){
 
@@ -67,27 +67,14 @@ class ReservationController extends Controller {
 
             ReservationClass::makeReservation($dateformat, $time, $fname, $lname, $phone, $email, $capacity);
 
-            //ReservationClass::sendEmail($email, $fname);
+            ReservationClass::sendEmail($email, $fname, $date, $time, $capacity);
                 
             return view('reservation.thanks')->with('data',$input);
          
         }
     }
 
-    // --- Go back to first reservation step --- //
-
-    public function back()
-    {
-        $input = Request::all();
-
-        $date = $input['date'];
-        $time = $input['time'];
-        $capacity = $input['capacity'];
-
-        return redirect('reservation')->withInput();
-    }
-
-    // --- Get restaurant tables for CMS --- //
+    // --- Manage Tables & Reservations --- //
 
     public function getTables(){
 
@@ -96,8 +83,6 @@ class ReservationController extends Controller {
         return view('reservation.tables')
             ->with('tables', $tables);
     }
-
-    // --- Insert restaurant tables for CMS --- //
 
     public function store()
     {
@@ -127,8 +112,6 @@ class ReservationController extends Controller {
         }
     }  
 
-    // --- Delete restaurant tables for CMS --- //
-
     public function destroy()
     {
         if(Request::ajax()){
@@ -140,7 +123,16 @@ class ReservationController extends Controller {
         }
     }
 
-    // --- Cancel and delete restaurant tables for CMS --- //
+    public function back()
+    {
+        $input = Request::all();
+
+        $date = $input['date'];
+        $time = $input['time'];
+        $capacity = $input['capacity'];
+
+        return redirect('reservation')->withInput();
+    }
 
     public function cancelReservation()
     {
@@ -148,13 +140,10 @@ class ReservationController extends Controller {
 
             $id = Request::input('id');
             
-            ReservationClass::deleteReservation($id);
-            ReservationClass::deleteTablesReservations($id);
+            $reservation = ReservationClass::deleteReservation($id);
 
         }
     }
-
-    // --- Get today's reservations --- //
 
     public function todayReservations()
     {
@@ -166,6 +155,7 @@ class ReservationController extends Controller {
         $reservationTables = ReservationClass::getReservationTables($reservationsToday);
         
         return view('reservation.reservation_partial')
+            //->with('tables', $tables)
             ->with('rtables', $reservationTables);
     }
 }

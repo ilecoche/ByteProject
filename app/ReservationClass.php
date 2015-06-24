@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
 
 class ReservationClass {
     
@@ -184,27 +186,32 @@ class ReservationClass {
             ->delete();
     }
 
-     public static function deleteTablesReservations($id)
-    {
-        $delete = DB::table('tables_reservations')
-            ->where('reservation_id', '=', $id)
-            ->delete();
-    }
-
-    public function sendEmail($email, $name){
+    public static function sendEmail($email, $name, $dateformat, $time, $capacity){
         
         $to = $email;
-        
         $final_subject = 
             'Thank You!';
         
-        $final_message = "Hello " . $name . ". Thank you for booking a reservation!";
+        //$final_message = ['body' => "Hello " . $name . ". Thank you for booking a reservation!"];
+        $final_message = ['name' => $name,
+                          'resdate' => $dateformat,
+                          'restime' => $time,
+                          'capacity' => $capacity];
         
         $final_headers = "From: byteteam2015@gmail.com" .
                          "Reply-To: byteteam2015@gmail.com" .
                          "X-Mailer: PHP/" . phpversion();
         
-        mail($to, $final_subject, $final_message, $final_headers);
+        //mail($to, $final_subject, $final_message, $final_headers);
+        $dataheaders = ['to' => $email, 'subject' => $final_subject];
+
+
+             Mail::send('emails.thankyou',
+                    $final_message,
+                    function($message) use ($dataheaders){
+                        $message->to($dataheaders['to'])
+                                ->subject($dataheaders['subject']);
+                    });
 
     }
 }
