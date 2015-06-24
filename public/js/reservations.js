@@ -18,7 +18,7 @@ $('form.reserve').submit(function(e){
 		data: form.serialize(),
 		beforeSend: function(){
 			$('.reserve-container').hide();
-			$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
+			$('.reserve-loader').show().html('<h1><i class="fa fa-cog fa-spin fa-2x"></i></h1>');
 		},
 		complete: function(){
 			$('.reserve-loader').hide();
@@ -91,7 +91,7 @@ $('form.confirm').validate({
 			data: $(form).serialize(),
 			beforeSend: function(){
 				$('.reserve-container').hide();
-				$('.reserve-loader').show().html('<i class="fa fa-cog fa-spin fa-3x"></i>');
+				$('.reserve-loader').show().html('<h1><i class="fa fa-cog fa-spin fa-2x"></i></h1>');
 			},
 			complete: function(){
 				$('.reserve-loader').hide();
