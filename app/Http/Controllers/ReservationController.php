@@ -48,7 +48,7 @@ class ReservationController extends Controller {
         }
     }
 
-    // --- Confirm reservation --- //
+    // --- Confirm reservation and insert into database --- //
     
     public function reserve(){
 
@@ -74,23 +74,30 @@ class ReservationController extends Controller {
         }
     }
 
-    // --- Manage Tables & Reservations --- //
+    // --- Go back to first reservation step --- //
+
+    public function back()
+    {
+        $input = Request::all();
+
+        $date = $input['date'];
+        $time = $input['time'];
+        $capacity = $input['capacity'];
+
+        return redirect('reservation')->withInput();
+    }
+
+    // --- Get restaurant tables for CMS --- //
 
     public function getTables(){
 
         $tables = Tables::all();
-
-        // date_default_timezone_set('America/Toronto');
-        // $today = date("Y-m-d");
-
-        // $reservationsToday = ReservationClass::getTodayReservations($today);
-
-        // $reservationTables = ReservationClass::getReservationTables($reservationsToday);
         
         return view('reservation.tables')
             ->with('tables', $tables);
-            //->with('rtables', $reservationTables);
     }
+
+    // --- Insert restaurant tables for CMS --- //
 
     public function store()
     {
@@ -120,6 +127,8 @@ class ReservationController extends Controller {
         }
     }  
 
+    // --- Delete restaurant tables for CMS --- //
+
     public function destroy()
     {
         if(Request::ajax()){
@@ -131,16 +140,7 @@ class ReservationController extends Controller {
         }
     }
 
-    public function back()
-    {
-        $input = Request::all();
-
-        $date = $input['date'];
-        $time = $input['time'];
-        $capacity = $input['capacity'];
-
-        return redirect('reservation')->withInput();
-    }
+    // --- Cancel and delete restaurant tables for CMS --- //
 
     public function cancelReservation()
     {
@@ -154,6 +154,8 @@ class ReservationController extends Controller {
         }
     }
 
+    // --- Get today's reservations --- //
+
     public function todayReservations()
     {
         date_default_timezone_set('America/Toronto');
@@ -164,7 +166,6 @@ class ReservationController extends Controller {
         $reservationTables = ReservationClass::getReservationTables($reservationsToday);
         
         return view('reservation.reservation_partial')
-            //->with('tables', $tables)
             ->with('rtables', $reservationTables);
     }
 }

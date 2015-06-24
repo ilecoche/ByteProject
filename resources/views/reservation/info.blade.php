@@ -1,5 +1,5 @@
 <div class="reserve-container">
-
+<div class="thanks-container">
     <h2>Complete your reservation</h2>
 
     <div class="row">
@@ -92,6 +92,7 @@
 
         </div><!-- /.res-confirm-btn -->
     </div><!-- /.row -->
+    </div>
 </div><!-- /.reserve-container -->
 
 <!-- Scripts -->

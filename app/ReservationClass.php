@@ -184,7 +184,7 @@ class ReservationClass {
             ->delete();
     }
 
-     public static function deleteTablesReservation($id)
+     public static function deleteTablesReservations($id)
     {
         $delete = DB::table('tables_reservations')
             ->where('reservation_id', '=', $id)

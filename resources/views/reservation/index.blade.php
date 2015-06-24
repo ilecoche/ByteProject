@@ -14,6 +14,7 @@
 @stop
 
 @section('content')
+<div class="bk"></div>
 
 <div class="container">
 
@@ -21,6 +22,7 @@
 
     <div class="reserve-container">
 
+    <div class="thanks-container">
     <div class="row">
         <div class="col-sm-12">
             <h1 id="reserve-title">Make a Reservation</h1>
