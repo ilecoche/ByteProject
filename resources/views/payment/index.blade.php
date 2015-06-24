@@ -114,7 +114,7 @@
         </li>
 
         <li>
-            {!! Form::submit('Pay Now',['class' => 'btn btn-primary form-control', 'id' => 'payment'] )!!}
+            {!! Form::submit('Pay Now',['class' => 'btn btn-success form-control', 'id' => 'payment'] )!!}
             <span class="payment-error" style="display: block; color: red;"><!-- Credit Card Payment Error --></span>
         </li>
     </ol>

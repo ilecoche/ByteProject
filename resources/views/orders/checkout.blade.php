@@ -4,7 +4,7 @@
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
 @stop
 @section('content')
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 				<h2>Order Details</h2>
@@ -18,13 +18,17 @@
                                            
                                     
                                     
-                                <ul>
+                                <ul id="checkList">
                                     <li>
                                         DATE: {{ \Carbon\Carbon::now()->format('Y-m-d') }}
+                                    </li>
+                                    <li>
                                         ORDER # {{ $order_no }}
                                     </li>
                                     <li>
                                         CUSTOMER: {!! Form::text('customer_name', null) !!}
+                                    </li>
+                                    <li>
                                         TABLE #: {!! Form::text('table_id', null) !!}
                                     </li>
                                     
@@ -71,8 +75,8 @@
                                         <td>{!! Form::text('tip', null) !!}</td>
                                     </tr>
                                 </table>  
-                              {!! Form::submit('Place Order') !!} 
-                              <button type="button" onclick="window.location='{{ url("products") }}'">Want to keep ordering</button>
+                              {!! Form::submit('Place Order', ['class' => 'btn btn-success']) !!} 
+                              <button class="btn SR" type="button" onclick="window.location='{{ url("products") }}'">Want to keep ordering</button>
                                     {!! Form::close() !!}
                         </div>
 		</div>

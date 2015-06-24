@@ -1,4 +1,29 @@
 table{
     width: 60%;
-    margin: auto;
+    /*margin: auto;*/
+}
+
+#checkList {
+    list-style-type: none;
+    padding: 20px 0;
+}
+
+#checkList li {
+    display: block;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+table {
+    font-weight: bold;
+}
+
+tr:first-child {
+    color: red;
+}
+
+input {
+        border: 1px solid #000;
+        border-width: 0 0 1px;
+        box-shadow: none;
 }
