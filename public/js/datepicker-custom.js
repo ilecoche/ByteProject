@@ -6,8 +6,8 @@ $(document).ready(function () {
         orientation: "top auto",
         todayHighlight: true,
         format: "MM d, yyyy",
-        "autoclose": true,
-        startDate: today 
+        startDate: today,
+        "autoclose": true
     });
     
 });
