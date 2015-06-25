@@ -22,8 +22,3 @@ tr:first-child {
     color: red;
 }
 
-input {
-        border: 1px solid #000;
-        border-width: 0 0 1px;
-        box-shadow: none;
-}

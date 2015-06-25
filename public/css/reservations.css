@@ -1,5 +1,6 @@
 .bk {
     background: url(../images/reservation.jpg) no-repeat; 
+    background-size: 100%;
     position:absolute;
     padding:0;
     margin:0;

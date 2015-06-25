@@ -5,7 +5,7 @@
         
             <section id="title">
                 <h1>Grab a Byte</h1>
-                <a href="{{url ('auth/login')}}" class="btn btn-primary btn-block SR">Sign In</a>
+                <a href="{{url ('auth/login')}}" class="btn btn-block LI">Login</a>
             </section>
        
     </div>

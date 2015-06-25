@@ -5,6 +5,7 @@
 @stop
 @section('content')
 <div class="container-fluid">
+    <div id="checkOut">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 				<h2>Order Details</h2>
