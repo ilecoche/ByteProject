@@ -59,8 +59,8 @@
         </div>
   </div>
   <div class ="row">
-     <div class="col-sm-5" >
-         <h3>Info pane</h3>
+     <div class="col-sm-6" >
+         <h3>Info</h3>
          <ul class="list-group">
             <li class="list-group-item"><span class="glyphicon glyphicon-earphone"></span> {{$c->phone}}</li>
              <li class="list-group-item"><span class="glyphicon glyphicon-time"></span> {{$c->business_hours}}</li>
@@ -69,7 +69,7 @@
             <li class="list-group-item"><span class="glyphicon glyphicon-usd"></span> {{$c->price}}</li>
          </ul>
       </div>
-      <div  class="col-sm-5">
+      <div  class="col-sm-6">
           <iframe
 			width=100%
 			height=400

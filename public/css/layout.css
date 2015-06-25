@@ -5,17 +5,17 @@ body {
 
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
-      width: 25%;
-      height: 20%;
+      width: 320px;
+      height: 215px;
       margin: auto;
   }
+  
+  
+  #myCarousel {
+      margin-bottom: 20px;
+      
+  }
 
-
-#map {
-    width: 80%;
-    height: auto;
-    margin: 0 10%;
-    }
 
 
 .btn {
@@ -28,9 +28,20 @@ text-align: center;
 
 
 @media (max-width: 768px) {
+    
+    .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 200px;
+      height: 150px;
+      margin: auto;
+  }
 
     .my-carousel {
         height: 50%;
+    }
+    
+    .SR {
+        margin-bottom: 5px;
     }
     
 }
